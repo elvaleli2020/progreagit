@@ -1,4 +1,4 @@
-#Prototipo de gestión de proyectos de grado usando Gitlab
+# Prototipo de gestión de proyectos de grado usando Gitlab
 Administrar de manera óptima los proyectos que se van a entregar los productos de trabajo de grado en GitLab
 
 ## Integrantes 
@@ -6,13 +6,13 @@ Elian Nahun Zapata Alfonso
 Jhorman Jesús Botello Díaz
 Juliana Andrea Ortega Castillo
 
-##Lenguajes de desarrollo
+## Lenguajes de desarrollo
 Java, JavaScript
 
-##Framework
+## Framework
 Spring - backend
 React - frontend
 
-##Puertos
+## Puertos
 port=8081 - backend
 port=3000 - frontend
