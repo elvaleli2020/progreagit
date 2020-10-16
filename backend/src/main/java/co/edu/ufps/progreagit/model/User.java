@@ -1,10 +1,14 @@
 package co.edu.ufps.progreagit.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,14 +18,38 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idUser;
 
     @Column(nullable = false)
+    @Size(max=100)
     private String name;
+
+    @Size(max=12)
+    private String code;
 
     @Email
     @Column(nullable = false)
+    @Size(max=100)
     private String email;
+
+    @Email
+    @Size(max=100)
+    private String personal_email;
+
+    @Size(max=200)
+    private String address;
+
+    private String cellphone;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnore
+    private Set<Roles> roles = new HashSet<>();
+
+    @OneToMany(mappedBy="user")
+    private Set<RedUser> redUsers;
 
     private String imageUrl;
 
@@ -37,19 +65,12 @@ public class User {
 
     private String providerId;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @JsonIgnore
-    private Set<Role> roles = new HashSet<>();
-
-    public Long getId() {
-        return id;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public String getName() {
@@ -106,5 +127,53 @@ public class User {
 
     public void setProviderId(String providerId) {
         this.providerId = providerId;
+    }
+
+    public String getPersonal_email() {
+        return personal_email;
+    }
+
+    public void setPersonal_email(String personal_email) {
+        this.personal_email = personal_email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
+    }
+
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Set<RedUser> getRedUsers() {
+        return redUsers;
+    }
+
+    public void setRedUsers(Set<RedUser> redUsers) {
+        this.redUsers = redUsers;
     }
 }
