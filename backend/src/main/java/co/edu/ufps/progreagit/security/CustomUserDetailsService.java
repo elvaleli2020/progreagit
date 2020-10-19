@@ -1,7 +1,7 @@
 package co.edu.ufps.progreagit.security;
 
 
-import co.edu.ufps.progreagit.repository.UserRepository;
+import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
 import co.edu.ufps.progreagit.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    UserJPA userRepository;
 
     @Override
     @Transactional

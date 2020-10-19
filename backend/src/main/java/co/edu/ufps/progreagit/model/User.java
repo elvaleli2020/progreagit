@@ -1,12 +1,10 @@
 package co.edu.ufps.progreagit.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,7 +32,7 @@ public class User {
 
     @Email
     @Size(max=100)
-    private String personal_email;
+    private String personalEmail;
 
     @Size(max=200)
     private String address;
@@ -49,15 +47,12 @@ public class User {
     private Set<Roles> roles = new HashSet<>();
 
     @OneToMany(mappedBy="user")
-    private Set<RedUser> redUsers;
+    private List<UserNetwork> userNetworks;
 
     private String imageUrl;
 
     @Column(nullable = false)
     private Boolean emailVerified = false;
-
-    @JsonIgnore
-    private String password;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -105,14 +100,6 @@ public class User {
         this.emailVerified = emailVerified;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public AuthProvider getProvider() {
         return provider;
     }
@@ -129,12 +116,12 @@ public class User {
         this.providerId = providerId;
     }
 
-    public String getPersonal_email() {
-        return personal_email;
+    public String getPersonalEmail() {
+        return personalEmail;
     }
 
-    public void setPersonal_email(String personal_email) {
-        this.personal_email = personal_email;
+    public void setPersonalEmail(String personalEmail) {
+        this.personalEmail = personalEmail;
     }
 
     public String getAddress() {
@@ -169,11 +156,11 @@ public class User {
         this.code = code;
     }
 
-    public Set<RedUser> getRedUsers() {
-        return redUsers;
+    public List<UserNetwork> getUserNetworks() {
+        return userNetworks;
     }
 
-    public void setRedUsers(Set<RedUser> redUsers) {
-        this.redUsers = redUsers;
+    public void setUserNetworks(List<UserNetwork> userNetworks) {
+        this.userNetworks = userNetworks;
     }
 }

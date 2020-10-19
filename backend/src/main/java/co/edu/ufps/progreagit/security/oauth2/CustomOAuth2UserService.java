@@ -3,7 +3,7 @@ package co.edu.ufps.progreagit.security.oauth2;
 import co.edu.ufps.progreagit.exception.OAuth2AuthenticationProcessingException;
 import co.edu.ufps.progreagit.model.AuthProvider;
 import co.edu.ufps.progreagit.model.User;
-import co.edu.ufps.progreagit.repository.UserRepository;
+import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import co.edu.ufps.progreagit.security.oauth2.user.OAuth2UserInfo;
 import co.edu.ufps.progreagit.security.oauth2.user.OAuth2UserInfoFactory;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJPA userRepository;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {

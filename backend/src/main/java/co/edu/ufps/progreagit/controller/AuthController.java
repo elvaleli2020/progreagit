@@ -7,7 +7,7 @@ import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.payload.AuthResponse;
 import co.edu.ufps.progreagit.payload.LoginRequest;
 import co.edu.ufps.progreagit.payload.SignUpRequest;
-import co.edu.ufps.progreagit.repository.UserRepository;
+import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJPA userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -62,10 +62,7 @@ public class AuthController {
         User user = new User();
         user.setName(signUpRequest.getName());
         user.setEmail(signUpRequest.getEmail());
-        user.setPassword(signUpRequest.getPassword());
         user.setProvider(AuthProvider.local);
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         User result = userRepository.save(user);
 

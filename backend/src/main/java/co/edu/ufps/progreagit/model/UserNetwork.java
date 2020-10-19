@@ -6,34 +6,35 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "red_users")
-public class RedUser {
+@Table(name = "user_network")
+public class UserNetwork {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRedUser;
+    private Long idUserNetwork;
 
     @ManyToOne
     @JoinColumn(name="idUser", nullable=false)
+    @JsonIgnore
     private User user;
 
     @Column(nullable = false)
     @Size(max=100)
-    private String address;
+    private String webAddress;
 
-    public Long getIdRedUser() {
-        return idRedUser;
+    public Long getIdUserNetwork() {
+        return idUserNetwork;
     }
 
-    public void setIdRedUser(Long idRedUser) {
-        this.idRedUser = idRedUser;
+    public void setIdUserNetwork(Long idUserNetwork) {
+        this.idUserNetwork = idUserNetwork;
     }
 
-    public String getAddress() {
-        return address;
+    public String getWebAddress() {
+        return webAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setWebAddress(String webAddress) {
+        this.webAddress = webAddress;
     }
 
     public User getUser() {
