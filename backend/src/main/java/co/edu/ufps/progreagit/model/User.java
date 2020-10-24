@@ -1,5 +1,6 @@
 package co.edu.ufps.progreagit.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -38,6 +39,10 @@ public class User {
     private String address;
 
     private String cellphone;
+
+    @ManyToOne
+    @JoinColumn(name="idRol", nullable=true)
+    private Roles rol;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(	name = "user_roles",
@@ -162,5 +167,13 @@ public class User {
 
     public void setUserNetworks(List<UserNetwork> userNetworks) {
         this.userNetworks = userNetworks;
+    }
+
+    public Roles getRol() {
+        return rol;
+    }
+
+    public void setRol(Roles rol) {
+        this.rol = rol;
     }
 }

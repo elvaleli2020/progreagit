@@ -2,14 +2,18 @@ package co.edu.ufps.progreagit.controller;
 
 import co.edu.ufps.progreagit.exception.BadRequestException;
 import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
+import co.edu.ufps.progreagit.model.Roles;
 import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.model.UserNetwork;
 import co.edu.ufps.progreagit.payload.ApiResponse;
+import co.edu.ufps.progreagit.payload.LoginRequest;
+import co.edu.ufps.progreagit.payload.SeachUser;
 import co.edu.ufps.progreagit.payload.UserRequest;
 import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.repository.UserNetworkJPA;
 import co.edu.ufps.progreagit.security.CurrentUser;
 import co.edu.ufps.progreagit.security.UserPrincipal;
+import co.edu.ufps.progreagit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,54 +27,42 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserJPA userRepository;
-
-    @Autowired
-    private UserNetworkJPA userNetworkJPA;
+    private UserService userService;
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+    public User getAccountUser1(@CurrentUser UserPrincipal userPrincipal) {
+        return  userService.accountUser(userPrincipal.getId());
     }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('LEADER')")
+    public User getCurrentUser(@PathVariable(name = "id") Long id) {
+        return  userService.accountUser(id);
+    }
+
     @GetMapping("/")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('LEADER') ")
     public ResponseEntity<?> getList() {
-        return ResponseEntity.ok(userRepository.findAll());
+        return ResponseEntity.ok(userService.list());
+    }
+
+    @PostMapping("/seach")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('LEADER')")
+    public ResponseEntity<?> seachUser(@RequestBody(required=false) SeachUser seachUser){
+        return ResponseEntity.ok(userService.seachUser(seachUser));
+    }
+
+    @PostMapping("/assing_leader")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> assingLeaderUser(@RequestBody UserRequest userRequest){
+        return ResponseEntity.ok(userService.assingLeaderUser(userRequest.getId()));
     }
 
     @PutMapping("/")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('LEADER')")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest) {
-
-        User user = userRepository.findById(userRequest.getId())
-                .orElse(null);
-        if(user == null)
-            throw new BadRequestException("User not fount");
-        if(user.getEmail().equals(userRequest.getEmail())) {
-            throw new BadRequestException("Email address not exist");
-        }
-
-        user.setIdUser(userRequest.getId());
-        user.setAddress(userRequest.getAddress());
-        user.setCellphone(userRequest.getCellphone());
-        user.setCode(userRequest.getCode());
-        user.setPersonalEmail(userRequest.getPersonalEmail());
-
-        userRepository.save(user);
-
-        List<UserNetwork> userNetworks = new ArrayList<>();
-        UserNetwork userNetwork;
-        if(userRequest.getUserNetworking()!=null) {
-            for (String webAddress : userRequest.getUserNetworking()) {
-                userNetwork = new UserNetwork();
-                userNetwork.setUser(user);
-                userNetwork.setWebAddress(webAddress);
-                userNetworkJPA.save(userNetwork);
-            }
-        }
-
+        userService.updateUser(userRequest);
         return ResponseEntity.ok(new ApiResponse(true, "User registered successfully"));
     }
 }

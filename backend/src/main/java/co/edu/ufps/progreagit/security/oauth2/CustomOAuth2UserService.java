@@ -2,6 +2,7 @@ package co.edu.ufps.progreagit.security.oauth2;
 
 import co.edu.ufps.progreagit.exception.OAuth2AuthenticationProcessingException;
 import co.edu.ufps.progreagit.model.AuthProvider;
+import co.edu.ufps.progreagit.model.Roles;
 import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.security.UserPrincipal;
@@ -70,6 +71,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
+        user.setRol(new Roles(1));
         return userRepository.save(user);
     }
 

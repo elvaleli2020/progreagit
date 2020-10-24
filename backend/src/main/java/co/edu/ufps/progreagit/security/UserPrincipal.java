@@ -1,5 +1,7 @@
 package co.edu.ufps.progreagit.security;
 
+import co.edu.ufps.progreagit.model.ERole;
+import co.edu.ufps.progreagit.model.Roles;
 import co.edu.ufps.progreagit.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,9 +27,22 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     }
 
     public static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> authorities = null;
+        if(user.getRol()!=null){
+            if(user.getRol().getName()== ERole.ROLE_ADMIN){
+                authorities= Collections.
+                        singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            }
+            if(user.getRol().getName()== ERole.ROLE_LEADER){
+                authorities= Collections.
+                        singletonList(new SimpleGrantedAuthority("ROLE_LEADER"));
+            }
 
+        }
+        if(authorities == null){
+            authorities = Collections.
+                    singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        }
         return new UserPrincipal(
                 user.getIdUser(),
                 user.getEmail(),
