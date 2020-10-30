@@ -48,6 +48,17 @@ public class ProgreaGitApplicationTests {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.idUser").value(1));
 	}
 
+	@Test
+	@WithMockUser(roles={"USER"})
+	public void updateUser() throws Exception {
+
+//		mvc.perform(MockMvcRequestBuilders
+//				.put("/user/")
+//				.content(objectMapper.writeValueAsString(comandoLibro))
+//				.contentType(MediaType.APPLICATION_JSON)
+//				.accept(MediaType.APPLICATION_JSON))
+//				.andExpect(status().isOk());
+	}
 
 
 

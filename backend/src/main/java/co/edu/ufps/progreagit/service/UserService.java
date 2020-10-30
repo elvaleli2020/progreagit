@@ -1,12 +1,12 @@
 package co.edu.ufps.progreagit.service;
 
 import co.edu.ufps.progreagit.exception.BadRequestException;
-import co.edu.ufps.progreagit.exception.NotContentException;
 import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
+import co.edu.ufps.progreagit.model.Project;
 import co.edu.ufps.progreagit.model.Roles;
 import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.model.UserNetwork;
-import co.edu.ufps.progreagit.payload.SeachUser;
+import co.edu.ufps.progreagit.payload.SearchUser;
 import co.edu.ufps.progreagit.payload.UserRequest;
 import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.repository.UserNetworkJPA;
@@ -25,46 +25,50 @@ public class UserService {
     @Autowired
     private UserNetworkJPA userNetworkJPA;
 
+    @Autowired
+    private ProjectService projectService;
+
     /**
      * Service get account by id
      * @param id
      * @return
      */
-    public User accountUser(Long id) {
+    public User getUser(Long id) {
+        /* Checks the existence of the user, if not return an exception */
         return userJPA.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     }
 
     /**
-     * Service to seach users
-     * @param seachUser
+     * Service to search users
+     * @param searchUser
      * @return
      */
-    public List<User> seachUser(SeachUser seachUser){
+    public List<User> searchUser(SearchUser searchUser){
         Roles roles = null;
         List<User> userList= new ArrayList<>();
         User user = null;
-        if(seachUser!=null){
+        if(searchUser !=null){
             // If the code exist
-            if(seachUser.getCode()!=null){
-                user = userJPA.findByCode(seachUser.getCode()).orElse(null);
+            if(searchUser.getCode()!=null){
+                user = userJPA.findByCode(searchUser.getCode()).orElse(null);
                 if(user!=null)
                     userList.add(user);
                 return userList;
             }
             // If the email exist
-            if(seachUser.getEmail()!=null){
+            if(searchUser.getEmail()!=null){
 
-                return userJPA.findByEmailContainingAndIdUserNot(seachUser.getEmail(),1L).orElse( userList);
+                return userJPA.findByEmailContainingAndIdUserNot(searchUser.getEmail(),1L).orElse( userList);
             }
             // Seach by part of the name
-            if(seachUser.getName()!=null){
-                return userJPA.findByNameContainingAndIdUserNot(seachUser.getName(), 1L).orElse(userList);
+            if(searchUser.getName()!=null){
+                return userJPA.findByNameContainingAndIdUserNot(searchUser.getName(), 1L).orElse(userList);
             }
             // Seach by role, admin, leader
-            if(seachUser.getRole()!=null){
-                if(seachUser.getRole().equals("ADMIN")){
+            if(searchUser.getRole()!=null){
+                if(searchUser.getRole().equals("ADMIN")){
                     roles= new Roles(2);
-                }else if(seachUser.getRole().equals("LEADER")){
+                }else if(searchUser.getRole().equals("LEADER")){
                     roles= new Roles(3);
                 }
                 return userJPA.findByRol(roles).orElse(userList);
@@ -75,17 +79,30 @@ public class UserService {
     }
 
     /**
-     * Service by assing leader to a project
+     * Service by assing leader to a project with restriction of having an active project
      * @param id the user
      * @return boolean
      */
     public boolean assingLeaderUser(Long id){
+        /**
+         * Checking if you already have a project assigned */
+        if(projectService.findByLeader(id) != null)
+            throw new BadRequestException("Leader already assigned");
+
         User user = userJPA.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
-        user.setRoles(null);
         Roles rol = new Roles(3);
         user.setRol(rol);
+        user.setPetitionLeader(false);
         userJPA.save(user);
+
+        Project project = new Project();
+        List<User> users = new ArrayList<User>();
+
+        users.add(user);
+        project.setUsers(users);
+
+        projectService.register(project);
         return true;
     }
 

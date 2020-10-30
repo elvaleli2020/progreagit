@@ -2,7 +2,7 @@ package co.edu.ufps.progreagit.payload;
 
 import co.edu.ufps.progreagit.model.ERole;
 
-public class SeachUser {
+public class SearchUser {
     String name;
     String code;
     String email;

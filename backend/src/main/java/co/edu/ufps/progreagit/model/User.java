@@ -40,16 +40,12 @@ public class User {
 
     private String cellphone;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean petitionLeader;
+
     @ManyToOne
     @JoinColumn(name="idRol", nullable=true)
     private Roles rol;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @JsonIgnore
-    private Set<Roles> roles = new HashSet<>();
 
     @OneToMany(mappedBy="user")
     private List<UserNetwork> userNetworks;
@@ -145,14 +141,6 @@ public class User {
         this.cellphone = cellphone;
     }
 
-    public Set<Roles> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Roles> roles) {
-        this.roles = roles;
-    }
-
     public String getCode() {
         return code;
     }
@@ -175,5 +163,13 @@ public class User {
 
     public void setRol(Roles rol) {
         this.rol = rol;
+    }
+
+    public boolean isPetitionLeader() {
+        return petitionLeader;
+    }
+
+    public void setPetitionLeader(boolean petitionLeader) {
+        this.petitionLeader = petitionLeader;
     }
 }
