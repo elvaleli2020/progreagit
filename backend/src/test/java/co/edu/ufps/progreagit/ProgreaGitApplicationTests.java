@@ -1,5 +1,6 @@
 package co.edu.ufps.progreagit;
 
+import co.edu.ufps.progreagit.payload.UserRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ public class ProgreaGitApplicationTests {
 	private ObjectMapper objectMapper;
 
 	@Test
-	@WithMockUser(roles={"USER","ADMIN"})
+	@WithMockUser(roles={"LEADER","ADMIN"})
 	public void getListUser() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
 				.get("/user/")
@@ -51,13 +52,13 @@ public class ProgreaGitApplicationTests {
 	@Test
 	@WithMockUser(roles={"USER"})
 	public void updateUser() throws Exception {
-
-//		mvc.perform(MockMvcRequestBuilders
-//				.put("/user/")
-//				.content(objectMapper.writeValueAsString(comandoLibro))
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON))
-//				.andExpect(status().isOk());
+		UserRequest userRequest = null;
+		mvc.perform(MockMvcRequestBuilders
+				.put("/user/")
+				.content(objectMapper.writeValueAsString(userRequest))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
 	}
 
 
