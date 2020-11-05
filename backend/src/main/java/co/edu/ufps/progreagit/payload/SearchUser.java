@@ -3,10 +3,10 @@ package co.edu.ufps.progreagit.payload;
 import co.edu.ufps.progreagit.model.ERole;
 
 public class SearchUser {
-    String name;
-    String code;
-    String email;
-    String rol;
+    private String name;
+    private String code;
+    private String email;
+    private String rol;
 
     public String getName() {
         return name;

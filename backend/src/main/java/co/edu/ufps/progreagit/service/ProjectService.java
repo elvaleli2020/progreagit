@@ -100,6 +100,8 @@ public class ProjectService {
         /**
          * if something turns out wrong it returns an exception of project */
         Project project = findByLeader(idUserLeader);
+        if(project.getUsers()==null)
+            throw new NotContentException("No");
         for(User user:project.getUsers()){
             if(user.getIdUser()==idUserMember){
                 return false;

@@ -40,7 +40,7 @@ public class User {
 
     private String cellphone;
 
-    @Column(columnDefinition = "boolean default false")
+    @Column(columnDefinition = "boolean default false", nullable = true)
     private boolean petitionLeader;
 
     @ManyToOne

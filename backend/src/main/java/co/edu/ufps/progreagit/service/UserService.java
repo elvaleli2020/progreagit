@@ -114,7 +114,7 @@ public class UserService {
     public boolean updateUser(UserRequest userRequest){
 
         User user = userJPA.findById(userRequest.getId())
-                .orElse(null);
+                .orElseThrow(null);
 
         // Exception for not finding the user
         if(user == null)

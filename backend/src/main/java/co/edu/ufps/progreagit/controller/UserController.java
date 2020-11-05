@@ -1,5 +1,7 @@
 package co.edu.ufps.progreagit.controller;
 
+import co.edu.ufps.progreagit.exception.NotContentException;
+import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
 import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.payload.SearchUser;
@@ -50,13 +52,17 @@ public class UserController {
     @PostMapping("/assing_leader")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> assingLeaderUser(@RequestBody UserRequest userRequest){
+        if(userRequest == null || userRequest.getId() == null)
+            throw new NotContentException("You need additional data");
         userService.assingLeaderUser(userRequest.getId());
         return ResponseEntity.ok(true);
     }
 
     @PutMapping("/")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest,@CurrentUser UserPrincipal userPrincipal) {
+        if(userPrincipal==null || userRequest==null || userRequest.getId()!=userPrincipal.getId())
+            throw new ResourceNotFoundException("User", "id", userRequest.getId());
         userService.updateUser(userRequest);
         return ResponseEntity.ok(new ApiResponse(true, "User registered successfully"));
     }
