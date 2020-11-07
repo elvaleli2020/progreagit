@@ -117,6 +117,7 @@ public class ProgreaGitUserTests {
 
 	@Test
 	@WithMockUser(roles={"ADMIN"})
+	@DisplayName(value = "assingLeader -> List of users filtered by code, email, name, if they have a leader request or not")
 	public void assingLeader() throws  Exception {
 		UserRequest userRequest = progreaGitBuilder.userRequestAssingLeader();
 		mvc.perform(MockMvcRequestBuilders

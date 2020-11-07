@@ -1,0 +1,2 @@
+Para generar reporte de prueba
+    mvn clean test site
