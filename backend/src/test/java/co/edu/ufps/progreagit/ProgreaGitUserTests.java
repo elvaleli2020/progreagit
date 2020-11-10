@@ -82,8 +82,8 @@ public class ProgreaGitUserTests {
 
 	@Test
 	@WithMockUser(roles={"ADMIN", "LEADER"})
-	@DisplayName(value = "searchUser -> List of users filtered by code, email, name, if they have a leader request or not")
-	public void searchUser() throws Exception {
+	@DisplayName(value = "searchUser -> List of users filtered by code, if they have a leader request or not")
+	public void searchUserByCode() throws Exception {
 		// Search by code
 		SearchUser searchUser = progreaGitBuilder.searchUserCode();
 		mvc.perform(MockMvcRequestBuilders
@@ -93,9 +93,14 @@ public class ProgreaGitUserTests {
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isOk());
+	}
 
+	@Test
+	@WithMockUser(roles={"ADMIN", "LEADER"})
+	@DisplayName(value = "searchUser -> List of users filtered by email if they have a leader request or not")
+	public void searchUserByEmail() throws Exception {
 		// Search by parts of the email
-		searchUser = progreaGitBuilder.searchUserEmail();
+		SearchUser searchUser = progreaGitBuilder.searchUserEmail();
 		mvc.perform(MockMvcRequestBuilders
 				.post("/user/search")
 				.content(objectMapper.writeValueAsString(searchUser))
@@ -104,8 +109,14 @@ public class ProgreaGitUserTests {
 				.andDo(print())
 				.andExpect(status().isOk());
 
+	}
+
+	@Test
+	@WithMockUser(roles={"ADMIN", "LEADER"})
+	@DisplayName(value = "searchUser -> List of users filtered by name, if they have a leader request or not")
+	public void searchUserByName() throws Exception {
 		// Search by parts of the name
-		searchUser = progreaGitBuilder.searchUserName();
+		SearchUser searchUser = progreaGitBuilder.searchUserName();
 		mvc.perform(MockMvcRequestBuilders
 				.post("/user/search")
 				.content(objectMapper.writeValueAsString(searchUser))
