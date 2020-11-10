@@ -1,6 +1,7 @@
 package co.edu.ufps.progreagit;
 
 import co.edu.ufps.progreagit.controller.ProjectController;
+import co.edu.ufps.progreagit.exception.NotContentException;
 import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,10 +51,23 @@ public class ProgreaGitProjectTest {
 
     @Test
     @WithMockUser(roles={"LEADER"})
+    @DisplayName(value = "getProjectFail -> See active leader project.")
+    public void getProjectFail(){
+        UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeaderFail();
+        NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
+                NotContentException.class,
+                () -> projectController.projectBelong(userPrincipal));
+
+        Assert.assertEquals("Unsupported credentials!", thrown.getMessage());
+    }
+
+    @Test
+    @WithMockUser(roles={"LEADER"})
     @DisplayName(value = "assingMember -> Assign member by leader")
     public void assingMember(){
         UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeader();
         Assert.assertEquals(projectController.assingMember(userPrincipal,3L).getStatusCode(), HttpStatus.OK);
     }
+
 
 }

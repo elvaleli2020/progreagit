@@ -27,14 +27,15 @@ public class UserController {
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('LEADER')")
-    public User getAccountUser1(@CurrentUser UserPrincipal userPrincipal) {
-        return  userService.getUser(userPrincipal.getId());
+    public ResponseEntity<User> getAccountUserLogin(@CurrentUser UserPrincipal userPrincipal) {
+        this.checkCredentiales(userPrincipal);
+        return  ResponseEntity.ok(userService.getUser(userPrincipal.getId()));
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('LEADER')")
-    public User getCurrentUser(@PathVariable(name = "id") Long id) {
-        return  userService.getUser(id);
+    public ResponseEntity<User> getCurrentUser(@PathVariable(name = "id") Long id) {
+        return  ResponseEntity.ok(userService.getUser(id));
     }
 
     @GetMapping("/")
@@ -62,8 +63,13 @@ public class UserController {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest,@CurrentUser UserPrincipal userPrincipal) {
         if(userPrincipal==null || userRequest==null || userRequest.getId()!=userPrincipal.getId())
-            throw new ResourceNotFoundException("User", "id", userRequest.getId());
+            throw new NotContentException("You need additional data!");
         userService.updateUser(userRequest);
-        return ResponseEntity.ok(new ApiResponse(true, "User registered successfully"));
+        return ResponseEntity.ok(new ApiResponse(true, "User update successfull"));
+    }
+
+    private void checkCredentiales(UserPrincipal userPrincipal){
+        if(userPrincipal==null || userPrincipal.getId()==null)
+            throw new NotContentException("Unsupported credentials!");
     }
 }

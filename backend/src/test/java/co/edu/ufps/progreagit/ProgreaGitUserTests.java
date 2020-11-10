@@ -1,6 +1,8 @@
 package co.edu.ufps.progreagit;
 
 import co.edu.ufps.progreagit.controller.UserController;
+import co.edu.ufps.progreagit.exception.NotContentException;
+import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
 import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.payload.SearchUser;
@@ -8,7 +10,7 @@ import co.edu.ufps.progreagit.payload.UserRequest;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dataBuilder.ProgreaGitBuilder;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -20,7 +22,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -46,6 +47,30 @@ public class ProgreaGitUserTests {
 		this.progreaGitBuilder = new ProgreaGitBuilder();
 	}
 
+
+	@Test
+	@WithMockUser(roles={"USER","ADMIN", "LEADER"})
+	@DisplayName(value = "getAccountUser -> The admin and leader user can access to visualize a specific user.")
+	public void getAccountUser() throws Exception {
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUser();
+		User user= (User) userController.getAccountUserLogin(userPrincipal).getBody();
+		assertThat(user)
+				.matches(m->m.getIdUser().equals(userPrincipal.getId()));
+	}
+
+	@Test
+	@WithMockUser(roles={"USER","ADMIN", "LEADER"})
+	@DisplayName(value = "getAccountUser -> The admin and leader user can access to visualize a specific user.")
+	public void getAccountUserFail() throws Exception {
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserFail();
+
+		NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
+				NotContentException.class,
+				() -> userController.getAccountUserLogin(userPrincipal));
+
+		Assert.assertEquals("Unsupported credentials!", thrown.getMessage());
+	}
+
 	@Test
 	@WithMockUser(roles={"LEADER","ADMIN"})
 	@DisplayName(value = "getListUser -> List of registered users regardless of their role, discriminating against administrator users.")
@@ -58,26 +83,18 @@ public class ProgreaGitUserTests {
 	}
 
 	@Test
-	@WithMockUser(roles={"USER","ADMIN", "LEADER"})
-	@DisplayName(value = "getAccountUser -> The admin and leader user can access to visualize a specific user.")
-	public void getAccountUser() throws Exception {
+	@WithMockUser(roles={"ADMIN", "LEADER"})
+	@DisplayName(value = "searchUser -> List of users filtered by code, if they have a leader request or not")
+	public void searchUser() throws Exception {
+		// Search by code
+		SearchUser searchUser = progreaGitBuilder.searchUserEmpty();
 		mvc.perform(MockMvcRequestBuilders
-				.get("/user/{id}", 1)
+				.post("/user/search")
+				.content(objectMapper.writeValueAsString(searchUser))
+				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.idUser").value(1));
-	}
-
-	@Test
-	@WithMockUser(roles={"USER"})
-	@DisplayName(value = "updateUser -> The user as soon as he accesses the authenticator if he is missing data")
-	public void updateUser() throws Exception {
-		UserRequest userRequest = progreaGitBuilder.userRequest();
-		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUser();
-		ApiResponse apiResponse= (ApiResponse) userController.updateUser(userRequest, userPrincipal).getBody();
-		assertThat(apiResponse)
-				.matches(m->m.getMessage().equals("User registered successfully"));;
+				.andExpect(status().isOk());
 	}
 
 	@Test
@@ -127,6 +144,44 @@ public class ProgreaGitUserTests {
 	}
 
 	@Test
+	@WithMockUser(roles={"USER","ADMIN", "LEADER"})
+	@DisplayName(value = "getAccountUser -> The admin and leader user can access to visualize a specific user.")
+	public void searchUserFail() throws Exception {
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserFail();
+
+		NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
+				NotContentException.class,
+				() -> userController.getAccountUserLogin(userPrincipal));
+
+		Assert.assertEquals("Unsupported credentials!", thrown.getMessage());
+	}
+
+	@Test
+	@WithMockUser(roles={"USER"})
+	@DisplayName(value = "updateUser -> The user as soon as he accesses the authenticator if he is missing data")
+	public void updateUser() throws Exception {
+		UserRequest userRequest = progreaGitBuilder.userRequest();
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUser();
+		ApiResponse apiResponse= (ApiResponse) userController.updateUser(userRequest, userPrincipal).getBody();
+		assertThat(apiResponse)
+				.matches(m->m.getMessage().equals("User update successfull"));
+	}
+
+	@Test
+	@WithMockUser(roles={"USER"})
+	@DisplayName(value = "updateUserFail -> The user as soon as he accesses the authenticator if he is missing data")
+	public void updateUserFail() throws Exception {
+		UserRequest userRequest = progreaGitBuilder.userRequestFail();
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUser();
+
+		NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
+				NotContentException.class,
+				() -> userController.updateUser(userRequest, userPrincipal));
+		Assert.assertEquals("You need additional data!", thrown.getMessage());
+	}
+
+
+	@Test
 	@WithMockUser(roles={"ADMIN"})
 	@DisplayName(value = "assingLeader -> List of users filtered by code, email, name, if they have a leader request or not")
 	public void assingLeader() throws  Exception {
@@ -138,6 +193,18 @@ public class ProgreaGitUserTests {
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isOk());
+	}
+
+	@Test
+	@WithMockUser(roles={"ADMIN"})
+	@DisplayName(value = "assingLeader -> List of users filtered by code, email, name, if they have a leader request or not")
+	public void assingLeaderFail() throws  Exception {
+		UserRequest userRequest = progreaGitBuilder.userRequestAssingLeader();
+
+		NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
+				NotContentException.class,
+				() -> userController.assingLeaderUser(userRequest));
+		Assert.assertEquals("You need additional data!", thrown.getMessage());
 	}
 
 }

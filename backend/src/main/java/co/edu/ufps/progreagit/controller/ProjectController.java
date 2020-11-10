@@ -2,6 +2,7 @@ package co.edu.ufps.progreagit.controller;
 
 import co.edu.ufps.progreagit.exception.NotContentException;
 import co.edu.ufps.progreagit.model.Project;
+import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.security.CurrentUser;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import co.edu.ufps.progreagit.service.ProjectService;
@@ -20,6 +21,7 @@ public class ProjectController {
     @GetMapping("/leader")
     @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> projectBelong(@CurrentUser UserPrincipal userPrincipal){
+        checkCredentiales(userPrincipal);
         return ResponseEntity.ok(projectService.findByLeader(userPrincipal.getId()));
     }
 
@@ -30,7 +32,7 @@ public class ProjectController {
         if(project1==null || project1!=null && project.getIdProject() != project1.getIdProject())
             throw new NotContentException("You do not have permission to modify this project");
         projectService.updateLeader(project);
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(new ApiResponse(true, "Project update successfull"));
     }
 
     @PostMapping("/leader_member")
@@ -38,5 +40,10 @@ public class ProjectController {
     public ResponseEntity<?> assingMember(@CurrentUser UserPrincipal userPrincipal, @RequestParam(value = "idUser") Long idUser){
         projectService.assingMember(userPrincipal.getId(), idUser);
         return ResponseEntity.ok(true);
+    }
+
+    private void checkCredentiales(UserPrincipal userPrincipal){
+        if(userPrincipal==null || userPrincipal.getId()==null)
+            throw new NotContentException("Unsupported credentials!");
     }
 }
