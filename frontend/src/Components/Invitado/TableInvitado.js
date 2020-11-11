@@ -8,15 +8,15 @@ class TableInvitado extends React.Component {
         return (
 
             <div className="col-sm-12">
-                <BootstrapTable options={{noDataText: 'La tabla se encuentra vacía'}}>
-                    <TableHeaderColumn dataField='título' isKey>Título</TableHeaderColumn>
+                <BootstrapTable options={{noDataText: 'This is custom text for empty data'}}>
+                    <TableHeaderColumn dataField='id' isKey>ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField='título'>Título</TableHeaderColumn>
                     <TableHeaderColumn dataField='lider'>Líder de proyecto</TableHeaderColumn>
                     <TableHeaderColumn dataField='email'>Email</TableHeaderColumn>
                     <TableHeaderColumn dataField='director'>Director</TableHeaderColumn>
                     <TableHeaderColumn dataField='anio'>Año</TableHeaderColumn>
                 </BootstrapTable>
             </div>
-
 
         );
     }

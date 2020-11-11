@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/Plantilla.css';
+import '../../Styles/Plantilla.css';
 
 
 function Footer() {

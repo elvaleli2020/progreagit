@@ -1,6 +1,6 @@
 import React from 'react';
-import '../Styles/Plantilla.css';
-import logo from "../Images/logo_ufps.png";
+import '../../Styles/Plantilla.css';
+import logo from "../../Images/logo_ufps.png";
 
 
 function Header() {

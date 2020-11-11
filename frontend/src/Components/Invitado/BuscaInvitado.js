@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../Styles/Plantilla.css';
+import '../../Styles/Plantilla.css';
 
 class BuscaInvitado extends Component {
 
@@ -8,14 +8,13 @@ class BuscaInvitado extends Component {
             <div className="col-sm-12 col-md-12 col-lg-12">
                 <div className="row">
                     <div className="col-sm-3 col-md-3 col-lg-2 ">
-
                         <select id="inputInvitado" className="form-control">
                             <option selected>Estudiante</option>
                             <option>Título</option>
                             <option>Año</option>
                         </select>
                     </div>
-                    <div className="col-sm-7 col-md-7 col-lg-7 ">
+                    <div className="col-sm-7 col col ">
                         <label htmlFor="inputPassword2" className="sr-only"></label>
                         <input type="text" className="form-control" id="buscarInvitado"/>
                     </div>
