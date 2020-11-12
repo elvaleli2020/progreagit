@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProjectJPA extends JpaRepository<Project, Integer> {
+
     Optional<Project> findByUsersIdUserAndEndDateIsNull(Long idUser);
 
     @Query("select p from Project p join p.users u where p.endDate is null and u.idUser = :idUser")

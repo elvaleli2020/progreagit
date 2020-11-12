@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ACCESS_TOKEN} from '../../Global/index';
+import {ACCESS_TOKEN} from '../../Global';
 import {Redirect} from 'react-router-dom'
 
 class OAuth2 extends Component {
@@ -19,7 +19,7 @@ class OAuth2 extends Component {
         if (token) {
             localStorage.setItem(ACCESS_TOKEN, token);
             return <Redirect to={{
-                pathname: "/Invitado",
+                pathname: "/profile",
                 state: {from: this.props.location}
             }}/>;
         } else {
