@@ -10,6 +10,7 @@ import co.edu.ufps.progreagit.security.CurrentUser;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import co.edu.ufps.progreagit.service.ProjectService;
 import co.edu.ufps.progreagit.service.UserService;
+import co.edu.ufps.progreagit.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,10 +26,12 @@ public class UserController {
     @Autowired
     private ProjectService projectService;
 
+    private ControllerUtil controllerUtil;
+
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('LEADER')")
     public ResponseEntity<User> getAccountUserLogin(@CurrentUser UserPrincipal userPrincipal) {
-        this.checkCredentiales(userPrincipal);
+        this.controllerUtil.checkCredentiales(userPrincipal);
         return  ResponseEntity.ok(userService.getUser(userPrincipal.getId()));
     }
 
@@ -46,7 +49,7 @@ public class UserController {
 
     @PostMapping("/search")
     @PreAuthorize("hasRole('ADMIN') or hasRole('LEADER')")
-    public ResponseEntity<?> searchUser(@RequestBody(required=false) SearchUser searchUser){
+    public ResponseEntity<?> searchUser(@RequestBody(required=false) SearchUser searchUser, @CurrentUser UserPrincipal userPrincipal){
         return ResponseEntity.ok(userService.searchUser(searchUser));
     }
 
@@ -68,8 +71,4 @@ public class UserController {
         return ResponseEntity.ok(new ApiResponse(true, "User update successfull"));
     }
 
-    private void checkCredentiales(UserPrincipal userPrincipal){
-        if(userPrincipal==null || userPrincipal.getId()==null)
-            throw new NotContentException("Unsupported credentials!");
-    }
 }
