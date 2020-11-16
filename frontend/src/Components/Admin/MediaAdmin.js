@@ -11,7 +11,7 @@ class MediaAdmin extends Component {
 
                 <Header></Header>
                 <div className="Plantilla-body">
-                    <h1>Este es el componente MediaAdmin</h1>
+                    <h1>Tutorial: ProgreaGit para Administradores</h1>
                     <Iframe  source="https://www.youtube.com/embed/dQw4w9WgXcQ" ></Iframe>
                 </div>
                 <Footer></Footer>
