@@ -8,6 +8,7 @@ import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.model.UserNetwork;
 import co.edu.ufps.progreagit.payload.SearchUser;
 import co.edu.ufps.progreagit.payload.UserRequest;
+import co.edu.ufps.progreagit.repository.ProjectJPA;
 import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.repository.UserNetworkJPA;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,7 @@ public class UserService {
     public boolean assingLeaderUser(Long id){
         /**
          * Checking if you already have a project assigned */
-        if(projectService.findByLeader(id) != null)
+        if(projectService.findByMember(id) != null)
             throw new BadRequestException("Leader already assigned");
 
         User user = userJPA.findById(id)
@@ -152,5 +153,34 @@ public class UserService {
      */
     public List<User> list(){
         return userJPA.findAll();
+    }
+
+    public List<User> listProject() {
+        return userJPA.findByProjectsEndDateIsNull();
+    }
+
+    public boolean assingMemberUser(Long idLeader, Long idMember) {
+        if(projectService.findByMember(idMember) != null)
+            throw new BadRequestException("Member already assigned");
+        User user = userJPA.findById(idMember)
+                .orElseThrow(() -> new ResourceNotFoundException("UserMember", "id", idMember));
+        Project project = projectService.findByMember(idMember);
+        project.getUsers().add(user);
+        projectService.update(project);
+        return true;
+    }
+
+    public boolean unassingMemberUser(Long idLeader, Long idMember) {
+        Project projectMember = projectService.findByMember(idMember);
+        if(projectMember != null)
+            throw new BadRequestException("Member already assigned");
+        User user = userJPA.findById(idMember)
+                .orElseThrow(() -> new ResourceNotFoundException("UserMember", "id", idMember));
+        Project project = projectService.findByMember(idMember);
+        if(projectMember.getIdProject()!=project.getIdProject())
+            return false;
+        project.getUsers().remove(user);
+        projectService.update(project);
+        return true;
     }
 }

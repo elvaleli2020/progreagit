@@ -4,11 +4,12 @@ import co.edu.ufps.progreagit.exception.NotContentException;
 import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
 import co.edu.ufps.progreagit.model.Project;
 import co.edu.ufps.progreagit.model.User;
+import co.edu.ufps.progreagit.payload.SearchProject;
 import co.edu.ufps.progreagit.repository.ProjectJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -72,16 +73,16 @@ public class ProjectService {
         if(project.getKeywords()!=null && project.getKeywords().equals(project1.getKeywords())){
             project1.setKeywords(project.getKeywords());
         }
-        projectJPA.save(project1);
+        update(project1);
         return true;
     }
 
     /**
-     * Service to search project for its leader
+     * Service to search project for its member or leader
      * @param idUser
      * @return
      */
-    public Project findByLeader(Long idUser){
+    public Project findByMember(Long idUser){
         /**
          * Check the existence of the project, otherwise you return an exception
          * */
@@ -99,7 +100,7 @@ public class ProjectService {
     public boolean assingMember(Long idUserLeader, Long idUserMember) {
         /**
          * if something turns out wrong it returns an exception of project */
-        Project project = findByLeader(idUserLeader);
+        Project project = findByMember(idUserLeader);
         if(project.getUsers()==null)
             throw new NotContentException("No");
         for(User user:project.getUsers()){
@@ -111,8 +112,52 @@ public class ProjectService {
          * if something turns out wrong it returns an exception of user */
         User userMember = userService.getUser(idUserMember);
         project.getUsers().add(userMember);
-        projectJPA.save(project);
+        update(project);
         return true;
     }
 
+    public List<Project> showProject(SearchProject searchProject) {
+        List<Project> projects= null;
+        /*  find acronym and name */
+        if(searchProject.getAcronym()!=null && searchProject.getName()!=null ){
+            return projectJPA.findByAcronymOrName(searchProject.getAcronym(), searchProject.getName()).orElse(null);
+        }
+        /* find acronym */
+        if(searchProject.getAcronym()!=null ){
+            return projectJPA.findByAcronym(searchProject.getAcronym()).orElse(null);
+        }
+        /* find name */
+        if(searchProject.getName()!=null ){
+            return projectJPA.findByName(searchProject.getName()).orElse(null);
+        }
+        return projectJPA.findAll();
+    }
+
+    /**
+     * Method
+     * HU5 RF13
+     * @param project
+     * @return
+     */
+    public boolean updateQualification(Project project) {
+        if(project.getIdProject() == null)
+            throw new NotContentException("It has no data to modify");
+        Project project1 = this.getProject(project.getIdProject());
+
+        if(project.getQualification()!=null && project.getProjectStatus()!=null){
+            project1.setProjectStatus(project.getProjectStatus());
+            project1.setQualification(project.getQualification());
+            project1.setEndDate(new Date(System.currentTimeMillis()));
+
+            // SE CLONA EL PROYECTO
+
+            update(project1);
+            return true;
+        }
+        return false;
+    }
+
+    public Project update(Project project){
+        return projectJPA.save(project);
+    }
 }

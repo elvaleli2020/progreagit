@@ -71,4 +71,50 @@ public class UserController {
         return ResponseEntity.ok(new ApiResponse(true, "User update successfull"));
     }
 
+    ////////////////// Iteration 2 /////////////////////
+
+    /**
+     * Service
+     * HU5 RF12
+     * @return
+     */
+    @GetMapping("/project")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getUsersForProject(){
+        return ResponseEntity.ok(userService.listProject());
+    }
+
+    /**
+     * Method
+     * HU4 RF04
+     * @param userPrincipal
+     * @param userRequest
+     * @return
+     */
+    @PostMapping("/assingMember")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> assingMembersUser(@CurrentUser UserPrincipal userPrincipal,@RequestBody UserRequest userRequest){
+        if(userRequest == null || userRequest.getId() == null)
+            throw new NotContentException("You need additional data");
+        userService.assingMemberUser(userPrincipal.getId(), userRequest.getId());
+        return ResponseEntity.ok(true);
+    }
+
+    /**
+     * Method Unassing member
+     * HU04 RF06
+     * @param userPrincipal
+     * @param userRequest
+     * @return
+     */
+    @PostMapping("/UnassingMember")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> UnassingMembersUser(@CurrentUser UserPrincipal userPrincipal,@RequestBody UserRequest userRequest){
+        if(userRequest == null || userRequest.getId() == null)
+            throw new NotContentException("You need additional data");
+        userService.unassingMemberUser(userPrincipal.getId(), userRequest.getId());
+        return ResponseEntity.ok(true);
+    }
+
+
 }
