@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://296a73d382c8.ngrok.io';
+export const API_BASE_URL = 'http://bc5b8ef5ef02.ngrok.io';
 export const ACCESS_TOKEN = 'accessToken';
 
 export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect'

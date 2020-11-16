@@ -10,9 +10,9 @@ function Plantilla() {
     return (
         <div className="Plantilla">
             <NavBar></NavBar>
-            <Header></Header>
+
             <Body></Body>
-            <Footer></Footer>
+
         </div>
     );
 }

@@ -11,8 +11,6 @@ import Lider from "../Lider/Lider";
 import Administrador from "../Admin/Administrador";
 import OAuth2 from "../General/OAuth2";
 
-import { ACCESS_TOKEN } from '../../Global';
-import { getCurrentUser } from '../../Util/ApiUtil';
 import ActData from "../ActData";
 
 class Body extends Component {
