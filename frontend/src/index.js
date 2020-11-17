@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './Styles/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
+
 import * as serviceWorker from './serviceWorker';
 import Plantilla from "./Plantilla";
 
