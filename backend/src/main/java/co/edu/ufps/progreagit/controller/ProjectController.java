@@ -64,6 +64,4 @@ public class ProjectController {
                 projectService.updateQualification(project),
                 "Project update successfull"));
     }
-
-
 }

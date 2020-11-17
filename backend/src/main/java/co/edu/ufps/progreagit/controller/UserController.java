@@ -1,7 +1,6 @@
 package co.edu.ufps.progreagit.controller;
 
 import co.edu.ufps.progreagit.exception.NotContentException;
-import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
 import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.payload.SearchUser;
