@@ -35,6 +35,7 @@ export function getCurrentUser() {
     });
 }
 export function putCurrentUser(updateUser) {
+    console.log("Por acá entró al método")
     return request({
         url: API_BASE_URL + "/user/",
         method: 'PUT',
