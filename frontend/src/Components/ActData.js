@@ -12,7 +12,7 @@ class ActData extends Component {
             email: "",
             address: "",
             cellphone: "",
-            req: "",
+            requestLeader: "",
             social:""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -106,9 +106,10 @@ class ActData extends Component {
                                id="socialMedia" />
                     </div>
                     <div className="form-check">
-                        <input type="checkbox" className="form-check-input" value={this.state.solicita} id="solicitud"
-                               onChange={(e)=>{this.setState({solicita: e.target.value})}}/>
-                        <label className="form-check-label" htmlFor="solicitud">Seleccione si desea ser Líder</label>
+                        <input type="checkbox" className="form-check-input"  value={this.state.requestLeader} id="solicitud"
+                               onChange={(e)=>{this.setState({requestLeader: e.target.value})}}/>
+
+                        <label className="form-check-label" htmlFor="requestLeader">Seleccione si desea ser Líder</label>
                     </div>
                     <br/>
                     <button type="submit" className="btn btn-primary">Actualizar</button>
