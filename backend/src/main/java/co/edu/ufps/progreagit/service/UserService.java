@@ -136,8 +136,8 @@ public class UserService {
 
         List<UserNetwork> userNetworks = new ArrayList<>();
         UserNetwork userNetwork;
-        if(userRequest.getUserNetworking()!=null) {
-            for (String webAddress : userRequest.getUserNetworking()) {
+        if(userRequest.getSocialMedia()!=null) {
+            for (String webAddress : userRequest.getSocialMedia()) {
                 userNetwork = new UserNetwork();
                 userNetwork.setUser(user);
                 userNetwork.setWebAddress(webAddress);

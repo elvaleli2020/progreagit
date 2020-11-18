@@ -30,12 +30,8 @@ class LoginButton extends Component {
             return (
                 <GoogleLogin
                     render={renderProps => (
-                        <nav className="main-header navbar navbar-expand navbar-dark navbar-danger">
+                        <nav className="main-header navbar navbar-expand-md navbar-dark navbar-danger">
                             <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <a className="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                                        className="fas fa-bars"></i></a>
-                                </li>
                                 <li className="nav-item d-none d-sm-inline-block">
                                     <a href={GOOGLE_AUTH_URL} className="nav-link">Inicio de sesión</a>
                                 </li>

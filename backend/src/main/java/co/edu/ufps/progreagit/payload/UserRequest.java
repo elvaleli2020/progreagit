@@ -9,7 +9,7 @@ public class UserRequest {
     private String cellphone;
     private String code;
     private String personalEmail;
-    private List<String> userNetworking;
+    private List<String> socialMedia;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class UserRequest {
         this.personalEmail = personalEmail;
     }
 
-    public List<String> getUserNetworking() {
-        return userNetworking;
+    public List<String> getSocialMedia() {
+        return socialMedia;
     }
 
-    public void setUserNetworking(List<String> userNetworking) {
-        this.userNetworking = userNetworking;
+    public void setSocialMedia(List<String> socialMedia) {
+        this.socialMedia = socialMedia;
     }
 }
