@@ -12,7 +12,6 @@ class ActData extends Component {
             email: "",
             address: "",
             cellphone: "",
-            redes: [],
             req: "",
             social:""
         };
@@ -66,10 +65,10 @@ class ActData extends Component {
         this.setState({ redes });
     }
 
-    handleSubmit(event) {
-        alert('Una red social fue añadida ' + JSON.stringify(this.state.redes));
-        event.preventDefault();
-    }
+    // handleSubmit(event) {
+    //     alert('Una red social fue añadida ' + JSON.stringify(this.state.redes));
+    //     event.preventDefault();
+    // }
 
     render() {
         return (
@@ -77,27 +76,27 @@ class ActData extends Component {
                 <h1>Actualización de datos</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="cod">Código U.F.P.S.</label>
-                        <input type="text" value={this.state.cod} className="form-control" id="cod"
-                               onChange={(e)=>{this.setState({cod: e.target.value})}} placeholder="Digite su código de estudiante U.F.P.S"/>
+                        <label htmlFor="code">Código U.F.P.S.</label>
+                        <input type="text" value={this.state.code} className="form-control" id="code"
+                               onChange={(e)=>{this.setState({code: e.target.value})}} placeholder="Digite su código de estudiante U.F.P.S"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email Personal</label>
-                        <input type="email" className="form-control" value={this.state.email} id="email"
-                               onChange={(e)=>{this.setState({email: e.target.value})}}
+                        <input type="email" className="form-control" value={this.state.personalEmail} id="email"
+                               onChange={(e)=>{this.setState({personalEmail: e.target.value})}}
                                aria-describedby="emailHelp" placeholder="Digite su email personal"/>
                             <small id="emailHelp" className="form-text text-muted">Nunca compartiremos esta información con nadie más</small>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="direccion">Dirección</label>
-                        <input type="text" className="form-control" value={this.state.direccion} id="direccion"
-                               onChange={(e)=>{this.setState({direccion: e.target.value})}}
+                        <label htmlFor="address">Dirección</label>
+                        <input type="text" className="form-control" value={this.state.address} id="direccion"
+                               onChange={(e)=>{this.setState({address: e.target.value})}}
                                placeholder="Digite su dirección de residencia"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="telefono">Teléfono</label>
-                        <input type="text" className="form-control" value={this.state.telefono} id="telefono"
-                               onChange={(e)=>{this.setState({telefono: e.target.value})}}
+                        <label htmlFor="callphone">Teléfono</label>
+                        <input type="text" className="form-control" value={this.state.cellphone} id="telefono"
+                               onChange={(e)=>{this.setState({cellphone: e.target.value})}}
                                placeholder="Digite su número telefónico"/>
                     </div>
                     <div className="form-group" >
@@ -105,11 +104,6 @@ class ActData extends Component {
                         <input className="form-control" value={this.state.social}
                                onChange={(e)=>{this.setState({social: e.target.value})}}
                                id="socialMedia" />
-                    </div>
-                    <div className="form-group" >
-                        {this.createUI()}
-                        <input type="button" className="form-control" id="buttonRedes"
-                               value="Agregar red social" onClick={this.addClick.bind(this)}/>
                     </div>
                     <div className="form-check">
                         <input type="checkbox" className="form-check-input" value={this.state.solicita} id="solicitud"
