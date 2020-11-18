@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,13 +54,23 @@ public class User {
     private String imageUrl;
 
     @Column(nullable = false)
+    @JsonIgnore
     private Boolean emailVerified = false;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     private AuthProvider provider;
 
+    @JsonIgnore
     private String providerId;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(	name = "project_user",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_project"))
+    @JsonIgnore
+    private List<Project> projects = new ArrayList<>();
 
     public Long getIdUser() {
         return idUser;

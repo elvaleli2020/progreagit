@@ -3,6 +3,7 @@ package co.edu.ufps.progreagit.repository;
 import co.edu.ufps.progreagit.model.Roles;
 import co.edu.ufps.progreagit.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface UserJPA extends JpaRepository<User, Long> {
 
     Boolean existsByEmail(String email);
 
+    @Query("select u from User u join u.projects p where p.endDate is null")
+    List<User> findByProjectsEndDateIsNull();
 }

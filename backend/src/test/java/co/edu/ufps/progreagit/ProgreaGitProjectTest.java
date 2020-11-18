@@ -2,7 +2,6 @@ package co.edu.ufps.progreagit;
 
 import co.edu.ufps.progreagit.controller.ProjectController;
 import co.edu.ufps.progreagit.exception.NotContentException;
-import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dataBuilder.ProgreaGitBuilder;
@@ -18,7 +17,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc

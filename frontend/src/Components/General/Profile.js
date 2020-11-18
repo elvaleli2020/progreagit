@@ -7,12 +7,6 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         console.log(props);
-        this.state = {
-            currentUser: null,
-            loading: false
-          }
-        this.loadCurrentUser();
-        
     }
 
     loadCurrentUser(){
@@ -31,19 +25,20 @@ class Profile extends Component {
 
 
     render(){
-        if(this.state.currentUser != null){
-            if(this.state.currentUser.rol.name=="ROLE_ADMIN"){
+        console.log(this.props.currentUser);
+        if(this.props.currentUser != null){
+            if(this.props.currentUser.rol.name=="ROLE_ADMIN"){
                 return <Redirect to={{
                     pathname: "/admin",
                     state: {from: this.props.location}
                 }}/>;
-            }else if(this.state.currentUser.rol.name=="ROLE_LEADER"){
+            }else if(this.props.currentUser.rol.name=="ROLE_LEADER"){
                 return <Redirect to={{
                     pathname: "/lider",
                     state: {from: this.props.location}
-                }}/>;    
+                }}/>;
             }else{
-                if(this.state.currentUser.rol.name=="ROLE_USER"){
+                if(this.props.currentUser.rol.name=="ROLE_USER"){
                     return <Redirect to={{
                         pathname: "/actualizacion",
                         state: {from: this.props.location}
