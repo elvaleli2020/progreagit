@@ -131,6 +131,7 @@ public class UserService {
         user.setCellphone(userRequest.getCellphone());
         user.setCode(userRequest.getCode());
         user.setPersonalEmail(userRequest.getPersonalEmail());
+        user.setPetitionLeader(userRequest.isRequestLeader());
 
         userJPA.save(user);
 

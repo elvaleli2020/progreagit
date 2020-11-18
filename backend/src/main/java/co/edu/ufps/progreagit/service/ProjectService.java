@@ -118,17 +118,19 @@ public class ProjectService {
 
     public List<Project> showProject(SearchProject searchProject) {
         List<Project> projects= null;
-        /*  find acronym and name */
-        if(searchProject.getAcronym()!=null && searchProject.getName()!=null ){
-            return projectJPA.findByAcronymOrName(searchProject.getAcronym(), searchProject.getName()).orElse(null);
-        }
-        /* find acronym */
-        if(searchProject.getAcronym()!=null ){
-            return projectJPA.findByAcronym(searchProject.getAcronym()).orElse(null);
-        }
-        /* find name */
-        if(searchProject.getName()!=null ){
-            return projectJPA.findByName(searchProject.getName()).orElse(null);
+        if(searchProject!=null){
+            /*  find acronym and name */
+            if(searchProject.getAcronym()!=null && searchProject.getName()!=null ){
+                return projectJPA.findByAcronymOrName(searchProject.getAcronym(), searchProject.getName()).orElse(null);
+            }
+            /* find acronym */
+            if(searchProject.getAcronym()!=null ){
+                return projectJPA.findByAcronym(searchProject.getAcronym()).orElse(null);
+            }
+            /* find name */
+            if(searchProject.getName()!=null ){
+                return projectJPA.findByName(searchProject.getName()).orElse(null);
+            }
         }
         return projectJPA.findAll();
     }

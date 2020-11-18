@@ -6,23 +6,8 @@ import {Redirect} from 'react-router-dom';
 class Profile extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        console.log("Profile: ", this.props);
     }
-
-    loadCurrentUser(){
-        getCurrentUser()
-        .then(response => {
-            this.setState({
-                currentUser: response,
-                loading: false
-            });
-        }).catch(error => {
-            this.setState({
-                loading: false
-            });  
-        }); 
-    }
-
 
     render(){
         console.log(this.props.currentUser);

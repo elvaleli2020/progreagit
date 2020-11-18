@@ -12,10 +12,21 @@ class ActData extends Component {
             email: "",
             address: "",
             cellphone: "",
-            requestLeader: "",
+            req: "",
             social:""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputCheckBox = this.handleInputCheckBox.bind(this);
+    }
+    handleInputCheckBox(event) {
+        const target = event.target;
+        console.log(target.value);
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.id;
+
+        this.setState({
+            [name]: value
+        });
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -106,10 +117,10 @@ class ActData extends Component {
                                id="socialMedia" />
                     </div>
                     <div className="form-check">
-                        <input type="checkbox" className="form-check-input"  value={this.state.requestLeader} id="solicitud"
-                               onChange={(e)=>{this.setState({requestLeader: e.target.value})}}/>
+                        <input type="checkbox" className="form-check-input" value={true} id="requestLeader" checked={this.state.requestLeader}
+                               onChange={this.handleInputCheckBox}/>
 
-                        <label className="form-check-label" htmlFor="requestLeader">Seleccione si desea ser Líder</label>
+                        <label className="form-check-label" htmlFor="solicitud">Seleccione si desea ser Líder</label>
                     </div>
                     <br/>
                     <button type="submit" className="btn btn-primary">Actualizar</button>

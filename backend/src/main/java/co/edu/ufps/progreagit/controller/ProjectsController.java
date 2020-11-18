@@ -14,8 +14,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/project")
-public class ProjectController {
+@RequestMapping("/projects")
+public class ProjectsController {
 
     @Autowired
     private ProjectService projectService;

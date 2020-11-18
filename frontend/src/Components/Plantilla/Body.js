@@ -31,7 +31,6 @@ class Body extends Component {
                 user: false
             }
         };
-        console.log(this.autenticated);
         this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
@@ -45,7 +44,7 @@ class Body extends Component {
         getCurrentUser()
             .then(response => {
                 console.log("Entre al getCurrentUser");
-                this.autenticated= true;
+                this.state.autenticated= true;
                 if(response.rol!=null&& response.rol.name!=null){
                     if(response.rol.name=="ROLE_ADMIN")
                         this.state.rol.admin=true;
@@ -55,6 +54,7 @@ class Body extends Component {
                         this.state.rol.user=true;
 
                 }
+                console.log("#$%&");
                 this.setState({
                     currentUser: response,
                     authenticated: true,
@@ -86,56 +86,60 @@ class Body extends Component {
     render() {
         if(this.state.loading) {
             return <LoadingIndicator />
+        }else{
+
+            console.log("ESTADOS: ",this.props.location);
+            return (
+                <div className="Plantilla">
+                    <NavBar authenticated={this.state.authenticated}
+                            currentUser={this.state.currentUser}
+                            handleLogout={this.handleLogout}></NavBar>
+                    <div className="content-wrapper">
+                        <div className="content-header">
+                            <div className="container-fluid">
+                                <div className="row mb-2">
+                                    <div className="col-sm-6">
+                                        <h1 className="m-0 text-dark">Dashboard</h1>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <ol className="breadcrumb float-sm-right">
+                                            <li className="breadcrumb-item"><a href="#">Home</a></li>
+                                            <li className="breadcrumb-item active">Dashboard v1</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <section className="contend">
+                            <div className="container-fluid">
+                                <BrowserRouter>
+                                    <Route exact path="/" component={PruebaRoute}></Route>
+                                    <Route path="/oauth2/redirect"  autenticated={"si sirve"} component={OAuth2}></Route>
+                                    <Route path="/invitado" component={Invitado}></Route>
+                                    <Route path="/mediaInv" component={MediaInv}></Route>
+
+                                    <PrivateRoute path="/profile"  authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+                                                  component={Profile} ></PrivateRoute>
+                                    <PrivateRoute path="/admin"   authenticated={this.state.rol.admin}
+                                                  component={Administrador}></PrivateRoute>
+                                    <PrivateRoute path="/lider" authenticated={this.state.rol.leader}
+                                                  component={Lider}></PrivateRoute>
+                                    <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} component={ActData}></PrivateRoute>
+
+                                </BrowserRouter>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            )
         }
         // if(this.state.authenticated){
         //         document.getElementById("body").className ='sidebar-mini';
         // }else{
         //     document.getElementById("body").className = '';
         // }
-        return (
-            <div className="Plantilla">
-                <NavBar authenticated={this.state.authenticated}
-                        currentUser={this.state.currentUser}
-                        handleLogout={this.handleLogout}></NavBar>
-                <div className="content-wrapper">
-                    <div className="content-header">
-                        <div className="container-fluid">
-                            <div className="row mb-2">
-                                <div className="col-sm-6">
-                                    <h1 className="m-0 text-dark">Dashboard</h1>
-                                </div>
-                                <div className="col-sm-6">
-                                    <ol className="breadcrumb float-sm-right">
-                                        <li className="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li className="breadcrumb-item active">Dashboard v1</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <section className="contend">
-                        <div className="container-fluid">
-                            <BrowserRouter>
-                                <Route exact path="/" component={PruebaRoute}></Route>
-                                <Route path="/oauth2/redirect" component={OAuth2}></Route>
-                                <Route path="/invitado" component={Invitado}></Route>
-                                <Route path="/mediaInv" component={MediaInv}></Route>
 
-                                <PrivateRoute path="/profile"  authenticated={this.state.authenticated} currentUser={this.state.currentUser}
-                                              component={Profile} ></PrivateRoute>
-                                <PrivateRoute path="/admin"   authenticated={this.state.rol.admin}
-                                              component={Administrador}></PrivateRoute>
-                                <PrivateRoute path="/lider" authenticated={this.state.rol.leader}
-                                              component={Lider}></PrivateRoute>
-                                <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} component={ActData}></PrivateRoute>
-
-                            </BrowserRouter>
-                        </div>
-                    </section>
-                </div>
-
-            </div>
-        )
     }
 }
 

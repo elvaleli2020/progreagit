@@ -9,6 +9,7 @@ public class UserRequest {
     private String cellphone;
     private String code;
     private String personalEmail;
+    private boolean requestLeader;
     private List<String> socialMedia;
 
     public Long getId() {
@@ -65,5 +66,13 @@ public class UserRequest {
 
     public void setSocialMedia(List<String> socialMedia) {
         this.socialMedia = socialMedia;
+    }
+
+    public boolean isRequestLeader() {
+        return requestLeader;
+    }
+
+    public void setRequestLeader(boolean requestLeader) {
+        this.requestLeader = requestLeader;
     }
 }
