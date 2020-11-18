@@ -87,10 +87,16 @@ class Body extends Component {
         if(this.state.loading) {
             return <LoadingIndicator />
         }
-        console.log("ADMIN: ", this.state.rol.admin)
+        if(this.state.authenticated){
+                document.getElementById("body").className ='sidebar-mini';
+        }else{
+            document.getElementById("body").className = '';
+        }
         return (
             <div className="Plantilla">
-                <NavBar authenticated={this.state.authenticated} handleLogout={this.handleLogout}></NavBar>
+                <NavBar authenticated={this.state.authenticated}
+                        currentUser={this.state.currentUser}
+                        handleLogout={this.handleLogout}></NavBar>
                 <div className="content-wrapper">
                     <div className="content-header">
                         <div className="container-fluid">

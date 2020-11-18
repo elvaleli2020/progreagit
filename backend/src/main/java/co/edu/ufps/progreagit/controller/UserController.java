@@ -64,8 +64,9 @@ public class UserController {
     @PutMapping("/")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest,@CurrentUser UserPrincipal userPrincipal) {
-        if(userPrincipal==null || userRequest==null || userRequest.getId()!=userPrincipal.getId())
+        if(userPrincipal==null || userRequest==null || userPrincipal.getId()==null)
             throw new NotContentException("You need additional data!");
+        userRequest.setId(userPrincipal.getId());
         userService.updateUser(userRequest);
         return ResponseEntity.ok(new ApiResponse(true, "User update successfull"));
     }

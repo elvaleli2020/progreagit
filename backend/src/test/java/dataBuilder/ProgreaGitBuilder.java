@@ -29,7 +29,7 @@ public class ProgreaGitBuilder {
         List<String> userNetworking = new ArrayList<>();
         userNetworking.add("facebook.com/ghhdghdg");
         userNetworking.add("twitter.com/hghdghdgfhf");
-        userRequest.setUserNetworking(userNetworking);
+        userRequest.setSocialMedia(userNetworking);
         return userRequest;
     }
     public UserRequest userRequestFail(){
@@ -41,7 +41,7 @@ public class ProgreaGitBuilder {
         List<String> userNetworking = new ArrayList<>();
         userNetworking.add("facebook.com/ghhdghdg");
         userNetworking.add("twitter.com/hghdghdgfhf");
-        userRequest.setUserNetworking(userNetworking);
+        userRequest.setSocialMedia(userNetworking);
         return userRequest;
     }
 
