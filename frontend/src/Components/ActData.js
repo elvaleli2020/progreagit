@@ -1,14 +1,31 @@
 //Este archivo contendrá el actualizador de datos una vez se autentique con Google por primera vez en el sistema
 import React, {Component} from 'react';
+import {putCurrentUser} from '../Util/ApiUtil'
+import {ACCESS_TOKEN} from "../Global";
 
 
 class ActData extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            
             redes: [{redes: ""}]
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const loginRequest = Object.assign({}, this.state);
+
+        putCurrentUser(loginRequest)
+            .then(response => {
+                localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+
+                this.props.history.push("/");
+            }).catch(error => {
+
+        });
     }
 
     addClick(){

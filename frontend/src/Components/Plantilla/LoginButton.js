@@ -30,9 +30,12 @@ class LoginButton extends Component {
             return (
                 <GoogleLogin
                     render={renderProps => (
-                        <a className="btn btn-block social-btn google"
-                           href={GOOGLE_AUTH_URL}>
-                            Iniciar sesión</a>
+                        <div>
+                            <a className="btn btn-block social-btn google"
+                               href={GOOGLE_AUTH_URL}>
+                                Iniciar sesión</a>
+                        </div>
+
                         
                     )}
 

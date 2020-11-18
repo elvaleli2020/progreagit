@@ -34,3 +34,10 @@ export function getCurrentUser() {
         method: 'GET'
     });
 }
+export function putCurrentUser(updateUser) {
+    return request({
+        url: API_BASE_URL + "/user/",
+        method: 'PUT',
+        body: JSON.stringify(updateUser)
+    });
+}
