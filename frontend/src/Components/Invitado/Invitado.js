@@ -10,17 +10,14 @@ class Invitado extends Component {
 
     render() {
         return (
-            <div>
-                <Header></Header>
-                <body className="Plantilla-body">
-                <div className="col-sm-12">
+            <div className="row">
+
+                <div className="col-lg-12">
                     <BuscaInvitado/>
                 </div>
-                <div className="col-sm-12">
+                <div className="col-lg-8">
                     <TableInvitado/>
                 </div>
-                </body>
-                <Footer></Footer>
             </div>
 
         );

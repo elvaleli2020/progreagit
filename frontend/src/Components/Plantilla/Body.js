@@ -91,22 +91,43 @@ class Body extends Component {
         return (
             <div className="Plantilla">
                 <NavBar authenticated={this.state.authenticated} handleLogout={this.handleLogout}></NavBar>
-                <BrowserRouter>
-                    <div>
-                        <Route exact path="/" component={PruebaRoute}></Route>
-                        <Route path="/oauth2/redirect" component={OAuth2}></Route>
-                        <Route path="/invitado" component={Invitado}></Route>
-                        <Route path="/mediaInv" component={MediaInv}></Route>
-
-                        <PrivateRoute path="/profile"  authenticated={this.state.authenticated} currentUser={this.state.currentUser}
-                                      component={Profile} ></PrivateRoute>
-                        <PrivateRoute path="/admin"   authenticated={this.state.rol.admin}
-                                      component={Administrador}></PrivateRoute>
-                        <PrivateRoute path="/lider" authenticated={this.state.rol.leader}
-                                      component={Lider}></PrivateRoute>
-                        <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} component={ActData}></PrivateRoute>
+                <div className="content-wrapper">
+                    <div className="content-header">
+                        <div className="container-fluid">
+                            <div className="row mb-2">
+                                <div className="col-sm-6">
+                                    <h1 className="m-0 text-dark">Dashboard</h1>
+                                </div>
+                                <div className="col-sm-6">
+                                    <ol className="breadcrumb float-sm-right">
+                                        <li className="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li className="breadcrumb-item active">Dashboard v1</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </BrowserRouter>
+                    <section className="contend">
+                        <div className="container-fluid">
+                            <BrowserRouter>
+                                <Route exact path="/" component={PruebaRoute}></Route>
+                                <Route path="/oauth2/redirect" component={OAuth2}></Route>
+                                <Route path="/invitado" component={Invitado}></Route>
+                                <Route path="/mediaInv" component={MediaInv}></Route>
+
+                                <PrivateRoute path="/profile"  authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+                                              component={Profile} ></PrivateRoute>
+                                <PrivateRoute path="/admin"   authenticated={this.state.rol.admin}
+                                              component={Administrador}></PrivateRoute>
+                                <PrivateRoute path="/lider" authenticated={this.state.rol.leader}
+                                              component={Lider}></PrivateRoute>
+                                <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} component={ActData}></PrivateRoute>
+
+                            </BrowserRouter>
+                        </div>
+                    </section>
+                </div>
+
             </div>
         )
     }
