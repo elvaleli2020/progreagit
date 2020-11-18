@@ -11,7 +11,7 @@ const request = (options) => {
 
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
-    console.log(options);   
+    console.log(options);
 
     return fetch(options.url, options)
     .then(response => 
@@ -19,6 +19,7 @@ const request = (options) => {
             if(!response.ok) {
                 return Promise.reject(json);
             }
+            console.log("Response: "+ json);
             return json;
         })
     );
@@ -40,5 +41,17 @@ export function putCurrentUser(updateUser) {
         url: API_BASE_URL + "/user/",
         method: 'PUT',
         body: JSON.stringify(updateUser)
+    });
+}
+
+export function getSearchProject(search) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    console.log("Por acá entró al postSearch")
+    return request({
+        url: API_BASE_URL + "/project/show",
+        method: 'POST',
+        body: JSON.stringify(search)
     });
 }

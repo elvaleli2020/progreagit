@@ -1,14 +1,34 @@
 import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
 import TableAdmin from "./TableAdmin";
+import {getSearchProject} from "../../Util/ApiUtil";
 
 class BuscaProyectos extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+        this.serviceSeach = this.serviceSearch();
+    }
+    serviceSearch(){
+        console.log("Entre al search");
+        const search = Object.assign({}, this.state);
+
+
+        getSearchProject(search)
+            .then(response => {
+                alert(response);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
     render() {
         return (
             <div>
-                <div >
+                <div>
                     <h1>Búsqueda Avanzada</h1>
-                    <form className="col-sm-12">
+                    <form onSubmit={this.serviceSeach } className="col-sm-12">
                         <div className="form-group">
                             <input type="text" className="form-control" id="InputTitle" placeholder="Título del proyecto"/>
                         </div>
@@ -21,7 +41,7 @@ class BuscaProyectos extends Component {
                                        placeholder="Palabras clave"/>
                             </div>
                             <div className="col-sm-3">
-                                <select id="inputEstado" className="form-control">
+                                <select id="imputEstado" className="form-control">
                                     <option selected>Seleccione Estado:</option>
                                     <option>Aceptada</option>
                                     <option>Rechazada</option>

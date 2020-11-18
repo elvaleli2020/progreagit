@@ -3,12 +3,17 @@ import {ACCESS_TOKEN} from '../../Global';
 import {Redirect} from 'react-router-dom'
 
 class OAuth2 extends Component {
+    constructor(props) {
+        super(props);
+        console.log("OAuth2 : ",this.props);
+        console.log(this.props.location);
+    }
+
     getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
         var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
 
         var results = regex.exec(this.props.location.search);
-        console.log(results);
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     };
 
@@ -18,6 +23,7 @@ class OAuth2 extends Component {
 
         if (token) {
             localStorage.setItem(ACCESS_TOKEN, token);
+            console.log("ASINGNE EL TOKEN");
             return <Redirect to={{
                 pathname: "/profile",
                 state: {from: this.props.location}
