@@ -24,35 +24,16 @@ class LoginButton extends Component {
         this.authenticated = false;
     }
 
-    // getUrlParameter(name) {
-    //     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    //     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    //
-    //     var results = regex.exec(this.props.location.search);
-    //     console.log(results);
-    //     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    // };
-
     render() {
 
-        // const token = this.getUrlParameter('token');
-        // const error = this.getUrlParameter('error');
-
-        // if(token){
-        //     localStorage.setItem(ACCESS_TOKEN, token);
-        // }
-        // const query = new URLSearchParams(this.props.location.search);
-        // const token = query.get('token')
-        // console.log(token)
-        // console.log(this.props.match.param.token);
-
-        if(!this.login){
+        if(!this.props.authenticated){
             return (
                 <GoogleLogin
                     render={renderProps => (
                         <a className="btn btn-block social-btn google"
                            href={GOOGLE_AUTH_URL}>
                             Iniciar sesión</a>
+                        
                     )}
 
                 />
@@ -62,7 +43,7 @@ class LoginButton extends Component {
                 <GoogleLogin
                     render={renderProps => (
                         <a className="btn btn-block social-btn google"
-                           onClick={this.logout()}>
+                           onClick={this.props.onLogout}>
                             Cerrar sesión</a>
                     )}
 

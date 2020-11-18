@@ -10,7 +10,7 @@ class NavBar extends Component {
         return (
             <React.Fragment>
                 <nav className="Plantilla-NavBar">
-                    <LoginButton authenticated={this.props.authenticated}></LoginButton>
+                    <LoginButton authenticated={this.props.authenticated} onLogout={this.props.handleLogout}></LoginButton>
                 </nav>
             </React.Fragment>
         );
