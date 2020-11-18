@@ -87,11 +87,11 @@ class Body extends Component {
         if(this.state.loading) {
             return <LoadingIndicator />
         }
-        if(this.state.authenticated){
-                document.getElementById("body").className ='sidebar-mini';
-        }else{
-            document.getElementById("body").className = '';
-        }
+        // if(this.state.authenticated){
+        //         document.getElementById("body").className ='sidebar-mini';
+        // }else{
+        //     document.getElementById("body").className = '';
+        // }
         return (
             <div className="Plantilla">
                 <NavBar authenticated={this.state.authenticated}

@@ -12,7 +12,7 @@ class ActData extends Component {
             email: "",
             address: "",
             cellphone: "",
-            redes: "",
+            redes: [],
             req: "",
             social:""
         };
@@ -30,6 +30,45 @@ class ActData extends Component {
             alert('Entró por el catch error');
         });
         alert('La info que muestra' + JSON.stringify(this.state));
+    }
+    addClick(){
+        this.setState(prevState => ({
+            redes: [...prevState.redes, { redes: ""}]
+        }))
+    }
+
+    createUI(){
+        return this.state.redes.map((el, i) => (
+            <div key={i} className="form-group">
+                <label htmlFor="InputRedes">Red Social #{i+1}</label>
+                <input type='text' className="form-control" name={"red_"+(i+1)}
+                       id="InputRedes" placeholder="Inserte URL de su perfil en red social" value={el.redes ||''}
+                       onChange={this.handleChange.bind(this, i)}
+                />
+                <input type='button' className="form-control" value='Eliminar' onClick={this.removeClick.bind(this, i)}/>
+                <br/>
+            </div>
+        ))
+    }
+
+    handleChange(i, e) {
+        console.log("Valor: "+e.target.value, "Name: "+e.target.name);
+        const { name, value } = e.target;
+        let redes = [...this.state.redes];
+        redes[i] = {...redes[i], [name]: value};
+        this.setState({ [name]:value });
+
+    }
+
+    removeClick(i){
+        let redes = [...this.state.redes];
+        redes.splice(i, 1);
+        this.setState({ redes });
+    }
+
+    handleSubmit(event) {
+        alert('Una red social fue añadida ' + JSON.stringify(this.state.redes));
+        event.preventDefault();
     }
 
     render() {
@@ -63,7 +102,14 @@ class ActData extends Component {
                     </div>
                     <div className="form-group" >
                         <label htmlFor="txtAreaResum">Redes Sociales:</label>
-                        <input className="form-control" value={this.state.social} id="socialMedia" />
+                        <input className="form-control" value={this.state.social}
+                               onChange={(e)=>{this.setState({social: e.target.value})}}
+                               id="socialMedia" />
+                    </div>
+                    <div className="form-group" >
+                        {this.createUI()}
+                        <input type="button" className="form-control" id="buttonRedes"
+                               value="Agregar red social" onClick={this.addClick.bind(this)}/>
                     </div>
                     <div className="form-check">
                         <input type="checkbox" className="form-check-input" value={this.state.solicita} id="solicitud"
