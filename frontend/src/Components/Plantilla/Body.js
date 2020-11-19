@@ -17,6 +17,7 @@ import {getCurrentUser} from "../../Util/ApiUtil";
 import LoadingIndicator from "./LoadingIndicator";
 import PrivateRoute from "../PrivateRouter";
 import NavBar from "./NavBar";
+import BuscaPersonas from "../Admin/BuscaPersonas";
 
 class Body extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class Body extends Component {
         this.state = {
             authenticated: false,
             currentUser: null,
-            loading: false,
+            loading: true,
             rol: {
                 admin: false,
                 leader: false,
@@ -122,6 +123,8 @@ class Body extends Component {
                                                   component={Profile} ></PrivateRoute>
                                     <PrivateRoute path="/admin"   authenticated={this.state.rol.admin}
                                                   component={Administrador}></PrivateRoute>
+                                    <PrivateRoute path="/buscar_personas"   authenticated={this.state.rol.admin}
+                                                  component={BuscaPersonas}></PrivateRoute>
                                     <PrivateRoute path="/lider" authenticated={this.state.rol.leader}
                                                   component={Lider}></PrivateRoute>
                                     <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} component={ActData}></PrivateRoute>

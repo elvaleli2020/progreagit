@@ -2,72 +2,96 @@ import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
 import TableAdmin from "./TableAdmin";
 import {getSearchProject} from "../../Util/ApiUtil";
+import {handleInputChange} from "../../Util/FormUtil";
 
 class BuscaProyectos extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            data:[]
         }
-        this.serviceSeach = this.serviceSearch();
+        this.serviceSeach = this.serviceSearch.bind(this);
+        this.handleInputChange = handleInputChange.bind(this);
     }
-    serviceSearch(){
+    serviceSearch(event){
+        event.preventDefault();
         console.log("Entre al search");
         const search = Object.assign({}, this.state);
 
 
         getSearchProject(search)
             .then(response => {
-                alert(response);
+                console.log(response);
+                this.setState({
+                    data: response
+                });
         }).catch(error => {
             console.log(error);
         });
     }
     render() {
+        console.log(this.state);
         return (
             <div>
                 <div>
                     <h1>Búsqueda Avanzada</h1>
-                    <form onSubmit={this.serviceSeach } className="col-sm-12">
-                        <div className="form-group">
-                            <input type="text" className="form-control" id="InputTitle" placeholder="Título del proyecto"/>
+                    <form onSubmit={this.serviceSeach} className="col-sm-12 text-sm-right" autocomplete="off">
+                        <div className="form-group row">
+                            <label className="col-sm-4 col-lg-3">Titulo del proyecto: </label>
+                            <input type="text" className="col-sm-8 col-lg-8 form-control" id="name"
+                                   value={this.state.name}
+                                   onChange={this.handleInputChange}/>
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" id="InputAutores" placeholder="Autor(es)"/>
+                        <div className="form-group row">
+                            <label className="col-sm-4 col-lg-3">Autores: </label>
+                            <input type="text" className="form-control col-sm-8 col-lg-8" id="autor"
+                                   value={this.state.autor}
+                                   onChange={this.handleInputChange}/>
                         </div>
-                        <div className="row">
-                            <div className="col-sm-9">
-                                <input type="text" className="form-control" id="InputKeywords"
-                                       placeholder="Palabras clave"/>
-                            </div>
-                            <div className="col-sm-3">
-                                <select id="imputEstado" className="form-control">
-                                    <option selected>Seleccione Estado:</option>
-                                    <option>Aceptada</option>
-                                    <option>Rechazada</option>
-                                    <option>Aceptada con correcciones</option>
-                                </select>
-                            </div>
+                        <div className="form-group row">
+                            <label className="col-sm-4 col-lg-3">Palabras claves: </label>
+
+                            <input type="text" className="col-sm-8 col-lg-8 form-control" id="keywords"
+                                   value={this.state.keywords}
+                                   onChange={this.handleInputChange}/>
                         </div>
-                        <br/>
-                        <div className="row">
+                        <div className="form-group row">
+                            <label className="col-sm-4 col-lg-3">Seleccione estado: </label>
+
+                            <select id="estado" value={this.state.estado}
+                                    onChange={this.handleInputChange} className="form-control col-sm-8 col-lg-3">
+                                <option selected>Ninguno</option>
+                                <option value="aceptada">Aceptada</option>
+                                <option value="rechazada">Rechazada</option>
+                                <option value="aceptada_con_corecciones">Aceptada con correcciones</option>
+                            </select>
+
+                            <label className="col-sm-4 col-lg-3">Sel. calificaciòn: </label>
+
+                            <select id="qualification"
+                                    value={this.state.qualification}
+                                    onChange={this.handleInputChange} className="form-control col-sm-8 col-lg-3">
+                                <option selected>Ninguna</option>
+                                <option value="aprobada">Aprobada</option>
+                                <option value="reprobadad">Reprobada</option>
+                                <option value="laureada">Laureada</option>
+                                <option value="meritoria">Meritoria</option>
+                            </select>
+                        </div>
+                        <div className="form-group row">
                             <div className="col-sm">
-                                <input type="text" className="form-control" id="InputDateDesde"
+                                <input type="date" className="form-control" id="dateInit"
+                                       value={this.state.dateInit}
+                                       onChange={this.handleInputChange}
                                        placeholder="Fecha desde: (DD/MM/YYYY)"/>
                             </div>
                             <div className="col-sm">
-                                <input type="text" className="form-control" id="InputDateHasta"
+                                <input type="date" className="form-control" id="dateLimit"
+                                       value={this.state.dateLimit}
+                                       onChange={this.handleInputChange}
                                        placeholder="Fecha hasta: (DD/MM/YYYY)"/>
                             </div>
-                            <div className="col-sm">
-                                <select id="inputCalificacion" className="form-control">
-                                    <option selected>Seleccione Calificación:</option>
-                                    <option>Aprobada</option>
-                                    <option>Reprobada</option>
-                                    <option>Laureada</option>
-                                    <option>Meritoria</option>
-                                </select>
-                            </div>
+
                         </div>
                         <br/>
                         <div className="form-group">
@@ -79,7 +103,7 @@ class BuscaProyectos extends Component {
                 </div>
                 <br/>
                <div>
-                <TableAdmin></TableAdmin>
+                <TableAdmin data={this.state.data}></TableAdmin>
                </div>
             </div>
         );
