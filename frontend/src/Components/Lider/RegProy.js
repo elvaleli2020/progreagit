@@ -12,7 +12,7 @@ class RegProy extends Component {
             gitAddress: this.props.data.gitAddress,
             keywords:this.props.data.keywords,
             director: this.props.data.director,
-            date: this.props.data.date
+            date: this.props.data.startDate
         };
         this.handleSubmit = this.handleSubmit.bind(this);
 
