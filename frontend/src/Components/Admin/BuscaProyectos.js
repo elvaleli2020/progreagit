@@ -90,13 +90,13 @@ class BuscaProyectos extends Component {
                                 <input type="date" className="form-control" id="dateInit"
                                        value={this.state.dateInit}
                                        onChange={this.handleInputChange}
-                                       placeholder="Fecha desde: (DD/MM/YYYY)"/>
+                                       placeholder="Fecha desde:"/>
                             </div>
                             <div className="col-sm">
                                 <input type="date" className="form-control" id="dateLimit"
                                        value={this.state.dateLimit}
                                        onChange={this.handleInputChange}
-                                       placeholder="Fecha hasta: (DD/MM/YYYY)"/>
+                                       placeholder="Fecha hasta:"/>
                             </div>
 
                         </div>
