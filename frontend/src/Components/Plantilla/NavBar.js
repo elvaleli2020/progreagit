@@ -26,11 +26,11 @@ class NavBar extends Component {
                         <div className="sidebar">
                             <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                                 <div className="image">
-                                    <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2"
-                                         alt="User Image"/>
+                                    <img src={this.props.currentUser.imageUrl} className="img-circle elevation-2"
+                                         alt={this.props.currentUser.name}/>
                                 </div>
                                 <div className="info">
-                                    <a href="#" className="d-block">Alexander Pierce</a>
+                                    <a href="#" className="d-block">{this.props.currentUser.name}</a>
                                 </div>
                             </div>
 
@@ -41,10 +41,18 @@ class NavBar extends Component {
 
                                     </li>
                                     <li className="nav-item">
-                                        <a href="pages/widgets.html" className="nav-link">
+                                        <a href="./admin" className="nav-link">
                                             <i className="nav-icon fas fa-th"></i>
                                             <p>
-                                                Cuenta
+                                                Busqueda de proyectos
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a href="./buscar_personas" className="nav-link">
+                                            <i className="nav-icon fas fa-th"></i>
+                                            <p>
+                                                Busqueda de personas
                                             </p>
                                         </a>
                                     </li>

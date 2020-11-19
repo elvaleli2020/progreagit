@@ -3,7 +3,7 @@ package co.edu.ufps.progreagit.payload;
 public class SearchProject {
     private String acronym;
     private String name;
-    private SearchUser autor;
+    private String autor;
     private String keywords;
     private String area;
     private String estado;
@@ -26,11 +26,11 @@ public class SearchProject {
         this.name = name;
     }
 
-    public SearchUser getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(SearchUser autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
