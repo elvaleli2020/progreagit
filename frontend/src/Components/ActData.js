@@ -12,7 +12,7 @@ class ActData extends Component {
             email: "",
             address: "",
             cellphone: "",
-            req: "",
+            requestLeader: "",
             social:""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -89,26 +89,26 @@ class ActData extends Component {
                     <div className="form-group">
                         <label htmlFor="code">Código U.F.P.S.</label>
                         <input type="text" value={this.state.code} className="form-control" id="code"
-                               onChange={(e)=>{this.setState({code: e.target.value})}} placeholder="Digite su código de estudiante U.F.P.S"/>
+                               onChange={(e)=>{this.setState({code: e.target.value})}} placeholder="Digite su código de estudiante U.F.P.S" required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email Personal</label>
                         <input type="email" className="form-control" value={this.state.personalEmail} id="email"
                                onChange={(e)=>{this.setState({personalEmail: e.target.value})}}
-                               aria-describedby="emailHelp" placeholder="Digite su email personal"/>
+                               aria-describedby="emailHelp" placeholder="Digite su email personal" required/>
                             <small id="emailHelp" className="form-text text-muted">Nunca compartiremos esta información con nadie más</small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="address">Dirección</label>
                         <input type="text" className="form-control" value={this.state.address} id="direccion"
                                onChange={(e)=>{this.setState({address: e.target.value})}}
-                               placeholder="Digite su dirección de residencia"/>
+                               placeholder="Digite su dirección de residencia" required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="callphone">Teléfono</label>
                         <input type="text" className="form-control" value={this.state.cellphone} id="telefono"
                                onChange={(e)=>{this.setState({cellphone: e.target.value})}}
-                               placeholder="Digite su número telefónico"/>
+                               placeholder="Digite su número telefónico" required/>
                     </div>
                     <div className="form-group" >
                         <label htmlFor="txtAreaResum">Redes Sociales:</label>

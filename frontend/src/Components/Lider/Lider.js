@@ -10,7 +10,7 @@ class Lider extends Component {
             <div>
                 {/*<MediaLider></MediaLider>*/}
                 <RegProy></RegProy>
-                <HistorialProy></HistorialProy>
+                {/*<HistorialProy></HistorialProy>*/}
             </div>
 
         );

@@ -5,6 +5,7 @@ import LoginButton from "./LoginButton";
 class NavBar extends Component {
     constructor(props) {
         super(props);
+        
     }
     render() {
         if(this.props.authenticated){

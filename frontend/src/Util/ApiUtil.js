@@ -58,12 +58,22 @@ export function getSearchProject(search) {
         body: JSON.stringify(search)
     });
 }
-
+// Buscar un usuario
 export function  postSearchUser(search){
     console.log("Por acá entró al postSearch")
     return request({
         url: API_BASE_URL + "/user/search",
         method: 'POST',
         body: JSON.stringify(search)
+    });
+}
+
+// Gestionar proyecto
+export function putProjectLeader(updateProject) {
+    console.log("Por acá entró al método putProjectLeader")
+    return request({
+        url: API_BASE_URL + "/project/leader",
+        method: 'PUT',
+        body: JSON.stringify(updateProject)
     });
 }
