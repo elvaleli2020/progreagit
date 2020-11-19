@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
 import {postSearchUser} from "../../Util/ApiUtil";
 import DataTable from "react-data-table-component";
+import LoadingInternal from "../Plantilla/LoadingInternal";
 
 class BuscaPersonas extends Component {
     constructor(props) {
@@ -9,6 +10,8 @@ class BuscaPersonas extends Component {
         this.state = {
             data:[]
         };
+        this.loading= true;
+
         this.cargarData();
         this.serviceSearchExt();
         this.serviceSearch = this.serviceSearch.bind(this);
@@ -21,14 +24,16 @@ class BuscaPersonas extends Component {
     }
     serviceSearchExt(){
         const search = Object.assign({}, this.state);
-
+        this.loading=true;
         postSearchUser(search)
             .then(response => {
                 console.log(response);
+                this.loading=false;
                 this.setState({
                     data: response
                 });
             }).catch(error => {
+            this.loading=false;
             console.log(error);
         });
     }
@@ -100,16 +105,22 @@ class BuscaPersonas extends Component {
                                 </form>
 
                                 <div className="col-sm-12 table-responsive">
+                                    {
+                                        this.loading?(
+                                            <LoadingInternal></LoadingInternal>
+                                        ):(
+                                            <DataTable
+                                                columns={this.columnas}
+                                                data={this.state.data}
 
-                                    <DataTable
-                                        columns={this.columnas}
-                                        data={this.state.data}
+                                                pagination
+                                                paginationComponentOptions={this.paginacionOpciones}
+                                                fixedHeader
+                                                fixedHeaderScrollHeight="600px"
+                                            />
+                                        )
+                                    }
 
-                                        pagination
-                                        paginationComponentOptions={this.paginacionOpciones}
-                                        fixedHeader
-                                        fixedHeaderScrollHeight="600px"
-                                        />
                                 </div>
                             </div>
                         </div>

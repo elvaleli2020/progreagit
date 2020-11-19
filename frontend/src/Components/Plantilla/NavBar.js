@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import '../../Styles/Plantilla.css';
 import LoginButton from "./LoginButton";
+import Menu from "./Menu";
 
 class NavBar extends Component {
     constructor(props) {
         super(props);
-        
     }
     render() {
-        if(this.props.authenticated){
+        if(this.props.authenticated && !this.props.rol.user){
             return (
                 <React.Fragment>
 
@@ -34,30 +34,7 @@ class NavBar extends Component {
                                 </div>
                             </div>
 
-                            <nav className="mt-2">
-                                <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                                    data-accordion="false">
-                                    <li className="nav-item has-treeview menu-open">
-
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="./admin" className="nav-link">
-                                            <i className="nav-icon fas fa-th"></i>
-                                            <p>
-                                                Busqueda de proyectos
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="./buscar_personas" className="nav-link">
-                                            <i className="nav-icon fas fa-th"></i>
-                                            <p>
-                                                Busqueda de personas
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <Menu rol={this.props.rol}></Menu>
                         </div>
                     </aside>
                 </React.Fragment>
@@ -70,8 +47,6 @@ class NavBar extends Component {
                 </React.Fragment>
             );
         }
-
-
     }
 }
 

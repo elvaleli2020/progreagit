@@ -31,9 +31,6 @@ class Body extends Component {
                 user: false
             }
         };
-        // if(window.location.pathname=="/oauth2/redirect"){
-        //     this.state.loading=false;
-        // }
 
         this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
@@ -97,6 +94,7 @@ class Body extends Component {
                 <div className="Plantilla">
                     <NavBar authenticated={this.state.authenticated}
                             currentUser={this.state.currentUser}
+                            rol={this.state.rol}
                             handleLogout={this.handleLogout}></NavBar>
                     <div className="content-wrapper">
                         <div className="content-header">
@@ -115,7 +113,7 @@ class Body extends Component {
 
                                 <BrowserRouter>
                                     <Route exact path="/" component={PruebaRoute}></Route>
-                                    <Route path="/oauth2/redirect"  autenticated={"si sirve"} component={OAuth2}></Route>
+                                    <Route path="/oauth2/redirect" component={OAuth2}></Route>
                                     <Route path="/invitado" component={Invitado}></Route>
                                     <Route path="/mediaInv" component={MediaInv}></Route>
 

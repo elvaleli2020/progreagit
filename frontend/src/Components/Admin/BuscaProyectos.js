@@ -3,6 +3,7 @@ import '../../Styles/Plantilla.css';
 import TableAdmin from "./TableAdmin";
 import {getSearchProject} from "../../Util/ApiUtil";
 import {handleInputChange} from "../../Util/FormUtil";
+import LoadingInternal from "../Plantilla/LoadingInternal";
 
 class BuscaProyectos extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class BuscaProyectos extends Component {
         this.state = {
             data:[]
         }
+        this.loading = true;
         this.serviceSearch(this);
         this.serviceSearch = this.serviceSearch.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
@@ -17,15 +19,17 @@ class BuscaProyectos extends Component {
     serviceSearch(event){
         if(!event)
             event.preventDefault();
-        console.log("Entre al search");
         const search = Object.assign({}, this.state);
+        this.loading = true;
         getSearchProject(search)
             .then(response => {
                 console.log(response);
+                this.loading=false;
                 this.setState({
                     data: response
                 });
         }).catch(error => {
+            this.loading= false;
             console.log(error);
         });
     }
@@ -106,7 +110,13 @@ class BuscaProyectos extends Component {
                 </div>
                 <br/>
                <div>
-                <TableAdmin data={this.state.data}></TableAdmin>
+                   {
+                       this.loading?(
+                           <LoadingInternal></LoadingInternal>
+                       ):(
+                           <TableAdmin data={this.state.data}></TableAdmin>
+                       )
+                   }
                </div>
             </div>
         );
