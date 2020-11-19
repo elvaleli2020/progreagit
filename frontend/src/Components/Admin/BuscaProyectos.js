@@ -10,11 +10,13 @@ class BuscaProyectos extends Component {
         this.state = {
             data:[]
         }
+        this.serviceSearch(this);
         this.serviceSearch = this.serviceSearch.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
     }
     serviceSearch(event){
-        event.preventDefault();
+        if(!event)
+            event.preventDefault();
         console.log("Entre al search");
         const search = Object.assign({}, this.state);
         getSearchProject(search)

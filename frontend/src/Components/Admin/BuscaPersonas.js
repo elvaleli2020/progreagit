@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
-import {getSearchProject, postSearchUser} from "../../Util/ApiUtil";
-import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
+import {postSearchUser} from "../../Util/ApiUtil";
 import DataTable from "react-data-table-component";
 
 class BuscaPersonas extends Component {
@@ -11,12 +10,16 @@ class BuscaPersonas extends Component {
             data:[]
         };
         this.cargarData();
-        this.serviceSearch = this.serviceSearch(this);
+        this.serviceSearchExt();
+        this.serviceSearch = this.serviceSearch.bind(this);
     }
 
     serviceSearch(event){
-        if(!event)
-            event.preventDefault();
+        console.log("event", event)
+        event.preventDefault();
+        this.serviceSearchExt();
+    }
+    serviceSearchExt(){
         const search = Object.assign({}, this.state);
 
         postSearchUser(search)
@@ -59,6 +62,9 @@ class BuscaPersonas extends Component {
             selectAllRowsItem: true,
             selectAllRowsItemText: 'Todos'
         }
+        this.Export = ({ onExport }) => (
+            <button onClick={e => onExport(e.target.value)}>Export</button>
+        );
     }
 
 
@@ -94,9 +100,11 @@ class BuscaPersonas extends Component {
                                 </form>
 
                                 <div className="col-sm-12 table-responsive">
+
                                     <DataTable
                                         columns={this.columnas}
                                         data={this.state.data}
+
                                         pagination
                                         paginationComponentOptions={this.paginacionOpciones}
                                         fixedHeader

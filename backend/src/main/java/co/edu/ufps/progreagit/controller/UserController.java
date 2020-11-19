@@ -92,7 +92,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/assingMember")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> assingMembersUser(@CurrentUser UserPrincipal userPrincipal,@RequestBody UserRequest userRequest){
         if(userRequest == null || userRequest.getId() == null)
             throw new NotContentException("You need additional data");
@@ -108,7 +108,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/UnassingMember")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> UnassingMembersUser(@CurrentUser UserPrincipal userPrincipal,@RequestBody UserRequest userRequest){
         if(userRequest == null || userRequest.getId() == null)
             throw new NotContentException("You need additional data");
