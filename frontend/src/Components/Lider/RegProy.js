@@ -6,7 +6,7 @@ class RegProy extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            idProject: "1",
+
             acronym: "",
             name: "",
             abstracts: "",
@@ -34,7 +34,7 @@ class RegProy extends Component {
         return (
             <div >
                 <h1>Registro de Proyectos</h1>
-                <form className="col-sm-12">
+                <form  onSubmit={this.handleSubmit} className="col-sm-12">
                     <div className="form-group">
                         <input type="text" className="form-control" id="titulo" value={this.state.name} placeholder="Título del proyecto"
                                onChange={(e)=>{this.setState({name: e.target.value})}} required/>
