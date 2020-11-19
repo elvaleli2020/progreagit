@@ -16,18 +16,17 @@ class OAuth2 extends Component {
         var results = regex.exec(this.props.location.search);
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     };
-
+    reload(){
+        window.location.href ="../profile";
+    }
     render() {
         const token = this.getUrlParameter('token');
         const error = this.getUrlParameter('error');
 
         if (token) {
             localStorage.setItem(ACCESS_TOKEN, token);
-            console.log("ASINGNE EL TOKEN");
-            return <Redirect to={{
-                pathname: "/profile",
-                state: {from: this.props.location}
-            }}/>;
+            this.reload();
+            return (<div></div>);
         } else {
             return <Redirect to={{
                 pathname: "/",

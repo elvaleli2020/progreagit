@@ -31,9 +31,9 @@ class Body extends Component {
                 user: false
             }
         };
-        if(window.location.pathname=="/oauth2/redirect"){
-            this.state.loading=false;
-        }
+        // if(window.location.pathname=="/oauth2/redirect"){
+        //     this.state.loading=false;
+        // }
 
         this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
