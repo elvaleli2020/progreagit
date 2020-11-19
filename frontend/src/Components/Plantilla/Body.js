@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import '../../Styles/Plantilla.css';
 
-
 import Invitado from "../Invitado/Invitado";
 import MediaInv from "../Invitado/MediaInv";
 import PruebaRoute from "../General/PruebaRoute";
@@ -32,6 +31,10 @@ class Body extends Component {
                 user: false
             }
         };
+        if(window.location.pathname=="/oauth2/redirect"){
+            this.state.loading=false;
+        }
+
         this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
