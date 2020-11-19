@@ -8,9 +8,8 @@ class BuscaProyectos extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            data:[]
         }
-        this.data=null;
         this.serviceSeach = this.serviceSearch.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
     }
@@ -23,7 +22,9 @@ class BuscaProyectos extends Component {
         getSearchProject(search)
             .then(response => {
                 console.log(response);
-                this.data = response;
+                this.setState({
+                    data: response
+                });
         }).catch(error => {
             console.log(error);
         });
@@ -53,17 +54,31 @@ class BuscaProyectos extends Component {
                             <input type="text" className="col-sm-8 col-lg-8 form-control" id="keywords"
                                    value={this.state.keywords}
                                    onChange={this.handleInputChange}/>
+                        </div>
+                        <div className="form-group row">
+                            <label className="col-sm-4 col-lg-3">Seleccione estado: </label>
 
                             <select id="estado" value={this.state.estado}
-                                    onChange={this.handleInputChange} className="form-control col-sm-3">
-                                <option selected>Seleccione Estado:</option>
+                                    onChange={this.handleInputChange} className="form-control col-sm-8 col-lg-3">
+                                <option selected>Ninguno</option>
                                 <option value="aceptada">Aceptada</option>
                                 <option value="rechazada">Rechazada</option>
                                 <option value="aceptada_con_corecciones">Aceptada con correcciones</option>
                             </select>
+
+                            <label className="col-sm-4 col-lg-3">Sel. calificaciòn: </label>
+
+                            <select id="qualification"
+                                    value={this.state.qualification}
+                                    onChange={this.handleInputChange} className="form-control col-sm-8 col-lg-3">
+                                <option selected>Ninguna</option>
+                                <option value="aprobada">Aprobada</option>
+                                <option value="reprobadad">Reprobada</option>
+                                <option value="laureada">Laureada</option>
+                                <option value="meritoria">Meritoria</option>
+                            </select>
                         </div>
-                        <br/>
-                        <div className="row">
+                        <div className="form-group row">
                             <div className="col-sm">
                                 <input type="date" className="form-control" id="dateInit"
                                        value={this.state.dateInit}
@@ -76,17 +91,7 @@ class BuscaProyectos extends Component {
                                        onChange={this.handleInputChange}
                                        placeholder="Fecha hasta: (DD/MM/YYYY)"/>
                             </div>
-                            <div className="col-sm">
-                                <select id="qualification"
-                                        value={this.state.qualification}
-                                        onChange={this.handleInputChange} className="form-control">
-                                    <option selected>Seleccione Calificación:</option>
-                                    <option value="aprobada">Aprobada</option>
-                                    <option value="reprobadad">Reprobada</option>
-                                    <option value="laureada">Laureada</option>
-                                    <option value="meritoria">Meritoria</option>
-                                </select>
-                            </div>
+
                         </div>
                         <br/>
                         <div className="form-group">
@@ -98,7 +103,7 @@ class BuscaProyectos extends Component {
                 </div>
                 <br/>
                <div>
-                <TableAdmin></TableAdmin>
+                <TableAdmin data={this.state.data}></TableAdmin>
                </div>
             </div>
         );

@@ -25,6 +25,7 @@ const request = (options) => {
     );
 };
 
+// Ver los datos del usurio registrado
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -35,6 +36,7 @@ export function getCurrentUser() {
         method: 'GET'
     });
 }
+// Actualizar usuario
 export function putCurrentUser(updateUser) {
     console.log("Por acá entró al método")
     return request({
@@ -44,6 +46,7 @@ export function putCurrentUser(updateUser) {
     });
 }
 
+// Buscar proyecto
 export function getSearchProject(search) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -51,6 +54,15 @@ export function getSearchProject(search) {
     console.log("Por acá entró al postSearch")
     return request({
         url: API_BASE_URL + "/project/show",
+        method: 'POST',
+        body: JSON.stringify(search)
+    });
+}
+
+export function  postSearchUser(search){
+    console.log("Por acá entró al postSearch")
+    return request({
+        url: API_BASE_URL + "/user/search",
         method: 'POST',
         body: JSON.stringify(search)
     });
