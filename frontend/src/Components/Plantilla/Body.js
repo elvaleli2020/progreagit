@@ -127,7 +127,8 @@ class Body extends Component {
                                                   component={BuscaPersonas}></PrivateRoute>
                                     <PrivateRoute path="/lider" authenticated={this.state.rol.leader}
                                                   component={Lider}></PrivateRoute>
-                                    <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} component={ActData}></PrivateRoute>
+                                    <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} user={this.state.currentUser} handleLogout={this.handleLogout}
+                                                  component={ActData}></PrivateRoute>
 
                                 </BrowserRouter>
                             </div>
