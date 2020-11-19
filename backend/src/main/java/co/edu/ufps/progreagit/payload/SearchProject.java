@@ -4,10 +4,11 @@ public class SearchProject {
     private String acronym;
     private String name;
     private SearchUser autor;
+    private String keywords;
     private String area;
     private String estado;
-    private int yearInit;
-    private int yearLimit;
+    private int dateInit;
+    private int dateLimit;
 
     public String getAcronym() {
         return acronym;
@@ -49,19 +50,27 @@ public class SearchProject {
         this.estado = estado;
     }
 
-    public int getYearInit() {
-        return yearInit;
+    public String getKeywords() {
+        return keywords;
     }
 
-    public void setYearInit(int yearInit) {
-        this.yearInit = yearInit;
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
-    public int getYearLimit() {
-        return yearLimit;
+    public int getDateInit() {
+        return dateInit;
     }
 
-    public void setYearLimit(int yearLimit) {
-        this.yearLimit = yearLimit;
+    public void setDateInit(int dateInit) {
+        this.dateInit = dateInit;
+    }
+
+    public int getDateLimit() {
+        return dateLimit;
+    }
+
+    public void setDateLimit(int dateLimit) {
+        this.dateLimit = dateLimit;
     }
 }

@@ -24,7 +24,7 @@ class Body extends Component {
         this.state = {
             authenticated: false,
             currentUser: null,
-            loading: false,
+            loading: true,
             rol: {
                 admin: false,
                 leader: false,
