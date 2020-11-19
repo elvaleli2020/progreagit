@@ -48,8 +48,9 @@ public class ProjectController {
     @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> updateLeader(@CurrentUser UserPrincipal userPrincipal, @RequestBody Project project){
         Project project1 = projectService.findByMember(userPrincipal.getId());
-        if(project1==null || project1!=null && project.getIdProject() != project1.getIdProject())
+        if(project1==null&&project==null)
             throw new NotContentException("You do not have permission to modify this project");
+        project.setIdProject(project1.getIdProject());
         projectService.updateLeader(project);
         return ResponseEntity.ok(new ApiResponse(true, "Project update successfull"));
     }

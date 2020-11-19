@@ -50,27 +50,27 @@ public class ProjectService {
         Project project1 = this.getProject(project.getIdProject());
 
         // Abtrapts
-        if(project.getAbstracts()!=null && project.getAbstracts().equals(project1.getAbstracts())){
+        if(project.getAbstracts()!=null && !project.getAbstracts().equals(project1.getAbstracts())){
             project1.setAbstracts(project.getAbstracts());
         }
         // Name
-        if(project.getName().equals(project1.getName())){
+        if(!project.getName().equals(project1.getName())){
             project1.setName(project.getName());
         }
         // Director
-        if(project.getDirector()!=null && project.getDirector().equals(project1.getDirector())){
+        if(project.getDirector()!=null && !project.getDirector().equals(project1.getDirector())){
             project1.setDirector(project.getDirector());
         }
         // Acronys
-        if(project.getAcronym()!=null && project.getAcronym().equals(project1.getAcronym())){
+        if(project.getAcronym()!=null && !project.getAcronym().equals(project1.getAcronym())){
             project1.setAcronym(project.getAcronym());
         }
         // GitAddresss
-        if(project.getGitAddress()!=null && project.getGitAddress().equals(project1.getGitAddress())){
+        if(project.getGitAddress()!=null && !project.getGitAddress().equals(project1.getGitAddress())){
             project1.setGitAddress(project.getGitAddress());
         }
         // keywords
-        if(project.getKeywords()!=null && project.getKeywords().equals(project1.getKeywords())){
+        if(project.getKeywords()!=null && !project.getKeywords().equals(project1.getKeywords())){
             project1.setKeywords(project.getKeywords());
         }
         update(project1);

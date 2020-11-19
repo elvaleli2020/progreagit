@@ -1,7 +1,6 @@
 package co.edu.ufps.progreagit;
 
 import co.edu.ufps.progreagit.controller.ProjectController;
-import co.edu.ufps.progreagit.controller.ProjectsController;
 import co.edu.ufps.progreagit.exception.NotContentException;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
