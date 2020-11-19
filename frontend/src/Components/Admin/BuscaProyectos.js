@@ -10,15 +10,13 @@ class BuscaProyectos extends Component {
         this.state = {
             data:[]
         }
-        this.serviceSeach = this.serviceSearch.bind(this);
+        this.serviceSearch = this.serviceSearch.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
     }
     serviceSearch(event){
         event.preventDefault();
         console.log("Entre al search");
         const search = Object.assign({}, this.state);
-
-
         getSearchProject(search)
             .then(response => {
                 console.log(response);
@@ -32,10 +30,13 @@ class BuscaProyectos extends Component {
     render() {
         console.log(this.state);
         return (
-            <div>
-                <div>
-                    <h1>Búsqueda Avanzada</h1>
-                    <form onSubmit={this.serviceSeach} className="col-sm-12 text-sm-right" autocomplete="off">
+            <div className="card">
+                <div className="card-header">
+                    <h4 className="card-title"><strong>Búsqueda Avanzada</strong></h4>
+                </div>
+                <div className="card-body">
+
+                    <form onSubmit={this.serviceSearch} className="col-sm-12 text-sm-right" autocomplete="off">
                         <div className="form-group row">
                             <label className="col-sm-4 col-lg-3">Titulo del proyecto: </label>
                             <input type="text" className="col-sm-8 col-lg-8 form-control" id="name"
