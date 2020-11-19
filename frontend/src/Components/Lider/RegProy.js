@@ -6,16 +6,16 @@ class RegProy extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
-            acronym: "",
-            name: "",
-            abstracts: "",
-            gitAddress: "",
-            keywords:"",
-            director: "",
-            date: new Date().toLocaleString()
+            acronym: this.props.data.acronym,
+            name: this.props.data.name ,
+            abstracts: this.props.data.abstracts,
+            gitAddress: this.props.data.gitAddress,
+            keywords:this.props.data.keywords,
+            director: this.props.data.director,
+            date: this.props.data.date
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -31,6 +31,7 @@ class RegProy extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div >
                 <h1>Registro de Proyectos</h1>

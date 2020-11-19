@@ -77,3 +77,9 @@ export function putProjectLeader(updateProject) {
         body: JSON.stringify(updateProject)
     });
 }
+export function getActiveProject(){
+    return request({
+        url: API_BASE_URL + "/project/leader",
+        method: 'GET',
+        });
+}
