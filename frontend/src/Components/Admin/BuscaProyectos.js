@@ -46,19 +46,22 @@ class BuscaProyectos extends Component {
                             <label className="col-sm-1 col-lg-1">Titulo del proyecto: </label>
                             <input type="text" className="col-sm-11 col-lg-11 form-control" id="name"
                                    value={this.state.name}
-                                   onChange={this.handleInputChange}/>
+                                   onChange={this.handleInputChange}
+                                   placeholder=" Por favor, inserte el título del proyecto"/>
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-1 col-lg-1">Autores: </label>
                             <input type="text" className="form-control col-sm-11 col-lg-11" id="autor"
                                    value={this.state.autor}
-                                   onChange={this.handleInputChange}/>
+                                   onChange={this.handleInputChange}
+                                   placeholder=" Por favor, inserte autor(es) relacionados con el proyecto"/>
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-1 col-lg-1">Palabras claves: </label>
                             <input type="text" className="col-sm-11 col-lg-11 form-control" id="keywords"
                                    value={this.state.keywords}
-                                   onChange={this.handleInputChange}/>
+                                   onChange={this.handleInputChange}
+                                   placeholder=" Por favor, inserte palabras claves del proyecto"/>
                         </div>
                         <div className="form-group row">
                                 <label className="col-sm-1 col-lg-1">Seleccione estado: </label>
@@ -89,8 +92,7 @@ class BuscaProyectos extends Component {
                                 <label htmlFor="dateInit" className="col-sm-1 col-lg-1">Fecha hasta:</label>
                                 <input type="date" className="form-control col-sm-2" id="dateLimit"
                                        value={this.state.dateLimit}
-                                       onChange={this.handleInputChange}
-                                       placeholder="Fecha hasta:"/>
+                                       onChange={this.handleInputChange}/>
 
                         </div>
                         <div className="form-group row">
