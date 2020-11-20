@@ -36,7 +36,7 @@ class BuscaProyectos extends Component {
     render() {
         console.log(this.state);
         return (
-            <div className="card">
+            <div className="card card-red">
                 <div className="card-header">
                     <h4 className="card-title"><strong>Búsqueda Avanzada</strong></h4>
                 </div>

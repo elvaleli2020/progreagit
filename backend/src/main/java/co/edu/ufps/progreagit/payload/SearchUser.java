@@ -7,6 +7,7 @@ public class SearchUser {
     private String code;
     private String email;
     private String rol;
+    private String petitionLeader;
 
     public String getName() {
         return name;
@@ -38,5 +39,17 @@ public class SearchUser {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public String getPetitionLeader() {
+        return petitionLeader;
+    }
+
+    public void setPetitionLeader(String petitionLeader) {
+        this.petitionLeader = petitionLeader;
     }
 }

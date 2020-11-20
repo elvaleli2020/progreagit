@@ -49,7 +49,7 @@ public class UserController {
     @PostMapping("/search")
     @PreAuthorize("hasRole('ADMIN') or hasRole('LEADER')")
     public ResponseEntity<?> searchUser(@RequestBody(required=false) SearchUser searchUser, @CurrentUser UserPrincipal userPrincipal){
-        return ResponseEntity.ok(userService.searchUser(searchUser));
+        return ResponseEntity.ok(userService.searchUserAdmin(searchUser,userPrincipal.getId()));
     }
 
     @PostMapping("/assing_leader")

@@ -14,6 +14,7 @@ export function handleInputChange(event) {
     const target = event.target;
     const id = target.id;
     const inputValue = target.value;
+    console.log(id, inputValue);
     this.setState({
         [id] : inputValue
     });

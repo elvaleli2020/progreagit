@@ -14,15 +14,21 @@ public interface UserJPA extends JpaRepository<User, Long> {
 
     Optional<User> findByCode(String code);
 
+    Optional<User> findByCodeAndCodeIsNotNull(String code);
+
     Optional<User> findByEmail(String email);
 
-    Optional<List<User>> findByEmailContainingAndIdUserNot(String email, Long idUser);
+    Optional<List<User>> findByEmailContainingAndIdUserNotAndCodeNotNull(String email, Long idUser);
 
-    Optional<List<User>> findByNameContainingAndIdUserNot(String name, Long idUser);
+    Optional<List<User>> findByNameContainingAndIdUserNotAndCodeNotNull(String name, Long idUser);
 
     Optional<List<User>> findByRol(Roles roles);
 
     Optional<List<User>> findByidUserNot(Long idUser);
+
+    List<User> findByidUserNotAndCodeIsNotNull(Long idUser);
+//    @Query("select u from User u  join r u.rol where r.id!=2 and u.petitionLeader=1")
+//    List<User> findByPetitionLeader();
 
     Boolean existsByEmail(String email);
 

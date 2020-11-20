@@ -6,8 +6,12 @@ import Menu from "./Menu";
 class NavBar extends Component {
     constructor(props) {
         super(props);
+        this.body = document.querySelector('body');
+
+
     }
     render() {
+
         if(this.props.authenticated && !this.props.rol.user){
             return (
                 <React.Fragment>
@@ -20,7 +24,7 @@ class NavBar extends Component {
                             <img src="./img/logo_ufps_200.jpg" alt="a"
                                  className="brand-image img-circle elevation-3"
                                  style={{opacity: .8}}/>
-                            <span className="brand-text font-weight-light">ProgreaGit</span>
+                            <span className="brand-text font-weight"> ProgreaGit </span>
                         </a>
 
                         <div className="sidebar">
@@ -40,8 +44,10 @@ class NavBar extends Component {
                 </React.Fragment>
             );
         }else{
+            this.body.setAttribute('class','layout-top-nav');
             return (
                 <React.Fragment>
+
                     <LoginButton authenticated={this.props.authenticated} onLogout={this.props.handleLogout}></LoginButton>
 
                 </React.Fragment>

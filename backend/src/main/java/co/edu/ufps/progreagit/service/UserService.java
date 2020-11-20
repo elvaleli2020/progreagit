@@ -44,7 +44,7 @@ public class UserService {
      * @param searchUser
      * @return
      */
-    public List<User> searchUser(SearchUser searchUser){
+    public List<User> searchUserAdmin(SearchUser searchUser, Long idUserAdmin){
         Roles roles = null;
         List<User> userList= new ArrayList<>();
         User user = null;
@@ -59,11 +59,11 @@ public class UserService {
             // If the email exist
             if(searchUser.getEmail()!=null){
 
-                return userJPA.findByEmailContainingAndIdUserNot(searchUser.getEmail(),1L).orElse( userList);
+                return userJPA.findByEmailContainingAndIdUserNotAndCodeNotNull(searchUser.getEmail(),idUserAdmin).orElse( userList);
             }
             // Seach by part of the name
             if(searchUser.getName()!=null){
-                return userJPA.findByNameContainingAndIdUserNot(searchUser.getName(), 1L).orElse(userList);
+                return userJPA.findByNameContainingAndIdUserNotAndCodeNotNull(searchUser.getName(), idUserAdmin).orElse(userList);
             }
             // Seach by role, admin, leader
             if(searchUser.getRole()!=null){
@@ -76,7 +76,7 @@ public class UserService {
             }
         }
 
-        return userJPA.findByidUserNot(1L).orElse(userList);
+        return userJPA.findByidUserNotAndCodeIsNotNull(idUserAdmin);
     }
 
     /**
