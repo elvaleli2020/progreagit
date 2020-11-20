@@ -95,7 +95,7 @@ class BuscaPersonas extends Component {
         return (
             <div className="row">
                 <div className="col-sm-12">
-                    <div className="card card-red">
+                    <div className="card">
                         <div className="card-header">
                             <h4 className="card-title"><strong>Búsqueda de personas</strong></h4>
                         </div>
@@ -105,7 +105,7 @@ class BuscaPersonas extends Component {
                                     <div className="form-group row">
                                         <label className="col-sm-2 col-lg-2">Buscar por: </label>
                                         <select id="estado"
-                                                value={this.state.estado}
+                                                defaultValue={this.state.estado}
                                                 onChange={this.handleInputChange} className="form-control col-sm-2 col-lg-2">
                                             <option value="nombre">Nombre</option>
                                             <option value="codigo">Codigo</option>

@@ -1,6 +1,8 @@
 import React from 'react'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import DataTable from "react-data-table-component";
+import LoadingInternal from "../Plantilla/LoadingInternal";
+import MostrarMasProyecto from "./MostrarMasProyecto";
 
 class TableAdmin extends React.Component {
 
@@ -9,29 +11,54 @@ class TableAdmin extends React.Component {
         console.log(this.props);
         this.cargarData();
     }
+
+
     cargarData(){
         this.columnas=[
             {
                 name: 'ID',
-                selector: 'id',
+                selector: 'idProject',
+                maxWidth: "20px",
                 sortable:true
             },
             {
-                name: 'Titulo',
+                name: 'TITULO',
                 selector: 'name',
+                maxWidth: "300px",
                 sortable:true
             },
             {
-                name: 'Correo electronico',
-                selector: 'email',
+                name: 'AUTOR',
+                selector: 'autores',
+                maxWidth: "300px",
                 sortable:true
             },
             {
-                name: 'Solicitusd lider',
-                selector: 'requestLeader',
+                name: 'DIRECTOR',
+                selector: 'director',
+                maxWidth: "200px",
                 sortable:true
-            }
+            },
+            {
+                name: 'FECHA INICIO',
+                selector: 'startDate',
+                maxWidth: "25px",
+                sortable:true
+            },
+            {
+                name: 'FECHA FIN',
+                selector: 'endDate',
+                maxWidth: "25px",
+                sortable:true
+            },
+            // {
+            //     name: 'ACCIONES',
+            //     button: true,
+            //     cell: () => <a href="#" className="btn btn-primary btn-sm" rel="noopener noreferrer">Ver más</a>
+            // }
+
         ];
+
         this.paginacionOpciones={
             rowsPerPageText: 'Filas por página',
             rangeSeparatorText:'de',
@@ -44,14 +71,21 @@ class TableAdmin extends React.Component {
         return (
 
             <div className="col-sm-12">
-                <BootstrapTable options={{noDataText: 'This is custom text for empty data'}}>
-                    <TableHeaderColumn dataField='id' isKey>ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='título'>Título</TableHeaderColumn>
-                    <TableHeaderColumn dataField='autor'>Autor(es)</TableHeaderColumn>
-                    <TableHeaderColumn dataField='director'>Director(es) / Codirector(es)</TableHeaderColumn>
-                    <TableHeaderColumn dataField='anio'>Año</TableHeaderColumn>
-                    <TableHeaderColumn dataField='fechaReg'>Fecha de Registro</TableHeaderColumn>
-                </BootstrapTable>
+                <div className="col-sm-12 table-responsive">
+                    <DataTable
+                        columns={this.columnas}
+                        data={this.props.data}
+                        pagination
+                        paginationComponentOptions={this.paginacionOpciones}
+                        fixedHeader
+                        expandableRows
+                        expandableRowDisabled={row => row.disabled}
+                        highlightOnHover
+                        defaultSortField="name"
+                        expandableRowsComponent={<MostrarMasProyecto data={this.props.data} />}
+                    />
+
+                </div>
             </div>
 
         );
