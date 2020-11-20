@@ -1,11 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import '../../Styles/Plantilla.css';
 import {putProjectLeader} from "../../Util/ApiUtil";
+import BuscaPersonas from "../Admin/BuscaPersonas";
+import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+
+
 
 class RegProy extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            show: false,
             acronym: this.props.data.acronym,
             name: this.props.data.name ,
             abstracts: this.props.data.abstracts,
@@ -17,20 +23,58 @@ class RegProy extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
+
+
     handleSubmit(event) {
         event.preventDefault();
         console.log(" Si pasó por handle submit");
         const loginRequest = Object.assign({}, this.state);
         putProjectLeader(loginRequest)
             .then(response => {
-                alert(response);
+                alert("Proyecto Actualizado con éxito");
             }).catch(error => {
-            alert('Entró por el catch error');
+            alert('No se ha podido registrar la información');
         });
-        alert('La info que muestra' + JSON.stringify(this.state));
+        // alert('La info que muestra' + JSON.stringify(this.state));
     }
 
     render() {
+        function Example() {
+            const [show, setShow] = useState(false);
+
+            const handleClose = () => setShow(false);
+            const handleShow = () => setShow(true);
+
+            return (
+                <div>
+                    <Button variant="primary" onClick={handleShow}>
+                        Gestion de Integrantes
+                    </Button>
+
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                        size="lg"
+                        centered
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Gestión de integrantes</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <BuscaPersonas></BuscaPersonas>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Cerrar
+                            </Button>
+                            <Button variant="primary">Registrar</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            );
+        }
         console.log(this.props);
         return (
             <div >
@@ -79,7 +123,7 @@ class RegProy extends Component {
                                    placeholder="Integrantes:"/>
                         </div>
                         <div className="col-sm-2">
-                            <button className="btn-primary">Gestionar Integrantes</button>
+                            <Example></Example>
                         </div>
                     </div>
                     <br/>
