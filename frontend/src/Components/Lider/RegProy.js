@@ -2,6 +2,7 @@ import React, {Component, useState} from 'react';
 import '../../Styles/Plantilla.css';
 import {putProjectLeader} from "../../Util/ApiUtil";
 import BuscaPersonas from "../Admin/BuscaPersonas";
+import EliminaIntegrante from "./EliminaIntegrante";
 import Modal from 'react-bootstrap/Modal';
 import Button from "react-bootstrap/Button";
 
@@ -56,13 +57,15 @@ class RegProy extends Component {
                         onHide={handleClose}
                         backdrop="static"
                         keyboard={false}
-                        size="lg"
+                        size="xl"
                         centered
                     >
                         <Modal.Header closeButton>
                             <Modal.Title>Gestión de integrantes</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
+                            <EliminaIntegrante></EliminaIntegrante>
+                            <br/>
                             <BuscaPersonas></BuscaPersonas>
                         </Modal.Body>
                         <Modal.Footer>
