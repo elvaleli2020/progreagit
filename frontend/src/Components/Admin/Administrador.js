@@ -8,19 +8,11 @@ class Administrador extends Component {
     render() {
         console.log("Entre otras");
         return (
-
             <div className="row">
                 <div className="col-sm-12">
                     <BuscaProyectos></BuscaProyectos>
-
                 </div>
-
             </div>
-
-
-
-
-
         );
     }
 }
