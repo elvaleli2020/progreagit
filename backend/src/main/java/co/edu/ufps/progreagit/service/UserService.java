@@ -92,6 +92,8 @@ public class UserService {
 
         User user = userJPA.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        if(user.getRol().getId()!=1)
+            throw new BadRequestException("He is already assigned");
         Roles rol = new Roles(3);
         user.setRol(rol);
         user.setPetitionLeader(false);

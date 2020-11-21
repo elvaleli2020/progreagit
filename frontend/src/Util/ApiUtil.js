@@ -83,3 +83,12 @@ export function getActiveProject(){
         method: 'GET',
         });
 }
+
+export function postAssingLeader(idUsuario) {
+    console.log("Por acá entró al método putProjectLeader")
+    return request({
+        url: API_BASE_URL + "/user/assing_leader",
+        method: 'PUT',
+        body: JSON.stringify(idUsuario)
+    });
+}

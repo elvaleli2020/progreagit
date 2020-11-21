@@ -20,10 +20,10 @@ class BuscaPersonas extends Component {
         this.serviceSearchExt();
         this.serviceSearch = this.serviceSearch.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
+        this.assingLeader = this.assingLeader.bind(this);
     }
 
     serviceSearch(event){
-        console.log("event", event)
         event.preventDefault();
         this.serviceSearchExt();
     }
@@ -54,6 +54,23 @@ class BuscaPersonas extends Component {
         });
     }
 
+    assingLeader(event){
+        event.preventDefault();
+        let idUsuario = Object.assign({}, {id: event.target.value});
+        console.log(idUsuario);
+        // postSearchUser(idUsuario)
+        //     .then(response => {
+        //         console.log(response);
+        //         this.serviceSearchExt();
+        //         this.setState({
+        //             loading:false
+        //         });
+        //     }).catch(error => {
+        //     this.state.loading=false;
+        //     console.log(error);
+        // });
+    }
+
     cargarData(){
         this.columnas=[
             {
@@ -75,7 +92,13 @@ class BuscaPersonas extends Component {
                 name: 'SOLICITUDO LIDER',
                 selector: 'requestLeader',
                 sortable:true
+            },
+            {
+                name: 'ACCIONES',
+                button: true,
+                cell: row => <button onClick={this.assingLeader} value={row.idUser} className="btn btn-primary btn-sm" rel="noopener noreferrer">Asignar proyecto</button>
             }
+
         ];
         this.paginacionOpciones={
             rowsPerPageText: 'Filas por página',
