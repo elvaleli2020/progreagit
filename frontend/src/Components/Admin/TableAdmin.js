@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import DataTable from "react-data-table-component";
 import LoadingInternal from "../Plantilla/LoadingInternal";
 import MostrarMasProyecto from "./MostrarMasProyecto";
+import {Button} from "react-bootstrap";
 
 class TableAdmin extends React.Component {
 
@@ -10,8 +11,52 @@ class TableAdmin extends React.Component {
         super(props);
         console.log(this.props);
         this.cargarData();
+        this.actionMemo = this.actionMemo.bind(this);
+
     }
 
+    actionMemo(event){
+        event.preventDefault();
+        this.downloadCSV(this.props.data)
+
+    }
+    downloadCSV(array) {
+        const link = document.createElement('a');
+        let csv = this.convertArrayOfObjectsToCSV(array);
+        if (csv == null) return;
+
+        const filename = 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = `data:text/csv;charset=utf-8,${csv}`;
+        }
+
+        link.setAttribute('href', encodeURI(csv));
+        link.setAttribute('download', filename);
+        link.click();
+    }
+    // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
+    convertArrayOfObjectsToCSV(array) {
+        let result;
+        const columnDelimiter = ';';
+        const lineDelimiter = '\n';
+        const keys = Object.keys(this.props.data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        array.forEach(item => {
+            let ctr = 0;
+            keys.forEach(key => {
+                if (ctr > 0) result += columnDelimiter;
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+        return result;
+    }
 
     cargarData(){
         this.columnas=[
@@ -67,9 +112,10 @@ class TableAdmin extends React.Component {
         }
     }
 
+
+
     render() {
         return (
-
             <div className="col-sm-12">
                 <div className="col-sm-12 table-responsive">
                     <DataTable
@@ -83,6 +129,7 @@ class TableAdmin extends React.Component {
                         highlightOnHover
                         defaultSortField="name"
                         expandableRowsComponent={<MostrarMasProyecto data={this.props.data} />}
+                        actions={<button className="btn btn-sm btn-primary" onClick={this.actionMemo}>Export</button>}
                     />
 
                 </div>
