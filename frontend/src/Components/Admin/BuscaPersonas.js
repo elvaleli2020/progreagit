@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
-import {postSearchUser} from "../../Util/ApiUtil";
+import {postAssingLeader, postSearchUser} from "../../Util/ApiUtil";
 import DataTable from "react-data-table-component";
 import LoadingInternal from "../Plantilla/LoadingInternal";
 import {handleInputChange} from "../../Util/FormUtil";
+import Alert from 'react-s-alert';
 
 class BuscaPersonas extends Component {
     constructor(props) {
@@ -58,17 +59,20 @@ class BuscaPersonas extends Component {
         event.preventDefault();
         let idUsuario = Object.assign({}, {id: event.target.value});
         console.log(idUsuario);
-        // postSearchUser(idUsuario)
-        //     .then(response => {
-        //         console.log(response);
-        //         this.serviceSearchExt();
-        //         this.setState({
-        //             loading:false
-        //         });
-        //     }).catch(error => {
-        //     this.state.loading=false;
-        //     console.log(error);
-        // });
+        postAssingLeader(idUsuario)
+            .then(response => {
+                console.log("RESPONSE: ",response);
+                this.serviceSearchExt();
+                this.setState({
+                    loading:false
+                });
+                Alert.success("You're successfully logged in!");
+            }).catch(error => {
+                console.log("ERROR: ",error);
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            this.state.loading=false;
+            console.log(error);
+        });
     }
 
     cargarData(){
@@ -96,7 +100,7 @@ class BuscaPersonas extends Component {
             {
                 name: 'ACCIONES',
                 button: true,
-                cell: row => <button onClick={this.assingLeader} value={row.idUser} className="btn btn-primary btn-sm" rel="noopener noreferrer">Asignar proyecto</button>
+                cell: row => <button style={{minWidth:"130px"}} onClick={this.assingLeader} value={row.idUser} className="btn btn-primary btn-sm" rel="noopener noreferrer">Asignar proyecto</button>
             }
 
         ];

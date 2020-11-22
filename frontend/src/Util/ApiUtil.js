@@ -22,7 +22,11 @@ const request = (options) => {
             console.log("Response: "+ json);
             return json;
         })
-    );
+    ).catch(error => {
+
+            console.log("Error: ", error);
+            return error;
+        });
 };
 
 // Ver los datos del usurio registrado
@@ -88,7 +92,7 @@ export function postAssingLeader(idUsuario) {
     console.log("Por acá entró al método putProjectLeader")
     return request({
         url: API_BASE_URL + "/user/assing_leader",
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify(idUsuario)
     });
 }
