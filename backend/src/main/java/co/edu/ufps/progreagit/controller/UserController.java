@@ -100,6 +100,12 @@ public class UserController {
         return ResponseEntity.ok(true);
     }
 
+    @GetMapping("/group")
+    public ResponseEntity<?> belongGroup(@CurrentUser UserPrincipal userPrincipal){
+        return ResponseEntity.ok(userService.getGroup(userPrincipal.getId()));
+    }
+
+
     /**
      * Method Unassing member
      * HU04 RF06

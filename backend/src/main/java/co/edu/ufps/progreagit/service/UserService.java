@@ -186,4 +186,14 @@ public class UserService {
         projectService.update(project);
         return true;
     }
+
+    /**
+     * Get all members of the work team
+     * @param id
+     * @return
+     */
+    public List<User> getGroup(Long id) {
+        Project project = projectService.findByMember(id);
+        return project.getUsers();
+    }
 }

@@ -112,7 +112,7 @@ class Body extends Component {
                             <div className="container-fluid">
 
                                 <BrowserRouter>
-                                    <Route exact path="/" component={PruebaRoute}></Route>
+                                    <Route exact path="/" component={Invitado}></Route>
                                     <Route path="/oauth2/redirect" component={OAuth2}></Route>
                                     <Route path="/invitado" component={Invitado}></Route>
                                     <Route path="/mediaInv" component={MediaInv}></Route>
