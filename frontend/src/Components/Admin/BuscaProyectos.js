@@ -50,31 +50,31 @@ class BuscaProyectos extends Component {
                     <h4 className="card-title"><strong>Búsqueda Avanzada</strong></h4>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={this.serviceSearch} className="col-sm-12 text-sm-right" autoComplete="off">
+                    <form onSubmit={this.serviceSearch} className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-sm-right" autoComplete="off">
                         <div className="form-group row">
-                            <label className="col-sm-1 col-lg-1">Titulo del proyecto: </label>
-                            <input type="text" className="col-sm-11 col-lg-11 form-control" id="name"
+                            <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Titulo del proyecto: </label>
+                            <input type="text" className="col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11 form-control" id="name"
                                    value={this.state.name}
                                    onChange={this.handleInputChange}
                                    placeholder=" Por favor, inserte el título del proyecto"/>
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-1 col-lg-1">Autores: </label>
-                            <input type="text" className="form-control col-sm-11 col-lg-11" id="autor"
+                            <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Autores: </label>
+                            <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11 " id="autor"
                                    value={this.state.autor}
                                    onChange={this.handleInputChange}
                                    placeholder=" Por favor, inserte autor(es) relacionados con el proyecto"/>
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-1 col-lg-1">Palabras claves: </label>
-                            <input type="text" className="col-sm-11 col-lg-11 form-control" id="keywords"
+                            <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Palabras claves: </label>
+                            <input type="text" className="col-7  col-sm-9 col-md-10 col-lg-10 col-xl-11 form-control" id="keywords"
                                    value={this.state.keywords}
                                    onChange={this.handleInputChange}
                                    placeholder=" Por favor, inserte palabras claves del proyecto"/>
                         </div>
                         <div className="form-group row">
-                                <label className="col-sm-1 col-lg-1">Seleccione estado: </label>
-                                <select className="form-control col-sm-2 " id="estado" defaultValue={this.state.estado}
+                                <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Seleccione estado: </label>
+                                <select className="form-control col-7 col-sm-9 col-md-4 col-lg-4 col-xl-2" id="estado" defaultValue={this.state.estado}
                                         onChange={this.handleInputChange} >
                                     <option>Ninguno</option>
                                     <option value="aceptada">Aceptada</option>
@@ -82,8 +82,8 @@ class BuscaProyectos extends Component {
                                     <option value="aceptada_con_corecciones">Aceptada con correcciones</option>
                                 </select>
 
-                                <label className="col-sm-1 col-lg-1">Seleccione calificación:</label>
-                                <select className="form-control col-sm-2 " id="qualification"
+                                <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Seleccione calificación:</label>
+                                <select className="form-control col-7 col-sm-9 col-md-4 col-lg-4 col-xl-2" id="qualification"
                                         defaultValue={this.state.qualification}
                                         onChange={this.handleInputChange}>
                                     <option>Ninguna</option>
@@ -93,23 +93,23 @@ class BuscaProyectos extends Component {
                                     <option value="meritoria">Meritoria</option>
                                 </select>
 
-                                <label htmlFor="dateInit" className="col-sm-1 col-lg-1">Fecha desde:</label>
-                                <input type="date" className="form-control col-sm-2 " id="dateInit"
+                                <label htmlFor="dateInit" className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Fecha desde:</label>
+                                <input type="date" className="form-control col-7 col-sm-3 col-md-4 col-lg-4 col-xl-2" id="dateInit"
                                        value={this.state.dateInit}
                                        onChange={this.handleInputChange}/>
 
-                                <label htmlFor="dateInit" className="col-sm-1 col-lg-1">Fecha hasta:</label>
-                                <input type="date" className="form-control col-sm-2" id="dateLimit"
+                                <label htmlFor="dateInit" className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Fecha hasta:</label>
+                                <input type="date" className="form-control col-7 col-sm-3 col-md-4 col-lg-4 col-xl-2" id="dateLimit"
                                        value={this.state.dateLimit}
                                        onChange={this.handleInputChange}/>
 
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-1 col-lg-1">Mentor(es): </label>
-                            <input type="text" className="col-sm-11 col-lg-11 form-control" id="InputDir"
+                            <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Mentor(es): </label>
+                            <input type="text" className="col-7  col-sm-9 col-md-10 col-lg-10 col-xl-11 form-control" id="InputDir"
                                    placeholder=" Por favor, inserte Director(es) / Codirector(es)"/>
                         </div>
-                        <button type="submit" className=" form-group row btn btn-primary col-sm-2 col-lg-2">Buscar</button>
+                        <button type="submit" className=" form-group row btn btn-primary col-6 col-sm-4 col-md-3 col-lg-2 col-lg-2 col-xl-1">Buscar</button>
                     </form>
                 </div>
                 <br/>
