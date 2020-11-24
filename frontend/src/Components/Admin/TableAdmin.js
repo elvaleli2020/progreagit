@@ -9,7 +9,6 @@ class TableAdmin extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.cargarData();
         this.actionMemo = this.actionMemo.bind(this);
 

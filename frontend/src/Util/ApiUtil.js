@@ -81,6 +81,7 @@ export function putProjectLeader(updateProject) {
         body: JSON.stringify(updateProject)
     });
 }
+// Proyecto activo del lider
 export function getActiveProject(){
     return request({
         url: API_BASE_URL + "/project/leader",
@@ -88,6 +89,7 @@ export function getActiveProject(){
         });
 }
 
+// Asignar leder por el administrador
 export function postAssingLeader(idUsuario) {
     console.log("Por acá entró al método putProjectLeader")
     return request({
@@ -96,3 +98,28 @@ export function postAssingLeader(idUsuario) {
         body: JSON.stringify(idUsuario)
     });
 }
+
+export function getMenbersGroup() {
+    console.log("Por acá entró al método putProjectLeader")
+    return request({
+        url: API_BASE_URL + "/user/group",
+        method: 'GET'
+    });
+}
+
+export function postAssignarMember(user){
+    return request({
+        url: API_BASE_URL + "/user/assingMember",
+        method: 'POST',
+        body: JSON.stringify(user)
+    });
+}
+
+export function postUnAssignarMember(user){
+    return request({
+        url: API_BASE_URL + "/user/unassingMember",
+        method: 'POST',
+        body: JSON.stringify(user)
+    });
+}
+

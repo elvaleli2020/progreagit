@@ -4,7 +4,6 @@ import '../../Styles/Plantilla.css';
 
 import Invitado from "../Invitado/Invitado";
 import MediaInv from "../Invitado/MediaInv";
-import PruebaRoute from "../General/PruebaRoute";
 import Profile from "../General/Profile";
 import Lider from "../Lider/Lider";
 import Administrador from "../Admin/Administrador";
@@ -17,6 +16,7 @@ import LoadingIndicator from "./LoadingIndicator";
 import PrivateRoute from "../PrivateRouter";
 import NavBar from "./NavBar";
 import BuscaPersonas from "../Admin/BuscaPersonas";
+import Alert from "react-s-alert";
 
 class Body extends Component {
     constructor(props) {
@@ -132,7 +132,9 @@ class Body extends Component {
                             </div>
                         </section>
                     </div>
-
+                    <Alert stack={{limit: 3}}
+                           timeout = {3000}
+                           position='top-right' effect='slide' offset={65} />
                 </div>
             )
         }

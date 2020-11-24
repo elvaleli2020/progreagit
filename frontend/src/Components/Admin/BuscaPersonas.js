@@ -159,7 +159,6 @@ class BuscaPersonas extends Component {
                                             <DataTable
                                                 columns={this.columnas}
                                                 data={this.state.data}
-
                                                 pagination
                                                 paginationComponentOptions={this.paginacionOpciones}
                                                 fixedHeader

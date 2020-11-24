@@ -49,7 +49,9 @@ public class UserController {
     @PostMapping("/search")
     @PreAuthorize("hasRole('ADMIN') or hasRole('LEADER')")
     public ResponseEntity<?> searchUser(@RequestBody(required=false) SearchUser searchUser, @CurrentUser UserPrincipal userPrincipal){
-        return ResponseEntity.ok(userService.searchUserAdmin(searchUser,userPrincipal.getId()));
+        if(this.controllerUtil.getRolUserPrincipal(userPrincipal).equals("ROLE_ADMIN"))
+            return ResponseEntity.ok(userService.searchUserAdmin(searchUser,userPrincipal.getId()));
+        return ResponseEntity.ok(userService.searchUserLeader(searchUser));
     }
 
     @PostMapping("/assing_leader")
@@ -100,11 +102,17 @@ public class UserController {
         return ResponseEntity.ok(true);
     }
 
+    /**
+     * Methodo belong group
+     * HU04 RF07
+     * @param userPrincipal
+     * @return
+     */
     @GetMapping("/group")
+    @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> belongGroup(@CurrentUser UserPrincipal userPrincipal){
         return ResponseEntity.ok(userService.getGroup(userPrincipal.getId()));
     }
-
 
     /**
      * Method Unassing member
@@ -113,7 +121,7 @@ public class UserController {
      * @param userRequest
      * @return
      */
-    @PostMapping("/UnassingMember")
+    @PostMapping("/unassingMember")
     @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> UnassingMembersUser(@CurrentUser UserPrincipal userPrincipal,@RequestBody UserRequest userRequest){
         if(userRequest == null || userRequest.getId() == null)

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Styles/Plantilla.css';
-import Body from './Components/Plantilla/Body'
+import Body from './Components/Plantilla/Body';
 
 
 class Plantilla extends Component  {
@@ -11,9 +11,7 @@ class Plantilla extends Component  {
     }
     render() {
         return (
-
                 <Body autenticated={this.authenticated}></Body>
-
         );
     }
 }

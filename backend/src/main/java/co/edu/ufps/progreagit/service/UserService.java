@@ -39,6 +39,9 @@ public class UserService {
         return userJPA.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     }
 
+    public List<User> searchUserLeader(SearchUser searchUser) {
+        return userJPA.findForLeader();
+    }
     /**
      * Service to search users
      * @param searchUser
@@ -167,19 +170,27 @@ public class UserService {
             throw new BadRequestException("Member already assigned");
         User user = userJPA.findById(idMember)
                 .orElseThrow(() -> new ResourceNotFoundException("UserMember", "id", idMember));
-        Project project = projectService.findByMember(idMember);
+        Project project = projectService.findByMember(idLeader);
         project.getUsers().add(user);
         projectService.update(project);
         return true;
     }
 
+    /**
+     * Service unassing member HU
+     * @param idLeader
+     * @param idMember
+     * @return
+     */
     public boolean unassingMemberUser(Long idLeader, Long idMember) {
+        if(idLeader==idMember)
+            throw new BadRequestException("You can't unassing yourself");
         Project projectMember = projectService.findByMember(idMember);
-        if(projectMember != null)
-            throw new BadRequestException("Member already assigned");
+        if(projectMember == null)
+            throw new BadRequestException("Not have project assing");
         User user = userJPA.findById(idMember)
                 .orElseThrow(() -> new ResourceNotFoundException("UserMember", "id", idMember));
-        Project project = projectService.findByMember(idMember);
+        Project project = projectService.findByMember(idLeader);
         if(projectMember.getIdProject()!=project.getIdProject())
             return false;
         project.getUsers().remove(user);
@@ -196,4 +207,5 @@ public class UserService {
         Project project = projectService.findByMember(id);
         return project.getUsers();
     }
+
 }

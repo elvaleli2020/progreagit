@@ -5,6 +5,7 @@ import BuscaPersonas from "../Admin/BuscaPersonas";
 import EliminaIntegrante from "./EliminaIntegrante";
 import Modal from 'react-bootstrap/Modal';
 import Button from "react-bootstrap/Button";
+import Integrantes from "./Integrante";
 
 
 
@@ -22,9 +23,12 @@ class RegProy extends Component {
             date: this.props.data.startDate
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.eliminarIntegrante= this.eliminarIntegrante.bind(this);
     }
 
+    eliminarIntegrante(event){
+        console.log("Estoy eliminndo una persona");
+    }
 
     handleSubmit(event) {
         event.preventDefault();
@@ -40,9 +44,9 @@ class RegProy extends Component {
     }
 
     render() {
-        function Example() {
+        function Example(props) {
+            console.log(props);
             const [show, setShow] = useState(false);
-
             const handleClose = () => setShow(false);
             const handleShow = () => setShow(true);
 
@@ -64,9 +68,9 @@ class RegProy extends Component {
                             <Modal.Title>Gestión de integrantes</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <EliminaIntegrante></EliminaIntegrante>
-                            <br/>
-                            <BuscaPersonas></BuscaPersonas>
+                            <Integrantes data={props.data} ></Integrantes>
+                            {/*<br/>*/}
+                            {/*<BuscaPersonas></BuscaPersonas>*/}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
@@ -78,7 +82,7 @@ class RegProy extends Component {
                 </div>
             );
         }
-        console.log(this.props);
+        console.log(this.props.data.users);
         return (
             <div >
                 <h1>Registro de Proyectos</h1>
@@ -93,8 +97,8 @@ class RegProy extends Component {
                                    placeholder="Sigla u Acrónimo" onChange={(e)=>{this.setState({acronym: e.target.value})}} required/>
                          </div>
                         <div className="col-sm-3">
-                            <select id="inputClasificacion" value="Proyecto de grado" className="form-control" disabled>
-                                <option selected>Proyecto de grado</option>
+                            <select id="inputClasificacion" defaultValue="proyecto_grado" className="form-control" disabled>
+                                <option value="proyecto_grado">Proyecto de grado</option>
                             </select>
                         </div>
                     </div>
@@ -126,7 +130,7 @@ class RegProy extends Component {
                                    placeholder="Integrantes:"/>
                         </div>
                         <div className="col-sm-2">
-                            <Example></Example>
+                            <Example data={this.props.data.users} onAccion={this.eliminarIntegrante}></Example>
                         </div>
                     </div>
                     <br/>

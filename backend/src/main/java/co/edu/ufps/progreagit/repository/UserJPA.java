@@ -24,6 +24,13 @@ public interface UserJPA extends JpaRepository<User, Long> {
 
     Optional<List<User>> findByRol(Roles roles);
 
+    /**
+     * Query for leader
+     * @return
+     */
+    @Query("SELECT u from User u left join u.projects p JOIN u.rol r WHERE u.code IS NOT NULL AND r.id=1 AND (p.idProject IS NULL)")
+    List<User> findForLeader();
+
     Optional<List<User>> findByidUserNot(Long idUser);
 
     List<User> findByidUserNotAndCodeIsNotNull(Long idUser);
