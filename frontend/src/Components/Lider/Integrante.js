@@ -149,37 +149,53 @@ class Integrantes extends Component{
     render() {
         return(
             <div className="row">
-                <div className="col-12 table-responsive text-center">
-                    {
-                        this.state.loadingIntegrante ? (
-                            <LoadingInternal></LoadingInternal>
-                        ) : (
-                            <DataTable
-                                columns={this.columnasIntegrantes}
-                                data={this.state.integrantes}
-                                pagination
-                                paginationComponentOptions={this.paginacionOpciones}
-                                fixedHeader
-                            />)
-                    }
+                <div className="col-12">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="col-12"><strong>Integrante actuales</strong></div>
+                            <div className="col-12 table-responsive text-center">
+                                {
+                                    this.state.loadingIntegrante ? (
+                                        <LoadingInternal></LoadingInternal>
+                                    ) : (
+                                        <DataTable
+                                            columns={this.columnasIntegrantes}
+                                            data={this.state.integrantes}
+                                            pagination
+                                            paginationComponentOptions={this.paginacionOpciones}
+                                            fixedHeader
+                                        />)
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-12 margin-bottom">
-                    <hr style={{width:"100%"}}/>
+
+                <div className="col-12">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="col-12"><strong>Integrante para incluir</strong></div>
+                            <div className="col-12 margin-bottom">
+                                <hr style={{width:"100%"}}/>
+                            </div>
+                            <div className="col-12 table-responsive text-center">
+                                {
+                                    this.state.loadingNuevos?(
+                                        <LoadingInternal></LoadingInternal>
+                                    ):(
+                                        <DataTable
+                                            columns={this.columnasNuevos}
+                                            data={this.state.nuevos}
+                                            pagination
+                                            paginationComponentOptions={this.paginacionOpciones}
+                                            fixedHeader
+                                        />)
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-12 table-responsive text-center">
-                    {
-                        this.state.loadingNuevos?(
-                            <LoadingInternal></LoadingInternal>
-                        ):(
-                        <DataTable
-                            columns={this.columnasNuevos}
-                            data={this.state.nuevos}
-                            pagination
-                            paginationComponentOptions={this.paginacionOpciones}
-                            fixedHeader
-                        />)
-                    }
-                </div>
+
                 <Alert stack={{limit: 3}}
                        timeout = {3000}
                        position='top-right' effect='slide' offset={65} />

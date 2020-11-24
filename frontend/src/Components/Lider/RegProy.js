@@ -69,14 +69,11 @@ class RegProy extends Component {
                         </Modal.Header>
                         <Modal.Body>
                             <Integrantes data={props.data} ></Integrantes>
-                            {/*<br/>*/}
-                            {/*<BuscaPersonas></BuscaPersonas>*/}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
                                 Cerrar
                             </Button>
-                            <Button variant="primary">Registrar</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
