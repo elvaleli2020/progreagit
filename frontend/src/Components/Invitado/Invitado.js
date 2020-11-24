@@ -12,10 +12,11 @@ class Invitado extends Component {
         return (
             <div className="row">
 
-                <div className="col-lg-12">
+                <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <BuscaInvitado/>
                 </div>
-                <div className="col-lg-8">
+
+                <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <TableInvitado/>
                 </div>
             </div>

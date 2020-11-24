@@ -7,7 +7,7 @@ class TableInvitado extends React.Component {
     render() {
         return (
 
-            <div className="col-sm-12">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <BootstrapTable options={{noDataText: 'This is custom text for empty data'}}>
                     <TableHeaderColumn dataField='id' isKey>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='título'>Título</TableHeaderColumn>
