@@ -35,14 +35,11 @@ class ModalIntegrantes extends Component{
                     </Modal.Header>
                     <Modal.Body>
                         <Integrantes data={this.props.incluidos}></Integrantes>
-                        <br/>
-                        <BuscaPersonas></BuscaPersonas>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
                             Cerrar
                         </Button>
-                        <Button variant="primary">Registrar</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
