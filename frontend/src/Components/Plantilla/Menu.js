@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 
+
 class Menu extends Component{
     constructor(props) {
         super(props);
@@ -43,9 +44,17 @@ class Menu extends Component{
                         </li>
                         <li className="nav-item">
                             <a href="./lider"  className="nav-link">
-                                <i className="nav-icon fas fa-th"></i>
+                                <i className="nav-icon fas fa-edit"></i>
                                 <p>
                                     Proyecto
+                                </p>
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="./verIntegrantes"  className="nav-link">
+                                <i className="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Ver Integrantes
                                 </p>
                             </a>
                         </li>

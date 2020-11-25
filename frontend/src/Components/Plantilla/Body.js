@@ -16,6 +16,7 @@ import LoadingIndicator from "./LoadingIndicator";
 import PrivateRoute from "../PrivateRouter";
 import NavBar from "./NavBar";
 import BuscaPersonas from "../Admin/BuscaPersonas";
+import VerIntegrante from "../Invitado/VerIntegrante";
 import Alert from "react-s-alert";
 
 class Body extends Component {
@@ -125,6 +126,8 @@ class Body extends Component {
                                                   component={BuscaPersonas}></PrivateRoute>
                                     <PrivateRoute path="/lider" authenticated={this.state.rol.leader}
                                                   component={Lider}></PrivateRoute>
+                                    <PrivateRoute path="/verIntegrantes" authenticated={this.state.rol.leader}
+                                                  component={VerIntegrante} ></PrivateRoute>
                                     <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} user={this.state.currentUser} handleLogout={this.handleLogout}
                                                   component={ActData}></PrivateRoute>
 
