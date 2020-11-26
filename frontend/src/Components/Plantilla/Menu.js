@@ -19,7 +19,7 @@ class Menu extends Component{
                             <a href="./admin"  className="nav-link">
                                 <i className="nav-icon fas fa-th"></i>
                                 <p>
-                                    Busqueda de proyectos
+                                    Búsqueda de proyectos
                                 </p>
                             </a>
                         </li>
@@ -27,7 +27,15 @@ class Menu extends Component{
                             <a href="./buscar_personas" className="nav-link">
                                 <i className="nav-icon fas fa-th"></i>
                                 <p>
-                                    Busqueda de personas
+                                    Búsqueda de personas
+                                </p>
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="./media" className="nav-link">
+                                <i className="nav-icon fas fa-th"></i>
+                                <p>
+                                    Guía de uso
                                 </p>
                             </a>
                         </li>
@@ -55,6 +63,14 @@ class Menu extends Component{
                                 <i className="nav-icon fas fa-edit"></i>
                                 <p>
                                     Ver Integrantes
+                                </p>
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="./media" className="nav-link">
+                                <i className="nav-icon fas fa-th"></i>
+                                <p>
+                                    Guía de uso
                                 </p>
                             </a>
                         </li>

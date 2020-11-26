@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import '../../Styles/Plantilla.css';
 
 import Invitado from "../Invitado/Invitado";
-import MediaInv from "../Invitado/MediaInv";
+import Media from "../Plantilla/Media"
 import Profile from "../General/Profile";
 import Lider from "../Lider/Lider";
 import Administrador from "../Admin/Administrador";
@@ -116,8 +116,8 @@ class Body extends Component {
                                     <Route exact path="/" component={Invitado}></Route>
                                     <Route path="/oauth2/redirect" component={OAuth2}></Route>
                                     <Route path="/invitado" component={Invitado}></Route>
-                                    <Route path="/mediaInv" component={MediaInv}></Route>
 
+                                    <PrivateRoute path="/media" component={Media} authenticated={this.state.authenticated} currentUser={this.state.currentUser}></PrivateRoute>
                                     <PrivateRoute path="/profile"  authenticated={this.state.authenticated} currentUser={this.state.currentUser}
                                                   component={Profile} ></PrivateRoute>
                                     <PrivateRoute path="/admin"   authenticated={this.state.rol.admin}
