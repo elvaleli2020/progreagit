@@ -12,11 +12,12 @@ class MostrarMasProyecto extends Component {
         const url="https://github.com/";
         const page=this.removePrefix(url,this.props.data.gitAddress);
         const link= page.slice(0,-4);
-        return link;
+        const united = "https://api.github.com/repos/"+link+"/zipball/";
+        return united;
     }
 
     render(){
-
+        console.log(this.cleanURL());
         return (
             <div className="card">
                 <div className="card-body text-left">
@@ -51,7 +52,8 @@ class MostrarMasProyecto extends Component {
                             <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.gitAddress}  readOnly/>
                     </div>
                     <div className="form-group row align-content-center col-sm-12">
-                            <button className="btn btn-primary  col-sm-2" >Descargar Proyecto </button>
+                            <button className="btn btn-primary  col-sm-2"  >
+                                <a href={this.cleanURL()}>Descargar Proyecto </a> </button>
                     </div>
 
                 </div>
