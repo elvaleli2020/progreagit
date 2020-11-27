@@ -3,7 +3,9 @@ import {BrowserRouter, Route} from "react-router-dom";
 import '../../Styles/Plantilla.css';
 
 import Invitado from "../Invitado/Invitado";
-import Media from "../Plantilla/Media"
+import MediaInv from "../Invitado/MediaInv";
+import MediaAdmin from "../Admin/MediaAdmin";
+import MediaLider from "../Lider/MediaLider";
 import Profile from "../General/Profile";
 import Lider from "../Lider/Lider";
 import Administrador from "../Admin/Administrador";
@@ -117,7 +119,7 @@ class Body extends Component {
                                     <Route path="/oauth2/redirect" component={OAuth2}></Route>
                                     <Route path="/invitado" component={Invitado}></Route>
 
-                                    <PrivateRoute path="/media" component={Media} authenticated={this.state.authenticated} currentUser={this.state.currentUser}></PrivateRoute>
+
                                     <PrivateRoute path="/profile"  authenticated={this.state.authenticated} currentUser={this.state.currentUser}
                                                   component={Profile} ></PrivateRoute>
                                     <PrivateRoute path="/admin"   authenticated={this.state.rol.admin}
@@ -128,6 +130,9 @@ class Body extends Component {
                                                   component={Lider}></PrivateRoute>
                                     <PrivateRoute path="/verIntegrantes" authenticated={this.state.rol.leader}
                                                   component={VerIntegrante} ></PrivateRoute>
+                                    <PrivateRoute path="/mediaInv" component={MediaInv} authenticated={this.state.rol.user} ></PrivateRoute>
+                                    <PrivateRoute path="/mediaAdmin" component={MediaAdmin} authenticated={this.state.rol.admin} ></PrivateRoute>
+                                    <PrivateRoute path="/mediaLider" component={MediaLider} authenticated={this.state.rol.leader}></PrivateRoute>
                                     <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} user={this.state.currentUser} handleLogout={this.handleLogout}
                                                   component={ActData}></PrivateRoute>
 
