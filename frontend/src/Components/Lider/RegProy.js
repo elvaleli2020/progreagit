@@ -82,7 +82,7 @@ class RegProy extends Component {
         console.log(this.props.data.users);
         return (
             <div >
-                <h1>Registro de Proyectos</h1>
+                <h1>Gestión del proyecto</h1>
                 <form  onSubmit={this.handleSubmit} className="col-sm-12">
                     <div className="form-group">
                         <input type="text" className="form-control" id="titulo" value={this.state.name} placeholder="Título del proyecto"
@@ -136,7 +136,7 @@ class RegProy extends Component {
                                placeholder="URL de repositorio" onChange={(e)=>{this.setState({gitAddress: e.target.value})}}/>
                     </div>
                     <br/>
-                    <button type="submit" className="btn btn-primary">Registrar</button>
+                    <button type="submit" className="btn btn-primary">Guardar</button>
                 </form>
             </div>
         );
