@@ -6,6 +6,7 @@ class MostrarMasProyecto extends Component {
         console.log("mostrar proyectos: ",this.props);
     }
 
+    
     render(){
         return (
             <div className="card">

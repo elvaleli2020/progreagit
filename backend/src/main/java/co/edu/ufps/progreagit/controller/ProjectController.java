@@ -38,10 +38,14 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.showProject(searchProject));
     }
 
-    @PostMapping("/show")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> showAdminPost(@RequestBody(required=false) SearchProject searchProject){ //
-        return ResponseEntity.ok(projectService.showProject(searchProject));
+    /**
+     * Method show projects by title(name), autors, area, years for guest
+     * HU5 RF11
+     * @return
+     */
+    @GetMapping("/showGuest")
+    public ResponseEntity<?> showGuest(@RequestBody(required=false) SearchProject searchProject){ //
+        return ResponseEntity.ok(projectService.showProjectGuest(searchProject));
     }
 
     @PutMapping("/leader")
@@ -69,4 +73,10 @@ public class ProjectController {
                 projectService.updateQualification(project),
                 "Project update successfull"));
     }
+
+    @GetMapping("/prueba")
+    public String index(){
+        return "Bienvenido ProgreaGit Backend 21";
+    }
+
 }

@@ -162,4 +162,13 @@ public class ProjectService {
     public Project update(Project project){
         return projectJPA.save(project);
     }
+
+    /**
+     *
+     * @param searchProject
+     * @return
+     */
+    public Project showProjectGuest(SearchProject searchProject) {
+        return null;
+    }
 }
