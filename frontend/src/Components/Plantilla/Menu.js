@@ -32,7 +32,7 @@ class Menu extends Component{
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="./media" className="nav-link">
+                            <a href="./mediaAdmin" className="nav-link">
                                 <i className="nav-icon fas fa-th"></i>
                                 <p>
                                     Guía de uso
@@ -67,7 +67,7 @@ class Menu extends Component{
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="./media" className="nav-link">
+                            <a href="./mediaLider" className="nav-link">
                                 <i className="nav-icon fas fa-th"></i>
                                 <p>
                                     Guía de uso
