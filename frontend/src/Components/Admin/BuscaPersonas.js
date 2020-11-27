@@ -93,14 +93,14 @@ class BuscaPersonas extends Component {
                 sortable:true
             },
             {
-                name: 'SOLICITUDO LIDER',
+                name: 'SOLICITUD LIDER',
                 selector: 'requestLeader',
                 sortable:true
             },
             {
                 name: 'ACCIONES',
                 button: true,
-                cell: row => <button style={{minWidth:"130px"}} onClick={this.assingLeader} value={row.idUser} className="btn btn-primary btn-sm" rel="noopener noreferrer">Asignar proyecto</button>
+                cell: row => <button style={{minWidth:"130px"}} onClick={this.assingLeader} value={row.idUser} className="btn btn-primary btn-sm" rel="noopener noreferrer">Aprobar solicitud</button>
             }
 
         ];
