@@ -1,4 +1,4 @@
-![ProgreaGit](http://www.madarme.co/portada-web.png)
+![ProgreaGit](/titulo.png)
 # Título del proyecto:
 
 #### Ejemplo de Lectura de datos JSON 
