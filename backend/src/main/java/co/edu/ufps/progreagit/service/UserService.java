@@ -51,10 +51,11 @@ public class UserService {
         Roles roles = null;
         List<User> userList= new ArrayList<>();
         User user = null;
+
         if(searchUser !=null){
             // If the code exist
             if(searchUser.getCode()!=null){
-                user = userJPA.findByCode(searchUser.getCode()).orElse(null);
+                user = userJPA.findByCodeAdminNotPetition(searchUser.getCode()).orElse(null);
                 if(user!=null)
                     userList.add(user);
                 return userList;
@@ -62,11 +63,11 @@ public class UserService {
             // If the email exist
             if(searchUser.getEmail()!=null){
 
-                return userJPA.findByEmailContainingAndIdUserNotAndCodeNotNull(searchUser.getEmail(),idUserAdmin).orElse( userList);
+                return userJPA.findbyEmailAdminNotPetition(searchUser.getEmail());
             }
             // Seach by part of the name
             if(searchUser.getName()!=null){
-                return userJPA.findByNameContainingAndIdUserNotAndCodeNotNull(searchUser.getName(), idUserAdmin).orElse(userList);
+                return userJPA.findbyNameAdminNotPetition(searchUser.getName());
             }
             // Seach by role, admin, leader
             if(searchUser.getRole()!=null){
@@ -79,7 +80,7 @@ public class UserService {
             }
         }
 
-        return userJPA.findByidUserNotAndCodeIsNotNull(idUserAdmin);
+        return userJPA.findByGeneral();
     }
 
     /**

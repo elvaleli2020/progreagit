@@ -94,7 +94,8 @@ class BuscaPersonas extends Component {
             },
             {
                 name: 'SOLICITUD LIDER',
-                selector: 'requestLeader',
+                button:true,
+                cell: row => <div>{row.petitionLeader?(<div>SI</div>):(<div>NO</div>)}</div>,
                 sortable:true
             },
             {
