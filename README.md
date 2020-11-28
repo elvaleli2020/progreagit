@@ -1,7 +1,7 @@
-![ProgreaGit](/titulo.png)
-# Título del proyecto:
+![ProgreaGit](./titulo.jpg)
+# Título del proyecto: 
+Aplicación web para administrar el repositorio de trabajos de grado del programa de ingeniería de sistemas aplicando el GitHub
 
-#### Ejemplo de Lectura de datos JSON 
 ***
 ## Índice
 1. [Características](#caracter-sticas-)
@@ -16,12 +16,18 @@
 
 #### Características:
 
-  - Proyecto con lectura de datos json a través de la API fecth JavaScript
-  - Carga dinámica del JSON 
+  - Autenticación por google, de los correos corporativos de la UFPS
+  - Administración de Roles
+  - Gestión de proyectos de grado
+  - Almacenamiento de información de proyectos de grado
+  - Manejo de repositorios Github
+  - Calificación de proyectos de grado
+
 
 ***
   #### Contenido del proyecto
 
+```bash
 ├───backend
 │   └───src
 │       ├───main
@@ -205,6 +211,7 @@
         └───Util
                 ApiUtil.js
                 FormUtil.js
+```
 
 ***
 #### Tecnologías
@@ -270,9 +277,12 @@
 ***
 ### Autor(es)
 Proyecto desarrollado por 
-	[Elian Nahun Zapata Alfonso COD:1151193 ] (<eliannahunza@ufps.edu.co>).
-	[Jhorman Jesus Botello COD.1151454] (<jhomanjesusbdbod@ufps.edu.co>)
-	[Juliana Andrea Ortega Castillo COD.1151134] (<julianaandreaoc@ufps.edu.co>)
+
+[Elian Nahun Zapata Alfonso COD:1151193 ] (<eliannahunza@ufps.edu.co>)
+
+[Jhorman Jesus Botello COD.1151454] (<jhomanjesusbdbod@ufps.edu.co>)
+
+[Juliana Andrea Ortega Castillo COD.1151134] (<julianaandreaoc@ufps.edu.co>)
 
 
 ***
