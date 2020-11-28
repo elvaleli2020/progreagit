@@ -171,4 +171,15 @@ public class ProjectService {
     public Project showProjectGuest(SearchProject searchProject) {
         return null;
     }
+
+    /**
+     * Service, Clone repository
+     * HU05 RF14, The system must allow the administrator user to clone the GitHub
+     * repository for the Systems engineering program workspace
+     * @param idProject
+     * @return
+     */
+    public boolean cloneRepository(Long idProject){
+        return false;
+    }
 }

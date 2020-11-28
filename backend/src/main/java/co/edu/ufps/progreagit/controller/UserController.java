@@ -27,6 +27,12 @@ public class UserController {
 
     private ControllerUtil controllerUtil;
 
+    /**
+     * Methodo verify the authenticity of the account
+     * HU1 RF1 The system must allow different users to log in
+     * @param userPrincipal
+     * @return
+     */
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('LEADER')")
     public ResponseEntity<User> getAccountUserLogin(@CurrentUser UserPrincipal userPrincipal) {
@@ -54,6 +60,13 @@ public class UserController {
         return ResponseEntity.ok(userService.searchUserLeader(searchUser));
     }
 
+    /**
+     * Method, project leader user permission
+     * HU2 RF16,The system must allow the administrator user to give permissions to view and collaborate on the project,
+     * to the leading user of the project
+     * @param userRequest
+     * @return
+     */
     @PostMapping("/assing_leader")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> assingLeaderUser(@RequestBody UserRequest userRequest){
@@ -63,6 +76,13 @@ public class UserController {
         return ResponseEntity.ok(true);
     }
 
+    /**
+     * Method request role to administrator
+     * HU2 RF03 The system should allow users to request a role from the administrator
+     * @param userRequest
+     * @param userPrincipal
+     * @return
+     */
     @PutMapping("/")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest,@CurrentUser UserPrincipal userPrincipal) {
@@ -76,8 +96,8 @@ public class UserController {
     ////////////////// Iteration 2 /////////////////////
 
     /**
-     * Service
-     * HU5 RF12
+     * Method, View students
+     * HU5 RF12, The system must allow the administrator user to view students with currently active projects
      * @return
      */
     @GetMapping("/project")
@@ -87,8 +107,8 @@ public class UserController {
     }
 
     /**
-     * Method
-     * HU4 RF04
+     * Method Assign member
+     * HU4 RF04. The system must allow the project leader user to assign a member to a project
      * @param userPrincipal
      * @param userRequest
      * @return
@@ -103,8 +123,40 @@ public class UserController {
     }
 
     /**
-     * Methodo belong group
-     * HU04 RF07
+     * Method Edit member
+     * HU4 RF05, El sistema debe permitir al usuario líder del proyecto, editar los integrantes del proyecto
+     * @param userRequest
+     * @param userPrincipal
+     * @return
+     */
+    @PutMapping("/updateForleader")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> updateForLeader(@RequestBody UserRequest userRequest,@CurrentUser UserPrincipal userPrincipal) {
+        if(userPrincipal==null || userRequest==null || userPrincipal.getId()==null)
+            throw new NotContentException("You need additional data!");
+        userRequest.setId(userPrincipal.getId());
+        userService.updateUser(userRequest);
+        return ResponseEntity.ok(new ApiResponse(true, "User update successfull"));
+    }
+    /**
+     * Method Unassing member
+     * HU04 RF06,The system must allow the project leader user to deallocate the project members
+     * @param userPrincipal
+     * @param userRequest
+     * @return
+     */
+    @PostMapping("/unassingMember")
+    @PreAuthorize("hasRole('LEADER')")
+    public ResponseEntity<?> unassingMembersUser(@CurrentUser UserPrincipal userPrincipal,@RequestBody UserRequest userRequest){
+        if(userRequest == null || userRequest.getId() == null)
+            throw new NotContentException("You need additional data");
+        userService.unassingMemberUser(userPrincipal.getId(), userRequest.getId());
+        return ResponseEntity.ok(true);
+    }
+
+    /**
+     * Methodo View members by the project leader
+     * HU04 RF07, The system must allow the project leader user to view the information of the project members
      * @param userPrincipal
      * @return
      */
@@ -113,22 +165,4 @@ public class UserController {
     public ResponseEntity<?> belongGroup(@CurrentUser UserPrincipal userPrincipal){
         return ResponseEntity.ok(userService.getGroup(userPrincipal.getId()));
     }
-
-    /**
-     * Method Unassing member
-     * HU04 RF06
-     * @param userPrincipal
-     * @param userRequest
-     * @return
-     */
-    @PostMapping("/unassingMember")
-    @PreAuthorize("hasRole('LEADER')")
-    public ResponseEntity<?> UnassingMembersUser(@CurrentUser UserPrincipal userPrincipal,@RequestBody UserRequest userRequest){
-        if(userRequest == null || userRequest.getId() == null)
-            throw new NotContentException("You need additional data");
-        userService.unassingMemberUser(userPrincipal.getId(), userRequest.getId());
-        return ResponseEntity.ok(true);
-    }
-
-
 }

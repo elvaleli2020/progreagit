@@ -28,8 +28,9 @@ public class ProjectController {
     }
 
     /**
-     * Method show projects by title(name), autors, area, years
-     * HU5 RF11
+     * Method View projects by title(name), autors, area, years
+     * HU5 RF11, The system must allow the administrator user to view the projects by classification,
+     * it will be displayed in a list with pagination
      * @return
      */
     @GetMapping("/show")
@@ -39,8 +40,7 @@ public class ProjectController {
     }
 
     /**
-     * Method show projects by title(name), autors, area, years for guest
-     * HU5 RF11
+     * Method
      * @return
      */
     @GetMapping("/showGuest")
@@ -48,6 +48,12 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.showProjectGuest(searchProject));
     }
 
+    /**
+     * Method
+     * @param userPrincipal
+     * @param project
+     * @return
+     */
     @PutMapping("/leader")
     @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> updateLeader(@CurrentUser UserPrincipal userPrincipal, @RequestBody Project project){
@@ -66,6 +72,7 @@ public class ProjectController {
         return ResponseEntity.ok(true);
     }
     //////// ITERATION 2 /////////////////
+
     @PutMapping("/qualification")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateQualification(@RequestBody Project project){

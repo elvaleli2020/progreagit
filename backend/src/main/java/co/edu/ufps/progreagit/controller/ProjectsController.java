@@ -20,6 +20,13 @@ public class ProjectsController {
     @Autowired
     private ProjectService projectService;
 
+    /**
+     * Method, View project by project leader
+     * HU03 RF09, The system must allow the leading user of the project to view the information
+     * of the registered project
+     * @param userPrincipal
+     * @return
+     */
     @GetMapping("/leader")
     @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> projectBelong(@CurrentUser UserPrincipal userPrincipal){
@@ -38,12 +45,13 @@ public class ProjectsController {
         return ResponseEntity.ok(projectService.showProject(searchProject));
     }
 
-    @PostMapping("/show")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> showAdminPost(@RequestBody(required=false) SearchProject searchProject){ //
-        return ResponseEntity.ok(projectService.showProject(searchProject));
-    }
-
+    /**
+     * Method, Update project
+     * HU3 RF10, The system should allow the project lead user to edit the registered project information
+     * @param userPrincipal
+     * @param project
+     * @return
+     */
     @PutMapping("/leader")
     @PreAuthorize("hasRole('LEADER')")
     public ResponseEntity<?> updateLeader(@CurrentUser UserPrincipal userPrincipal, @RequestBody Project project){
@@ -53,14 +61,27 @@ public class ProjectsController {
         projectService.updateLeader(project);
         return ResponseEntity.ok(new ApiResponse(true, "Project update successfull"));
     }
-
-    @PostMapping("/leader_member")
-    @PreAuthorize("hasRole('LEADER')")
-    public ResponseEntity<?> assingMember(@CurrentUser UserPrincipal userPrincipal, @RequestParam(value = "idUser") Long idUser){
-        projectService.assingMember(userPrincipal.getId(), idUser);
-        return ResponseEntity.ok(true);
-    }
+//
+//    /**
+//     * Method,
+//     * @param userPrincipal
+//     * @param idUser
+//     * @return
+//     */
+//    @PostMapping("/leader_member")
+//    @PreAuthorize("hasRole('LEADER')")
+//    public ResponseEntity<?> assingMember(@CurrentUser UserPrincipal userPrincipal, @RequestParam(value = "idUser") Long idUser){
+//        projectService.assingMember(userPrincipal.getId(), idUser);
+//        return ResponseEntity.ok(true);
+//    }
     //////// ITERATION 2 /////////////////
+
+    /**
+     * Method, Rate project
+     * HU5 RF13, The system must allow the administrator user to give a qualification to the project
+     * @param project
+     * @return
+     */
     @PutMapping("/qualification")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateQualification(@RequestBody Project project){

@@ -14,7 +14,8 @@ public interface UserJPA extends JpaRepository<User, Long> {
 
     Optional<User> findByCode(String code);
 
-    Optional<User> findByCodeAndCodeIsNotNull(String code);
+//    @Query("SELECT u FROm User u FROM  ")
+//    Optional<User> findByCodeAdmin(String code);
 
     Optional<User> findByEmail(String email);
 
