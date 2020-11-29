@@ -105,91 +105,91 @@ class RegProy extends Component {
             <div>
                 <h1>Gestión del proyecto</h1>
 
-                <form onSubmit={this.handleSubmit} className="col-sm-12">
-                    <div className="form-group row col-sm-12">
-                        <Alert className="col-sm-12" variant="success" show={this.state.visibleOk} onClose={() => this.setState({
+                <form onSubmit={this.handleSubmit} className="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" variant="success" show={this.state.visibleOk} onClose={() => this.setState({
                             visibleOk: !this.state.visibleOk
                         })} dismissible>
                             Actualización realizada con Éxito!
                         </Alert>
-                        <Alert className="col-sm-12" variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
                             visibleNok: !this.state.visibleNok
                         })} dismissible>
                             Actualización fallida de datos
                         </Alert>
                     </div>
 
-                    <div className="form-group row col-sm-12">
-                        <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Título del proyecto: </label>
-                        <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11 "
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <label className="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Título del proyecto: </label>
+                        <input type="text" className="form-control col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10"
                                id="titulo" value={this.state.name} placeholder="Título del proyecto"
                                onChange={(e) => {
                                    this.setState({name: e.target.value})
                                }} required/>
                     </div>
-                    <div className=" form-group row col-sm-12">
-                        <div className=" form-inline col-sm-7">
-                            <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Acrónimo: </label>
-                            <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11"
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                            <label className="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Acrónimo: </label>
+                            <input type="text" className="form-control col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10"
                                    id="acronimo" value={this.state.acronym}
                                    placeholder="Sigla u Acrónimo" onChange={(e) => {
                                 this.setState({acronym: e.target.value})
                             }} required/>
-                        </div>
-                        <div className=" form-inline col-sm-5 ">
-                            <label className="col-5 col-sm-4 col-md-3 col-lg-3 col-xl-2">Clasificación: </label>
+                    </div>
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
+                            <label className="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Clasificación: </label>
                             <select id="inputClasificacion" defaultValue="proyecto_grado"
-                                    className="form-control col-7 col-sm-8 col-md-9 col-lg-9 col-xl-10"
+                                    className="form-control col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10"
                                     disabled>
                                 <option value="proyecto_grado">Proyecto de grado</option>
                             </select>
-                        </div>
+
                     </div>
-                    <br/>
-                    <div className="form-group row col-sm-12">
-                        <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Mentor(es)</label>
-                        <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11"
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <label className="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Mentor(es):</label>
+                        <input type="text" className="form-control col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10"
                                id="monitores" value={this.state.director} placeholder="Director(es) / Codirector(es)"
                                onChange={(e) => {
                                    this.setState({director: e.target.value})
                                }} required/>
                     </div>
-                    <div className="form-group row col-sm-12">
-                        <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Palabras clave: </label>
-                        <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11"
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <label className="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Palabras clave: </label>
+                        <input type="text" className="form-control col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10"
                                id="palabraClave" value={this.state.keywords} placeholder="Palabras clave"
                                onChange={(e) => {
                                    this.setState({keywords: e.target.value})
                                }} required/>
                     </div>
-                    <div className="form-group row col-sm-12">
-                        <label className="col-sm-12">Resumen del proyecto:</label>
-                        <textarea className="form-control col-sm-12" id="resumen" rows="5" value={this.state.abstracts}
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <label className=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">Resumen del proyecto:</label>
+                        <textarea className="form-control col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="resumen" rows="5" value={this.state.abstracts}
                                   onChange={(e) => {
                                       this.setState({abstracts: e.target.value})
                                   }}/>
                     </div>
-                    <div className="form-group row col-sm-12">
-                        <div className=" form-inline col-sm-3">
-                            <label className="form-group col-sm-6">Fecha de registro:</label>
-                            <input type="text" className="form-control col-sm-6" id="date" value={this.state.date}
-                                   disabled/>
-                        </div>
-                        <div className="form-inline col-sm-9">
-                            <label className=" col-sm-2">Integrantes: </label>
-                            <input type="text"
-                                   value={this.state.integrantes}
-                                   className="form-control col-sm-7" id="InputGestionInt"
-                                   placeholder="Integrantes"/>
-                            <Example className="col-sm-2" data={this.props.data.users}
-                                     onAccion={this.eliminarIntegrante}></Example>
-                        </div>
 
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                            <label className=" col-12 col-sm-3 col-md-12 col-lg-12 col-xl-12">Integrantes: </label>
+                            <textarea type="text"
+                                   value={this.state.integrantes} rows="5"
+                                   className="form-control col-12 col-sm-9 col-md-12 col-lg-12 col-xl-12" id="InputGestionInt"
+                                   placeholder="Integrantes"/>
                     </div>
-                    <br/>
-                    <div className="form-group row col-sm-12">
-                        <label className=" col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Integrantes: </label>
-                        <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11 "
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <label className="form-group col-5 col-sm-3 col-md-2 col-lg-2 col-xl-2">Fecha de registro:</label>
+                        <input type="text" className="form-control col-7 col-sm-9 col-md-8 col-lg-6 col-xl-7" id="date" value={this.state.date}
+                               disabled/>
+                        <div className=" col-12 col-sm-6 col-md-2 col-lg-4 col-xl-3">
+                            <Example  data={this.props.data.users}
+                                      onAccion={this.eliminarIntegrante}></Example>
+                        </div>
+                    </div>
+
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
+                        <label className=" col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Integrantes: </label>
+                        <input type="text" className="form-control col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10 "
                                id="repositorio" value={this.state.gitAddress}
                                placeholder="URL de repositorio" onChange={(e) => {
                             this.setState({gitAddress: e.target.value})
