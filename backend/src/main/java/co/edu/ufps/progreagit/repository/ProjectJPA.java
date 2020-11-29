@@ -30,5 +30,4 @@ public interface ProjectJPA extends JpaRepository<Project, Integer> {
 
     @Query("SELECT p FROM Project p JOIN p.users u WHERE u.name like %?1% AND p.endDate IS NOT NULL AND p.projectStatus ='aceptada'")
     List<Project> findbyEstudiante(String estudiante);
-
 }

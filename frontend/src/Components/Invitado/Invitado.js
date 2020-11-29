@@ -6,11 +6,13 @@ import {dataAutor, postShowGuest} from "../../Util/ApiUtil";
 import Alert from "react-s-alert";
 import LoadingInternal from "../Plantilla/LoadingInternal";
 import {handleInputChange} from "../../Util/FormUtil";
+import {ACCESS_TOKEN} from "../../Global";
 
 
 class Invitado extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        console.log("PROPS: ",this.props.rol);
         this.state={
             data:[],
             loading:true,
@@ -20,8 +22,25 @@ class Invitado extends Component {
         this.cargarDatos(null);
         this.cargarDatos = this.cargarDatos.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
+        this.comprobarCuenta();
      }
 
+    comprobarCuenta(){
+        console.log("Invitados: ",this.props);
+        if(this.props.rol!=undefined){
+            if(this.props.rol.user) {
+                localStorage.removeItem(ACCESS_TOKEN);
+            }else if(this.props.rol.admin){
+                this.redireccionarPagina("admin")
+            }else if(this.props.rol.leader) {
+                this.redireccionarPagina("lider");
+            }
+        }
+     }
+
+     redireccionarPagina(pag){
+         window.location.href ="../" + pag;
+     }
     cargarDatos(event){
         if(event)
             event.preventDefault();

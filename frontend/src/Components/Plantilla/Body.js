@@ -91,7 +91,7 @@ class Body extends Component {
             return <LoadingIndicator />
         }else{
 
-            console.log("ESTADOS: ",this.props.location);
+            console.log("ESTADOS: ",this.state.rol);
             return (
                 <div className="Plantilla">
                     <NavBar authenticated={this.state.authenticated}
@@ -104,10 +104,11 @@ class Body extends Component {
                             <div className="container-fluid">
 
                                 <BrowserRouter>
-                                    <Route exact path="/" component={Invitado}></Route>
+                                    <Route exact path="/"  component={Invitado}></Route>
                                     <Route path="/oauth2/redirect" component={OAuth2}></Route>
-                                    <Route path="/invitado" component={Invitado}></Route>
-
+                                    
+                                    <PrivateRoute authenticated={true} path="/invitado"
+                                           rol={this.state.rol} component={Invitado}></PrivateRoute>
 
                                     <PrivateRoute path="/profile"  authenticated={this.state.authenticated} currentUser={this.state.currentUser}
                                                   component={Profile} ></PrivateRoute>

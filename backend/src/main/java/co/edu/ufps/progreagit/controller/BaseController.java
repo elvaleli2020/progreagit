@@ -1,16 +1,11 @@
 package co.edu.ufps.progreagit.controller;
 
-import co.edu.ufps.progreagit.service.GitControl;
 import co.edu.ufps.progreagit.service.GitHubControl;
 import org.kohsuke.github.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/")
@@ -30,8 +25,6 @@ public class BaseController {
             GitHub github = new GitHubBuilder().withOAuthToken("ca8bf119b6d4e24479485a6c3ed35bc5f25d2d54").build();
 
             GHRepository g1 = github.getRepository("elvaleli2016/prestashop");
-
-
 
             GHRepository g = github.getRepository("elvaleli2020/prueba5");
             g.delete();
