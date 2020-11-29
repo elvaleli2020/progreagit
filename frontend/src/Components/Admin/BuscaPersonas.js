@@ -163,7 +163,6 @@ class BuscaPersonas extends Component {
                                                 pagination
                                                 paginationComponentOptions={this.paginacionOpciones}
                                                 fixedHeader
-                                                fixedHeaderScrollHeight="600px"
                                             />
                                         )
                                     }

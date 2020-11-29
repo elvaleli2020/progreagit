@@ -28,7 +28,15 @@ const request = (options) => {
             return error;
         });
 };
-
+export function dataAutor(data){
+    data.forEach(e =>{
+        let autores = "";
+        e.users.forEach(u =>{
+            autores +="["+u.code+","+u.name+"]";
+        })
+        e.autores=autores;
+    });
+}
 // Ver los datos del usurio registrado
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
@@ -99,6 +107,7 @@ export function postAssingLeader(idUsuario) {
     });
 }
 
+// Integrantes
 export function getMenbersGroup() {
     console.log("Por acá entró al método putProjectLeader")
     return request({
@@ -106,12 +115,20 @@ export function getMenbersGroup() {
         method: 'GET'
     });
 }
-
+// Asignar integrante
 export function postAssignarMember(user){
     return request({
         url: API_BASE_URL + "/user/assingMember",
         method: 'POST',
         body: JSON.stringify(user)
+    });
+}
+
+export function postShowGuest(search){
+    return request({
+        url: API_BASE_URL + "/project/showGuest",
+        method: 'POST',
+        body: JSON.stringify(search)
     });
 }
 

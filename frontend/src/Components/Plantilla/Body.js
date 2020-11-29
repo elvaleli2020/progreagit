@@ -40,7 +40,6 @@ class Body extends Component {
     }
 
     loadCurrentlyLoggedInUser() {
-        console.log("Pase");
         this.setState({
             loading: true
         });

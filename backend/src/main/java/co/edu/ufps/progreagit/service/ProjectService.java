@@ -145,13 +145,14 @@ public class ProjectService {
         if(project.getIdProject() == null)
             throw new NotContentException("It has no data to modify");
         Project project1 = this.getProject(project.getIdProject());
-
+        //Project's state ACEPTADO
         if(project.getQualification()!=null && project.getProjectStatus()!=null){
             project1.setProjectStatus(project.getProjectStatus());
             project1.setQualification(project.getQualification());
             project1.setEndDate(new Date(System.currentTimeMillis()));
 
             // SE CLONA EL PROYECTO
+            cloneRepository(project1.getIdProject());
 
             update(project1);
             return true;
@@ -164,11 +165,15 @@ public class ProjectService {
     }
 
     /**
-     *
+     * service
      * @param searchProject
      * @return
      */
-    public Project showProjectGuest(SearchProject searchProject) {
+    public List<Project> showProjectGuest(SearchProject searchProject) {
+        if(searchProject.getName()!=null)
+            return projectJPA.findByTitle(searchProject.getName());
+        if(searchProject.getStudent()!=null)
+            return projectJPA.findbyEstudiante(searchProject.getStudent());
         return null;
     }
 
@@ -179,7 +184,7 @@ public class ProjectService {
      * @param idProject
      * @return
      */
-    public boolean cloneRepository(Long idProject){
+    public boolean cloneRepository(int idProject){
         return false;
     }
 }

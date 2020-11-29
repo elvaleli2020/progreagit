@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
 import TableAdmin from "./TableAdmin";
-import {getSearchProject} from "../../Util/ApiUtil";
+import {dataAutor, getSearchProject} from "../../Util/ApiUtil";
 import {handleInputChange} from "../../Util/FormUtil";
 import LoadingInternal from "../Plantilla/LoadingInternal";
 
@@ -17,15 +17,6 @@ class BuscaProyectos extends Component {
         this.handleInputChange = handleInputChange.bind(this);
     }
 
-    dataAutor(data){
-        data.forEach(e =>{
-            let autores = "";
-            e.users.forEach(u =>{
-                autores +="- "+u.code+","+u.name+" ";
-            })
-            e.autores=autores;
-        });
-    }
 
     serviceSearch(event){
         if(!event)
@@ -35,7 +26,7 @@ class BuscaProyectos extends Component {
         getSearchProject(search)
             .then(response => {
                 this.loading=false;
-                this.dataAutor(response);
+                dataAutor(response);
                 this.setState({
                     data: response
                 });
