@@ -107,12 +107,12 @@ class RegProy extends Component {
 
                 <form onSubmit={this.handleSubmit} className="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
-                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" variant="success" show={this.state.visibleOk} onClose={() => this.setState({
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="success" show={this.state.visibleOk} onClose={() => this.setState({
                             visibleOk: !this.state.visibleOk
                         })} dismissible>
                             Actualización realizada con Éxito!
                         </Alert>
-                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
                             visibleNok: !this.state.visibleNok
                         })} dismissible>
                             Actualización fallida de datos
@@ -175,7 +175,7 @@ class RegProy extends Component {
                             <textarea type="text"
                                    value={this.state.integrantes} rows="5"
                                    className="form-control col-12 col-sm-9 col-md-12 col-lg-12 col-xl-12" id="InputGestionInt"
-                                   placeholder="Integrantes"/>
+                                   placeholder="Integrantes" readOnly/>
                     </div>
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <label className="form-group col-5 col-sm-3 col-md-2 col-lg-2 col-xl-2">Fecha de registro:</label>
