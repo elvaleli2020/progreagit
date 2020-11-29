@@ -18,7 +18,7 @@ import LoadingIndicator from "./LoadingIndicator";
 import PrivateRoute from "../PrivateRouter";
 import NavBar from "./NavBar";
 import BuscaPersonas from "../Admin/BuscaPersonas";
-import VerIntegrante from "../Invitado/VerIntegrante";
+import VerIntegrante from "../Lider/VerIntegrante";
 import Alert from "react-s-alert";
 
 class Body extends Component {
