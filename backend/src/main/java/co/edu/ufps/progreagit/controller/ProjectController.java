@@ -33,16 +33,17 @@ public class ProjectController {
      * it will be displayed in a list with pagination
      * @return
      */
-    @GetMapping("/show")
+    @PostMapping("/show")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> showAdmin(@RequestBody(required=false) SearchProject searchProject){ //
         return ResponseEntity.ok(projectService.showProject(searchProject));
     }
 
     /**
-     * Method
+     * Method, View project by project leader
+     * HU03 RF09, The system must allow the leading user of the project to view the information
+     * of the registered project
      * @param userPrincipal
-     * @param project
      * @return
      */
     @PutMapping("/leader")
@@ -56,12 +57,12 @@ public class ProjectController {
         return ResponseEntity.ok(new ApiResponse(true, "Project update successfull"));
     }
 
-    @PostMapping("/leader_member")
-    @PreAuthorize("hasRole('LEADER')")
-    public ResponseEntity<?> assingMember(@CurrentUser UserPrincipal userPrincipal, @RequestParam(value = "idUser") Long idUser){
-        projectService.assingMember(userPrincipal.getId(), idUser);
-        return ResponseEntity.ok(true);
-    }
+//    @PostMapping("/leader_member")
+//    @PreAuthorize("hasRole('LEADER')")
+//    public ResponseEntity<?> assingMember(@CurrentUser UserPrincipal userPrincipal, @RequestParam(value = "idUser") Long idUser){
+//        projectService.assingMember(userPrincipal.getId(), idUser);
+//        return ResponseEntity.ok(true);
+//    }
     //////// ITERATION 2 /////////////////
 
     @PutMapping("/qualification")

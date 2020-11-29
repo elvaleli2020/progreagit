@@ -99,17 +99,7 @@ class Body extends Component {
                             rol={this.state.rol}
                             handleLogout={this.handleLogout}></NavBar>
                     <div className="content-wrapper">
-                        <div className="content-header">
-                            <div className="container-fluid">
-                                <div className="row mb-2">
-                                    <div className="col-sm-6">
-                                        <ol className="breadcrumb float-sm-right">
-                                            <li className="breadcrumb-item"><a href="#">Inicio</a></li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <section className="contend">
                             <div className="container-fluid">
 
