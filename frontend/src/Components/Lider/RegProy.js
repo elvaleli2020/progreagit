@@ -41,12 +41,22 @@ class RegProy extends Component {
             .then(response => {
                 this.setState({
                     visibleOk: !this.state.visibleOk
-                });
+                })
+                setTimeout(() => {
+                    this.setState({
+                        visibleOk: !this.state.visibleOk
+                    })
+                }, 4000)
 
             }).catch(error => {
             this.setState({
                 visibleNok: !this.state.visibleNok
             })
+            setTimeout(() => {
+                this.setState({
+                    visibleNok: !this.state.visibleNok
+                })
+            }, 4000)
         });
         // alert('La info que muestra' + JSON.stringify(this.state));
     }
@@ -92,17 +102,21 @@ class RegProy extends Component {
         return (
             <div>
                 <h1>Gestión del proyecto</h1>
-                <Alert variant="success" show={this.state.visibleOk} onClose={() => this.setState({
-                    visibleOk: !this.state.visibleOk
-                })} dismissible>
-                    Actualización realizada con Éxito!
-                </Alert>
-                <Alert variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
-                    visibleNok: !this.state.visibleNok
-                })} dismissible>
-                    Actualización fallida de datos
-                </Alert>
+
                 <form onSubmit={this.handleSubmit} className="col-sm-12">
+                    <div className="form-group row col-sm-12">
+                        <Alert className="col-sm-12" variant="success" show={this.state.visibleOk} onClose={() => this.setState({
+                            visibleOk: !this.state.visibleOk
+                        })} dismissible>
+                            Actualización realizada con Éxito!
+                        </Alert>
+                        <Alert className="col-sm-12" variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
+                            visibleNok: !this.state.visibleNok
+                        })} dismissible>
+                            Actualización fallida de datos
+                        </Alert>
+                    </div>
+
                     <div className="form-group row col-sm-12">
                         <label className="col-5 col-sm-3 col-md-2 col-lg-2 col-xl-1">Título del proyecto: </label>
                         <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-10 col-xl-11 "
