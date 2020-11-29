@@ -32,10 +32,21 @@ class MostrarMasProyecto extends Component {
                     </div>
                     <div className="form-group row">
                         <label className="col-sm-2 col-lg-2 text-right">Estado: </label>
-                        <input className="col-sm-2 form-control" value={this.props.data.projectStatus} readOnly/>
+                        <select className="col-sm-2 form-control" id="estado" >
+                            <option>Ninguno</option>
+                            <option value="aceptada">Aceptada</option>
+                            <option value="rechazada">Rechazada</option>
+                            <option value="aceptada_con_corecciones">Aceptada con correcciones</option>
+                        </select>
 
                         <label className="col-sm-2 col-lg-2 text-right">Calificación:</label>
-                        <input className="col-sm-2 form-control" value={this.props.data.qualification} readOnly/>
+                        <select className="col-sm-2 form-control" id="qualification">
+                            <option>Ninguna</option>
+                            <option value="aprobada">Aprobada</option>
+                            <option value="reprobadad">Reprobada</option>
+                            <option value="laureada">Laureada</option>
+                            <option value="meritoria">Meritoria</option>
+                        </select>
 
                         <label className="col-sm-1 col-lg-1 text-right">Fecha desde:</label>
                         <input className="col-sm-1 form-control" value={this.props.data.startDate} readOnly/>
@@ -52,10 +63,17 @@ class MostrarMasProyecto extends Component {
                             <label className="col-sm-2 col-lg-2 text-right">Repositorio:</label>
                             <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.gitAddress}  readOnly/>
                     </div>
-                    <div className="form-group row align-content-center col-sm-12">
-                            <button className="btn btn-primary  col-sm-2"  >
-                                <a href={this.cleanURL()}>Descargar Proyecto </a> </button>
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-lg-2 text-right">Repositorio clon: </label>
+                        <input className="col-sm-10 col-lg-10 form-control"  readOnly />
                     </div>
+                    <div className="form-inline  col-sm-12">
+                            <button className="btn btn-primary col-sm-2"  >
+                                <a href={this.cleanURL()}>Descargar Proyecto </a> </button>
+
+                            <button className="btn btn-primary col-sm-2"> Calificar</button>
+                    </div>
+
 
                 </div>
             </div>

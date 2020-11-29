@@ -53,21 +53,21 @@ class BuscaProyectos extends Component {
                             <input type="text" className="col-7 col-sm-9 col-md-10 col-lg-9 col-xl-10 form-control" id="name"
                                    value={this.state.name}
                                    onChange={this.handleInputChange}
-                                   placeholder=" Por favor, inserte el título del proyecto"/>
+                                   placeholder="Inserte el título del proyecto"/>
                         </div>
                         <div className="form-group row">
                             <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2">Autores: </label>
                             <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-9 col-xl-10 " id="autor"
                                    value={this.state.autor}
                                    onChange={this.handleInputChange}
-                                   placeholder=" Por favor, inserte autor(es) relacionados con el proyecto"/>
+                                   placeholder="Inserte autor(es) relacionados con el proyecto"/>
                         </div>
                         <div className="form-group row">
                             <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2">Palabras claves: </label>
                             <input type="text" className="col-7  col-sm-9 col-md-10 col-lg-9 col-xl-10 form-control" id="keywords"
                                    value={this.state.keywords}
                                    onChange={this.handleInputChange}
-                                   placeholder=" Por favor, inserte palabras claves del proyecto"/>
+                                   placeholder="Inserte palabras claves del proyecto"/>
                         </div>
                         <div className="form-group row">
                                 <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-3">Seleccione estado: </label>
@@ -90,7 +90,7 @@ class BuscaProyectos extends Component {
                                     <option value="laureada">Laureada</option>
                                     <option value="meritoria">Meritoria</option>
                                 </select>
-
+                                <br/>
                                 <label htmlFor="dateInit" className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-3">Fecha desde:</label>
                                 <input type="date" className="form-control col-7 col-sm-3 col-md-4 col-lg-3 col-xl-3" id="dateInit"
                                        value={this.state.dateInit}
@@ -105,7 +105,7 @@ class BuscaProyectos extends Component {
                         <div className="form-group row">
                             <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2">Mentor(es): </label>
                             <input type="text" className="col-7  col-sm-9 col-md-10 col-lg-9 col-xl-10 form-control" id="InputDir"
-                                   placeholder=" Por favor, inserte Director(es) / Codirector(es)"/>
+                                   placeholder="Inserte Director(es) / Codirector(es)"/>
                         </div>
                         <button type="submit" className=" form-group row btn btn-primary col-6 col-sm-4 col-md-3 col-lg-2 col-lg-2 col-xl-2">Buscar</button>
                     </form>
