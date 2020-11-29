@@ -149,10 +149,30 @@ public class ProjectService {
             }
 
             if(searchProject.getAutor()!=null){
+                if(searchProject.getEstado()!=null && searchProject.getQualification()!=null)
+                    return projectJPA.findByAutorAndStateAndQualification(
+                            searchProject.getAutor(),
+                            searchProject.getEstado(),
+                            searchProject.getQualification());
+                if(searchProject.getEstado()!=null) {
+                    return projectJPA.findByAutorAndState(
+                            searchProject.getAutor(),
+                            searchProject.getEstado());
+                }
                 return projectJPA.findByAutor(searchProject.getAutor());
             }
             if(searchProject.getMentor()!=null){
-
+                if(searchProject.getEstado()!=null && searchProject.getQualification()!=null)
+                    return projectJPA.findByMentorAndStateAndQualification(
+                            searchProject.getMentor(),
+                            searchProject.getEstado(),
+                            searchProject.getQualification());
+                if(searchProject.getEstado()!=null) {
+                    return projectJPA.findByMentorAndState(
+                            searchProject.getMentor(),
+                            searchProject.getEstado());
+                }
+                return projectJPA.findByAutor(searchProject.getAutor());
             }
         }
         return projectJPA.findAll();

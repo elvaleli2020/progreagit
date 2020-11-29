@@ -30,7 +30,7 @@ class BuscaProyectos extends Component {
             event.preventDefault();
         this.state.name=null;
         this.state.autor=null;
-        this.state.keyboards=null;
+        this.state.keywords=null;
         this.state.mentor=null;
 
         if(this.state.valueBusqueda!=null || this.state.valuebusqueda!=""){
@@ -38,8 +38,8 @@ class BuscaProyectos extends Component {
                 this.state.name = this.state.valueBusqueda;
             }else if(this.state.busqueda=="autor") {
                 this.state.autor=this.state.valueBusqueda;
-            }else if(this.state.busqueda=="keyboard"){
-                this.state.keyboards=this.state.valueBusqueda;
+            }else if(this.state.busqueda=="keywords"){
+                this.state.keywords=this.state.valueBusqueda;
             }else{
                 this.state.mentor=this.state.valueBusqueda;
             }
