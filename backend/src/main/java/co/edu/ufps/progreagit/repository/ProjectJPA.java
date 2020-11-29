@@ -45,9 +45,21 @@ public interface ProjectJPA extends JpaRepository<Project, Integer> {
     @Query("SELECT p FROM Project p JOIN p.users u WHERE u.name like %?1%")
     List<Project> findByAutor(String autor);
 
+    @Query("SELECT p FROM Project p JOIN p.users u WHERE u.name like %?1% AND p.projectStatus= ?2")
+    List<Project>  findByAutorAndState(String autor, String status);
+
+    @Query("SELECT p FROM Project p JOIN p.users u WHERE u.name like %?1% AND p.projectStatus= ?2 AND p.qualification=?3")
+    List<Project>  findByAutorAndStateAndQualification(String autor, String status, String qualification);
+
       //MENTOR
     @Query("SELECT p FROM Project p WhERE p.director like %?1% ")
     List<Project> findByMentor(String mentor);
+
+    @Query("SELECT p FROM Project p WHERE p.director like %?1% AND p.projectStatus= ?2")
+    List<Project>  findByMentorAndState(String mentor, String status);
+
+    @Query("SELECT p FROM Project p WHERE p.director like %?1% AND p.projectStatus= ?2 AND p.qualification=?3")
+    List<Project>  findByMentorAndStateAndQualification(String mentor, String status, String qualification);
 
 
     ////////// INVITADO //////////

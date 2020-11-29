@@ -44,7 +44,7 @@ class Menu extends Component{
             );
         }else if(this.props.rol.leader){
             return(
-                <nav className="mt-2">
+                <nav className="mt-2 text-left">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li className="nav-item has-treeview menu-open">
@@ -52,7 +52,7 @@ class Menu extends Component{
                         </li>
                         <li className="nav-item">
                             <a href="./lider"  className="nav-link">
-                                <i className="nav-icon fas fa-edit"></i>
+                                <i className="nav-icon fas fa-archive"></i>
                                 <p>
                                     Proyecto
                                 </p>
@@ -68,7 +68,7 @@ class Menu extends Component{
                         </li>
                         <li className="nav-item">
                             <a href="./mediaLider" className="nav-link">
-                                <i className="nav-icon fas fa-th"></i>
+                                <i className="nav-icon fas fa-camera-retro"></i>
                                 <p>
                                     Guía de uso
                                 </p>
