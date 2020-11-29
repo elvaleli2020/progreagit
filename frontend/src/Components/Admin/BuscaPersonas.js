@@ -101,7 +101,7 @@ class BuscaPersonas extends Component {
             {
                 name: 'ACCIONES',
                 button: true,
-                cell: row => <button style={{minWidth:"130px"}} onClick={this.assingLeader} value={row.idUser} className="btn btn-primary btn-sm" rel="noopener noreferrer">Aprobar solicitud</button>
+                cell: row => <div>{row.petitionLeader?(<button style={{minWidth:"130px"}} onClick={this.assingLeader} value={row.idUser} className="btn btn-primary btn-sm" rel="noopener noreferrer">Aprobar solicitud</button>):(<div></div>)}</div>
             }
 
         ];
