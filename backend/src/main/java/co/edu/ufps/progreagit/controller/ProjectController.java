@@ -41,15 +41,6 @@ public class ProjectController {
 
     /**
      * Method
-     * @return
-     */
-    @GetMapping("/showGuest")
-    public ResponseEntity<?> showGuest(@RequestBody(required=false) SearchProject searchProject){ //
-        return ResponseEntity.ok(projectService.showProjectGuest(searchProject));
-    }
-
-    /**
-     * Method
      * @param userPrincipal
      * @param project
      * @return
@@ -81,6 +72,15 @@ public class ProjectController {
                 "Project update successfull"));
     }
 
+    /**
+     * Method List projects to external users
+     * HU5 RF17 The system must allow unregistered users to see the basic information of approved projects
+     * @return
+     */
+    @PostMapping("/showGuest")
+    public ResponseEntity<?> showGuest(@RequestBody(required=false) SearchProject searchProject){ //
+        return ResponseEntity.ok(projectService.showProjectGuest(searchProject));
+    }
     @GetMapping("/prueba")
     public String index(){
         return "Bienvenido ProgreaGit Backend 21";

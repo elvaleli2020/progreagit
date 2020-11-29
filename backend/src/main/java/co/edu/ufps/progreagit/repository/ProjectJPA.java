@@ -15,8 +15,15 @@ public interface ProjectJPA extends JpaRepository<Project, Integer> {
 
     @Query("select p from Project p join p.users u where p.endDate is null and u.idUser = :idUser")
     Optional<Project> findByUsersIdUser(@Param("idUser") Long idUser);
+
     Optional<List<Project>> findByAcronym(String acronym);
     Optional<List<Project>> findByName(String name);
     Optional<List<Project>> findByAcronymOrName(String acronym, String name);
+
+    @Query("SELECT p FROM Project p WHERE p.acronym like %?1% AND p.name like %?1% AND p.endDate IS NOT NULL AND p.projectStatus ='ACEPTADO'")
+    List<Project> findByTitle(String title);
+
+    @Query("SELECT p FROM Project p JOIN p.users u WHERE u.name like %?1% AND p.endDate IS NOT NULL AND p.projectStatus ='ACEPTADO'")
+    List<Project> findbyEstudiante(String estudiante);
 
 }

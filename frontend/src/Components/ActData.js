@@ -38,16 +38,20 @@ class ActData extends Component {
 
         putCurrentUser(loginRequest)
             .then(response => {
-                    setTimeout(()=>{
-                    this.props.handleLogout();
-                    this.setState();
-                },1500);
+                    this.refescarVista();
                 this.seGuardo=true;
                 this.setState({nuevo:true});
             }).catch(error => {
             console.log('Entró por el catch error');
         });
 
+    }
+
+    refescarVista(){
+        setTimeout(()=>{
+            this.props.handleLogout();
+            this.setState();
+        },2500);
     }
     addClick(){
         this.setState(prevState => ({
@@ -90,8 +94,17 @@ class ActData extends Component {
     // }
 
     render() {
-
-        if (!this.seGuardo){
+        if(this.state.code!=null) {
+            this.refescarVista();
+            return (
+                <div className="Pantilla-body">
+                    <h3 className="">
+                        Ya se encuentra registrado en <strong>PROGREAGIT</strong>.
+                        Porfavor espere la confirmación del administrador, para acceder a su perfíl
+                    </h3>
+                </div>
+            );
+        }else if (!this.seGuardo){
             return (
                 <div className="Plantilla-body">
                     <h1>Actualización de datos</h1>

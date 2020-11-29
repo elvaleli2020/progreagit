@@ -1,21 +1,68 @@
 import React from 'react'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import MostrarMasProyecto from "../Admin/MostrarMasProyecto";
+import DataTable from "react-data-table-component";
 
 class TableInvitado extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.cargarDatos();
+    }
+    cargarDatos(){
+        this.columnas=[
+            {
+                name: 'ID',
+                selector: 'idProject',
+                maxWidth: "20px",
+                sortable:true
+            },
+            {
+                name: 'TITULO',
+                selector: 'name',
+                maxWidth: "300px",
+                sortable:true
+            },
+            {
+                name: 'AUTORES',
+                selector: 'autores',
+                maxWidth: "300px",
+                sortable:true
+            },
+            {
+                name: 'DIRECTOR',
+                selector: 'director',
+                maxWidth: "200px",
+                sortable:true
+            }
+        ];
+
+        this.paginacionOpciones={
+            rowsPerPageText: 'Filas por página',
+            rangeSeparatorText:'de',
+            selectAllRowsItem: true,
+            selectAllRowsItemText: 'Todos'
+        }
+    }
 
     render() {
         return (
 
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <BootstrapTable options={{noDataText: 'This is custom text for empty data'}}>
-                    <TableHeaderColumn dataField='id' isKey>ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='título'>Título</TableHeaderColumn>
-                    <TableHeaderColumn dataField='lider'>Líder de proyecto</TableHeaderColumn>
-                    <TableHeaderColumn dataField='email'>Email</TableHeaderColumn>
-                    <TableHeaderColumn dataField='director'>Director</TableHeaderColumn>
-                    <TableHeaderColumn dataField='anio'>Año</TableHeaderColumn>
-                </BootstrapTable>
+                {
+                    this.props.data.length==0?(
+                        <div>No dispone de datos</div>
+                    ):(
+                        <DataTable
+                            columns={this.columnas}
+                            data={this.props.data}
+                            pagination
+                            paginationComponentOptions={this.paginacionOpciones}
+                            fixedHeader
+                        />
+                    )
+                }
+
             </div>
 
         );

@@ -7,6 +7,7 @@ public class SearchProject {
     private String keywords;
     private String area;
     private String estado;
+    private String student;
     private int dateInit;
     private int dateLimit;
 
@@ -72,5 +73,13 @@ public class SearchProject {
 
     public void setDateLimit(int dateLimit) {
         this.dateLimit = dateLimit;
+    }
+
+    public String getStudent() {
+        return student;
+    }
+
+    public void setStudent(String student) {
+        this.student = student;
     }
 }
