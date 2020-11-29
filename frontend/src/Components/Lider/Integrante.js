@@ -152,13 +152,13 @@ class Integrantes extends Component{
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
-                            <div className="col-12"><strong>Integrante actuales</strong></div>
                             <div className="col-12 table-responsive text-center">
                                 {
                                     this.state.loadingIntegrante ? (
                                         <LoadingInternal></LoadingInternal>
                                     ) : (
                                         <DataTable
+                                            title="Integrantes actuales"
                                             columns={this.columnasIntegrantes}
                                             data={this.state.integrantes}
                                             pagination
@@ -174,7 +174,6 @@ class Integrantes extends Component{
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
-                            <div className="col-12"><strong>Integrante para incluir</strong></div>
                             <div className="col-12 margin-bottom">
                                 <hr style={{width:"100%"}}/>
                             </div>
@@ -184,6 +183,7 @@ class Integrantes extends Component{
                                         <LoadingInternal></LoadingInternal>
                                     ):(
                                         <DataTable
+                                            title="Integrantes para incluir"
                                             columns={this.columnasNuevos}
                                             data={this.state.nuevos}
                                             pagination

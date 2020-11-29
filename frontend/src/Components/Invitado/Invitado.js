@@ -82,7 +82,7 @@ class Invitado extends Component {
                                     <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-8">
                                         <input id="valor" type="text" value={this.state.valor}
                                                onChange={this.handleInputChange}
-                                               className="form-control col-12 col-sm-12 col-md-12" placeholder="Digite su búsqueda" id="buscarInvitado"/>
+                                               className="form-control col-12 col-sm-12 col-md-12" placeholder="Digite su búsqueda"/>
                                     </div>
                                     <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
                                         <button type="submit" className="btn btn-primary col-12 col-sm-6 col-md-6 col-lg-2 col-xl-12">Buscar</button>

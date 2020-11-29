@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import '../../Styles/Plantilla.css';
-import {putProjectLeader} from "../../Util/ApiUtil";
+import {dataAutor, putProjectLeader} from "../../Util/ApiUtil";
 import BuscaPersonas from "../Admin/BuscaPersonas";
 import EliminaIntegrante from "./EliminaIntegrante";
 import Modal from 'react-bootstrap/Modal';
@@ -12,6 +12,7 @@ import Alert from 'react-bootstrap/Alert'
 class RegProy extends Component {
     constructor(props) {
         super(props);
+        dataAutor([this.props.data]);
         this.state = {
             show: false,
             acronym: this.props.data.acronym,
@@ -21,6 +22,7 @@ class RegProy extends Component {
             keywords: this.props.data.keywords,
             director: this.props.data.director,
             date: this.props.data.startDate,
+            integrantes:this.props.data.autores,
             visibleOk: false,
             visibleNok: false
         };
@@ -175,7 +177,9 @@ class RegProy extends Component {
                         </div>
                         <div className="form-inline col-sm-9">
                             <label className=" col-sm-2">Integrantes: </label>
-                            <input type="text" className="form-control col-sm-7" id="InputGestionInt"
+                            <input type="text"
+                                   value={this.state.integrantes}
+                                   className="form-control col-sm-7" id="InputGestionInt"
                                    placeholder="Integrantes"/>
                             <Example className="col-sm-2" data={this.props.data.users}
                                      onAccion={this.eliminarIntegrante}></Example>

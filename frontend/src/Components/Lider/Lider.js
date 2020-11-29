@@ -27,9 +27,7 @@ class Lider extends Component {
         if (this.loading){
             return (
                 <div>
-                    {/*<MediaLider></MediaLider>*/}
                     <RegProy data={this.state}></RegProy>
-                    {/*<HistorialProy></HistorialProy>*/}
                 </div>
             );
         }

@@ -32,7 +32,7 @@ export function dataAutor(data){
     data.forEach(e =>{
         let autores = "";
         e.users.forEach(u =>{
-            autores +="["+u.code+","+u.name+"]";
+            autores +=""+u.code+","+u.name+" - ";
         })
         e.autores=autores;
     });

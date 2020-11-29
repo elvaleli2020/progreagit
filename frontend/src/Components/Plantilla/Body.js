@@ -145,11 +145,6 @@ class Body extends Component {
                 </div>
             )
         }
-        // if(this.state.authenticated){
-        //         document.getElementById("body").className ='sidebar-mini';
-        // }else{
-        //     document.getElementById("body").className = '';
-        // }
 
     }
 }
