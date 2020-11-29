@@ -3,6 +3,7 @@ import {getMenbersGroup} from "../../Util/ApiUtil";
 import LoadingInternal from "../Plantilla/LoadingInternal";
 import DataTable from "react-data-table-component";
 import {Alert} from "react-bootstrap";
+import MostrarMasIntegrante from "./MostrarMasIntegrante";
 
 class VerIntegrante extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class VerIntegrante extends Component {
         }
         console.log("integrantes: ", this.props);
         this.cargarData();
-       }
+    }
 
     cargarIntegrantes() {
         this.setState({loadingIntegrante: true});
@@ -38,7 +39,7 @@ class VerIntegrante extends Component {
 
         this.columnasIntegrantes = [
             {
-                name: 'CODIGO',
+                name: 'CÓDIGO',
                 selector: 'code',
                 sortable: true
             },
@@ -53,47 +54,11 @@ class VerIntegrante extends Component {
                 sortable: true
             },
             {
-                name: 'ACCIONES',
-                button: true,
-                cell: row =>
-                    <button style={{minWidth: "130px"}}
-                            onClick={this.eliminarIntegrante}
-                            value={row.idUser}
-                            className="btn btn-primary btn-sm" rel="noopener noreferrer">
-                        Eliminar
-                    </button>
+                name: 'NÚMERO',
+                selector: 'cellphone',
+                sortable: true
             }
         ];
-
-        this.columnasNuevos = [
-            {
-                name: 'CODIGO',
-                selector: 'code',
-                sortable: true
-            },
-            {
-                name: 'NOMBRE',
-                selector: 'name',
-                sortable: true
-            },
-            {
-                name: 'CORREO ELECTRONICO',
-                selector: 'email',
-                sortable: true
-            },
-            {
-                name: 'ACCIONES',
-                button: true,
-                cell: row =>
-                    <button style={{minWidth: "130px"}}
-                            onClick={this.agregarIntegrante}
-                            value={row.idUser}
-                            className="btn btn-primary btn-sm" rel="noopener noreferrer">
-                        Agregar
-                    </button>
-            }
-        ];
-
         this.paginacionOpciones = {
             rowsPerPageText: 'Filas por página',
             rangeSeparatorText: 'de',
@@ -123,6 +88,11 @@ class VerIntegrante extends Component {
                                                 pagination
                                                 paginationComponentOptions={this.paginacionOpciones}
                                                 fixedHeader
+                                                expandableRows
+                                                expandableRowDisabled={row => row.disabled}
+                                                highlightOnHover
+                                                defaultSortField="name"
+                                                expandableRowsComponent={<MostrarMasIntegrante data={this.props.data}/>}
                                             />)
                                     }
                                 </div>
@@ -131,8 +101,8 @@ class VerIntegrante extends Component {
                     </div>
 
                     <Alert stack={{limit: 3}}
-                           timeout = {3000}
-                           position='top-right' effect='slide' offset={65} />
+                           timeout={3000}
+                           position='top-right' effect='slide' offset={65}/>
                 </div>
             </div>
         );
