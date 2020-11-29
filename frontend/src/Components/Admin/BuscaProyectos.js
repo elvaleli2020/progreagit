@@ -83,7 +83,7 @@ class BuscaProyectos extends Component {
                                     <option value="laureada">Laureada</option>
                                     <option value="meritoria">Meritoria</option>
                                 </select>
-
+                                <br/>
                                 <label htmlFor="dateInit" className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-3">Fecha desde:</label>
                                 <input type="date" className="form-control col-7 col-sm-3 col-md-4 col-lg-3 col-xl-3" id="dateInit"
                                        value={this.state.dateInit}
