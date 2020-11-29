@@ -1,7 +1,9 @@
 package co.edu.ufps.progreagit;
 
 import co.edu.ufps.progreagit.controller.ProjectController;
+import co.edu.ufps.progreagit.controller.UserController;
 import co.edu.ufps.progreagit.exception.NotContentException;
+import co.edu.ufps.progreagit.payload.UserRequest;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dataBuilder.ProgreaGitBuilder;
@@ -31,6 +33,9 @@ public class ProgreaGitProjectTest {
 
     @Autowired
     private ProjectController projectController;
+
+    @Autowired
+    private UserController userController;
 
     private ProgreaGitBuilder progreaGitBuilder;
 
@@ -64,7 +69,9 @@ public class ProgreaGitProjectTest {
     @DisplayName(value = "assingMember -> Assign member by leader")
     public void assingMember(){
         UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeader();
-        Assert.assertEquals(projectController.assingMember(userPrincipal,3L).getStatusCode(), HttpStatus.OK);
+        UserRequest userRequest = new UserRequest();
+        userRequest.setId(3L);
+        Assert.assertEquals(userController.assingMembersUser(userPrincipal,userRequest).getStatusCode(), HttpStatus.OK);
     }
 
 

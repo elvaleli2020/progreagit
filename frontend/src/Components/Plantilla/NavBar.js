@@ -48,7 +48,8 @@ class NavBar extends Component {
             return (
                 <React.Fragment>
 
-                    <LoginButton authenticated={this.props.authenticated} onLogout={this.props.handleLogout}></LoginButton>
+                    <LoginButton authenticated={this.props.authenticated} onLogout={this.props.handleLogout}
+                                 rol={this.props.rol}></LoginButton>
 
                 </React.Fragment>
             );

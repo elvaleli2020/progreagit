@@ -8,7 +8,6 @@ class LoginButton extends Component {
     constructor(props) {
         super(props);
         this.login = false;
-        console.log(this.props);
         this.authenticated = this.props.authenticated
         if(localStorage.getItem(ACCESS_TOKEN)!=null){
             this.login = true;
@@ -25,7 +24,6 @@ class LoginButton extends Component {
     }
 
     render() {
-
         if(!this.props.authenticated){
             return (
                 <GoogleLogin
@@ -71,6 +69,7 @@ class LoginButton extends Component {
                 />
             )
         }else{
+            // if(this.props.rol!=null&& this.props.rol.user==false)
             return (
                 <GoogleLogin
                     render={renderProps => (
