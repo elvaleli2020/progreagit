@@ -131,20 +131,20 @@ class BuscaPersonas extends Component {
                             <div className="row">
                                 <form onSubmit={this.serviceSearch} className="col-sm-12 text-sm-right" autoComplete="off">
                                     <div className="form-group row">
-                                        <label className="col-sm-2 col-lg-2">Buscar por: </label>
+                                        <label className="col-sm-3 col-md-2 col-lg-2 col-xl-2">Buscar por: </label>
                                         <select id="estado"
                                                 defaultValue={this.state.estado}
-                                                onChange={this.handleInputChange} className="form-control col-sm-2 col-lg-2">
+                                                onChange={this.handleInputChange} className="form-control col-sm-9 col-md-2 col-lg-2 col-xl-2">
                                             <option value="nombre">Nombre</option>
                                             <option value="codigo">Codigo</option>
                                             <option value="email">Correo electronico</option>
                                         </select>
-                                        <input type="text" className="col-sm-6 col-lg-6 form-control" id="search"
+                                        <input type="text" className="col-sm-8 col-md-6 col-lg-6 col-xl-6 form-control" id="search"
                                                value={this.state.search}
-                                               onChange={this.handleInputChange}/>
+                                               onChange={this.handleInputChange} placeholder="Digite búsqueda"/>
 
-                                        <div className="form-group col-sm-1">
-                                            <button type="submit" className="btn btn-primary">Buscar</button>
+                                        <div className="form-group col-sm-4 col-md-2 col-lg-2 col-xl-2">
+                                            <button type="submit" className="btn btn-primary col-sm-12 col-md-12  col-lg-12 col-xl-12">Buscar</button>
                                         </div>
                                     </div>
 
