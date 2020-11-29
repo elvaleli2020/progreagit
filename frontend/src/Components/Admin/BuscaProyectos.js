@@ -10,7 +10,13 @@ class BuscaProyectos extends Component {
         super(props);
         this.state = {
             data:[],
-            loading:true
+            loading:true,
+            busqueda:"nombre",
+            valueBusqueda:null,
+            name:null,
+            autor:null,
+            keywords:null,
+            mentor:null
         }
         this.loading = true;
         this.serviceSearch(null);
@@ -22,6 +28,26 @@ class BuscaProyectos extends Component {
     serviceSearch(event){
         if(event!=null)
             event.preventDefault();
+        this.state.name=null;
+        this.state.autor=null;
+        this.state.keyboards=null;
+        this.state.mentor=null;
+
+        if(this.state.valueBusqueda!=null || this.state.valuebusqueda!=""){
+            if(this.state.busqueda=="nombre") {
+                this.state.name = this.state.valueBusqueda;
+            }else if(this.state.busqueda=="autor") {
+                this.state.autor=this.state.valueBusqueda;
+            }else if(this.state.busqueda=="keyboard"){
+                this.state.keyboards=this.state.valueBusqueda;
+            }else{
+                this.state.mentor=this.state.valueBusqueda;
+            }
+        }
+        this.setState({
+            loading:true
+        });
+        console.log(",",this.state)
         const search = Object.assign({}, this.state);
         this.setState({
             loading:true});
@@ -48,26 +74,21 @@ class BuscaProyectos extends Component {
                 </div>
                 <div className="card-body">
                     <form onSubmit={this.serviceSearch} className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-sm-right" autoComplete="off">
+
                         <div className="form-group row">
-                            <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2 ">Titulo del proyecto: </label>
-                            <input type="text" className="col-7 col-sm-9 col-md-10 col-lg-9 col-xl-10 form-control" id="name"
-                                   value={this.state.name}
+                            <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2 ">Titulo del busqueda: </label>
+                            <select id="busqueda"
+                                    defaultValue={this.state.busqueda}
+                                    onChange={this.handleInputChange} className="col-3 col-sm-3 col-md-4 col-lg-4 col-xl-4 form-control">
+                                <option value="nombre">Titulo</option>
+                                <option value="autor">Autor</option>
+                                <option value="keywords">Palabras claves</option>
+                                <option value="mentor">Mentor/director</option>
+                            </select>
+                            <input type="text" className="col-4 col-sm-5 col-md-6 col-lg-5 col-xl-6 form-control" id="valueBusqueda"
+                                   value={this.state.valueBusqueda}
                                    onChange={this.handleInputChange}
-                                   placeholder="Inserte el título del proyecto"/>
-                        </div>
-                        <div className="form-group row">
-                            <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2">Autores: </label>
-                            <input type="text" className="form-control col-7 col-sm-9 col-md-10 col-lg-9 col-xl-10 " id="autor"
-                                   value={this.state.autor}
-                                   onChange={this.handleInputChange}
-                                   placeholder="Inserte autor(es) relacionados con el proyecto"/>
-                        </div>
-                        <div className="form-group row">
-                            <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2">Palabras claves: </label>
-                            <input type="text" className="col-7  col-sm-9 col-md-10 col-lg-9 col-xl-10 form-control" id="keywords"
-                                   value={this.state.keywords}
-                                   onChange={this.handleInputChange}
-                                   placeholder="Inserte palabras claves del proyecto"/>
+                                   placeholder="Busqueda"/>
                         </div>
                         <div className="form-group row">
                                 <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-3">Seleccione estado: </label>
@@ -102,11 +123,7 @@ class BuscaProyectos extends Component {
                                        onChange={this.handleInputChange}/>
 
                         </div>
-                        <div className="form-group row">
-                            <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-2">Mentor(es): </label>
-                            <input type="text" className="col-7  col-sm-9 col-md-10 col-lg-9 col-xl-10 form-control" id="InputDir"
-                                   placeholder="Inserte Director(es) / Codirector(es)"/>
-                        </div>
+
                         <button type="submit" className=" form-group row btn btn-primary col-6 col-sm-4 col-md-3 col-lg-2 col-lg-2 col-xl-2">Buscar</button>
                     </form>
                 </div>

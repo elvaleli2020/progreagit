@@ -120,17 +120,39 @@ public class ProjectService {
         List<Project> projects= null;
         if(searchProject!=null){
             /*  find acronym and name */
-            if(searchProject.getAcronym()!=null && searchProject.getName()!=null ){
-                return projectJPA.findByAcronymOrName(searchProject.getAcronym(), searchProject.getName()).orElse(null);
-            }
-            /* find acronym */
-            if(searchProject.getAcronym()!=null ){
-                return projectJPA.findByAcronym(searchProject.getAcronym()).orElse(null);
-            }
-            /* find name */
             if(searchProject.getName()!=null ){
-                List<Project> projectList = projectJPA.findByName(searchProject.getName()).orElse(null);
-                return projectList;
+                if(searchProject.getEstado()!=null && searchProject.getQualification()!=null)
+                    return projectJPA.findByNameAndStateAndQualification(
+                            searchProject.getName(),
+                            searchProject.getEstado(),
+                            searchProject.getQualification());
+                if(searchProject.getEstado()!=null) {
+                    return projectJPA.findByNameAndState(
+                            searchProject.getName(),
+                            searchProject.getEstado());
+                }
+                return projectJPA.findByName(searchProject.getName()).orElse(null);
+            }
+
+            if(searchProject.getKeywords()!=null){
+                if(searchProject.getEstado()!=null && searchProject.getQualification()!=null)
+                    return projectJPA.findByKeywordAndStateAndQualification(
+                            searchProject.getKeywords(),
+                            searchProject.getEstado(),
+                            searchProject.getQualification());
+                if(searchProject.getEstado()!=null) {
+                    return projectJPA.findByKeywordAndState(
+                            searchProject.getKeywords(),
+                            searchProject.getEstado());
+                }
+                return projectJPA.findByKeyword(searchProject.getKeywords());
+            }
+
+            if(searchProject.getAutor()!=null){
+                return projectJPA.findByAutor(searchProject.getAutor());
+            }
+            if(searchProject.getMentor()!=null){
+
             }
         }
         return projectJPA.findAll();

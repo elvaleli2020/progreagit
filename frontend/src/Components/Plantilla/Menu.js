@@ -9,7 +9,7 @@ class Menu extends Component{
         console.log(this.props)
         if(this.props.rol.admin){
             return(
-                <nav className="mt-2">
+                <nav className="mt-2 text-left">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li className="nav-item has-treeview menu-open">
@@ -17,7 +17,7 @@ class Menu extends Component{
                         </li>
                         <li className="nav-item">
                             <a href="./admin"  className="nav-link">
-                                <i className="nav-icon fas fa-th"></i>
+                                <i className="nav-icon fas fa-archive"></i>
                                 <p>
                                     Búsqueda de proyectos
                                 </p>
@@ -25,7 +25,7 @@ class Menu extends Component{
                         </li>
                         <li className="nav-item">
                             <a href="./buscar_personas" className="nav-link">
-                                <i className="nav-icon fas fa-th"></i>
+                                <i className="nav-icon fas fa-address-book"></i>
                                 <p>
                                     Búsqueda de personas
                                 </p>
@@ -33,7 +33,7 @@ class Menu extends Component{
                         </li>
                         <li className="nav-item">
                             <a href="./mediaAdmin" className="nav-link">
-                                <i className="nav-icon fas fa-th"></i>
+                                <i className="nav-icon fas fa-camera-retro"></i>
                                 <p>
                                     Guía de uso
                                 </p>

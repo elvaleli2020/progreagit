@@ -7,7 +7,9 @@ public class SearchProject {
     private String keywords;
     private String area;
     private String estado;
+    private String qualification;
     private String student;
+    private String mentor;
     private int dateInit;
     private int dateLimit;
 
@@ -81,5 +83,21 @@ public class SearchProject {
 
     public void setStudent(String student) {
         this.student = student;
+    }
+
+    public String getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
+    public String getMentor() {
+        return mentor;
+    }
+
+    public void setMentor(String mentor) {
+        this.mentor = mentor;
     }
 }
