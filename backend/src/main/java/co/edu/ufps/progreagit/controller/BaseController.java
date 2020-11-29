@@ -16,12 +16,12 @@ import java.util.Map;
 @RequestMapping("/")
 public class BaseController {
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(){
-        return "Bienvenido ProgreaGit Backend 21";
+        return "Bienvenido ProgreaGit Backend 29";
     }
 
-    @GetMapping("/")
+    @GetMapping("/git")
     public String pruebaGitLab(){
         String resp= "algo";
         try {

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import GoogleLogin from "react-google-login";
 import {ACCESS_TOKEN, GOOGLE_AUTH_URL} from "../../Global";
-import {Redirect} from "react-router-dom";
 
 
 class LoginButton extends Component {
@@ -61,11 +60,8 @@ class LoginButton extends Component {
                                     </ul>
                                 </div>
                             </div>
-
                         </nav>
-                        
                     )}
-
                 />
             )
         }else{
@@ -84,7 +80,7 @@ class LoginButton extends Component {
                                 <li className="nav-item dropdown">
                                     <a className="nav-link" data-toggle="dropdown"
                                        onClick={this.props.onLogout}>
-                                        Cierre sesión
+                                        Cerrar sesión
                                     </a>
                                 </li>
                             </ul>

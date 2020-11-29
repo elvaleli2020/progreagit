@@ -9,29 +9,35 @@ class BuscaProyectos extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:[]
+            data:[],
+            loading:true
         }
         this.loading = true;
-        this.serviceSearch(this);
+        this.serviceSearch(null);
         this.serviceSearch = this.serviceSearch.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
     }
 
 
     serviceSearch(event){
-        if(!event)
+        if(event!=null)
             event.preventDefault();
         const search = Object.assign({}, this.state);
-        this.loading = true;
+        this.setState({
+            loading:true});
         getSearchProject(search)
             .then(response => {
-                this.loading=false;
+                console.log("Se genero el servico")
                 dataAutor(response);
                 this.setState({
-                    data: response
+                    data: response,
+                    loading:false
                 });
         }).catch(error => {
-            this.loading= false;
+            this.setState({
+                data:[],
+                loading:false
+            });
         });
     }
     render() {
@@ -65,7 +71,8 @@ class BuscaProyectos extends Component {
                         </div>
                         <div className="form-group row">
                                 <label className="col-5 col-sm-3 col-md-2 col-lg-3 col-xl-3">Seleccione estado: </label>
-                                <select className="form-control col-7 col-sm-9 col-md-4 col-lg-3 col-xl-3" id="estado" defaultValue={this.state.estado}
+                                <select className="form-control col-7 col-sm-9 col-md-4 col-lg-3 col-xl-3" id="estado"
+                                        defaultValue={this.state.estado}
                                         onChange={this.handleInputChange} >
                                     <option>Ninguno</option>
                                     <option value="aceptada">Aceptada</option>
@@ -106,7 +113,7 @@ class BuscaProyectos extends Component {
                 <br/>
                <div>
                    {
-                       this.loading?(
+                       this.state.loading?(
                            <LoadingInternal></LoadingInternal>
                        ):(
                            <TableAdmin data={this.state.data}></TableAdmin>

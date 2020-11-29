@@ -129,7 +129,8 @@ public class ProjectService {
             }
             /* find name */
             if(searchProject.getName()!=null ){
-                return projectJPA.findByName(searchProject.getName()).orElse(null);
+                List<Project> projectList = projectJPA.findByName(searchProject.getName()).orElse(null);
+                return projectList;
             }
         }
         return projectJPA.findAll();

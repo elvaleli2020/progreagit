@@ -63,7 +63,7 @@ export function getSearchProject(search) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
-    console.log("Por acá entró al postSearch")
+    console.log("Por acá entró al postSearch", search);
     return request({
         url: API_BASE_URL + "/project/show",
         method: 'POST',
