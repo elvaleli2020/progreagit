@@ -9,8 +9,11 @@ import co.edu.ufps.progreagit.repository.ProjectJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class ProjectService {
@@ -184,20 +187,23 @@ public class ProjectService {
      * @param project
      * @return
      */
+    @Transactional
     public boolean updateQualification(Project project) {
         if(project.getIdProject() == null)
             throw new NotContentException("It has no data to modify");
-        Project project1 = this.getProject(project.getIdProject());
+        Project project1 = projectJPA.findById(project.getIdProject())
+                .orElseThrow(() -> new ResourceNotFoundException("Project", "id", project.getIdProject()));
+
         //Project's state ACEPTADO
         if(project.getQualification()!=null && project.getProjectStatus()!=null){
             project1.setProjectStatus(project.getProjectStatus());
             project1.setQualification(project.getQualification());
-            project1.setEndDate(new Date(System.currentTimeMillis()));
+            project1.setEndDate(project1.getStartDate());
+            System.out.println(project1);
 
             // SE CLONA EL PROYECTO
             cloneRepository(project1.getIdProject());
-
-            update(project1);
+            projectJPA.save(project1);
             return true;
         }
         return false;
@@ -213,11 +219,13 @@ public class ProjectService {
      * @return
      */
     public List<Project> showProjectGuest(SearchProject searchProject) {
-        if(searchProject.getName()!=null)
-            return projectJPA.findByTitle(searchProject.getName());
-        if(searchProject.getStudent()!=null)
-            return projectJPA.findbyEstudiante(searchProject.getStudent());
-        return null;
+        if(searchProject!=null){
+            if(searchProject.getName()!=null)
+                return projectJPA.findByTitle(searchProject.getName());
+            if(searchProject.getStudent()!=null)
+                return projectJPA.findbyEstudiante(searchProject.getStudent());
+        }
+        return projectJPA.findByInvidado();
     }
 
     /**

@@ -73,7 +73,7 @@ public class UserController {
         if(userRequest == null || userRequest.getId() == null)
             throw new NotContentException("You need additional data");
         userService.assingLeaderUser(userRequest.getId());
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(new ApiResponse(true, "The user is assigned with the leader role"));
     }
 
     /**

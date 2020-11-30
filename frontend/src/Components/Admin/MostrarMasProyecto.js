@@ -1,9 +1,52 @@
 import React, {Component} from 'react';
+import {dataAutor, getSearchProject, putCalificacion} from "../../Util/ApiUtil";
+import {handleInputChange} from "../../Util/FormUtil";
+import {Alert} from "react-bootstrap";
 
 class MostrarMasProyecto extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            idProject:this.props.data.idProject,
+            qualification:this.props.data.qualification,
+            projectStatus: this.props.data.projectStatus,
+            visibleOk: false,
+            visibleNok: false
+        }
         console.log("mostrar proyectos: ",this.props);
+        this.accionCalificacion = this.accionCalificacion.bind(this);
+        this.handleInputChange = handleInputChange.bind(this);
+    }
+
+    accionCalificacion(event){
+        event.preventDefault();
+        const nota = Object.assign({}, this.state);
+        putCalificacion(nota)
+            .then(response => {
+                console.log("Se genero la calificación")
+                dataAutor(response);
+                this.setState({
+                    data: response,
+                    loading:false,
+                    visibleOk: !this.state.visibleOk
+                });
+                setTimeout(() => {
+                    this.setState({
+                        visibleOk: !this.state.visibleOk
+                    })
+                }, 4000)
+            }).catch(error => {
+            this.setState({
+                data:[],
+                loading:false,
+                visibleNok: !this.state.visibleNok
+            });
+            setTimeout(() => {
+                this.setState({
+                    visibleNok: !this.state.visibleNok
+                })
+            }, 4000)
+        });
     }
     removePrefix(prefix,s) {
         return s.substr(prefix.length);
@@ -32,7 +75,10 @@ class MostrarMasProyecto extends Component {
                     </div>
                     <div className="form-group row">
                         <label className="col-sm-2 col-lg-2 text-right">Estado: </label>
-                        <select className="col-sm-2 form-control" id="estado" >
+                        <select className="col-sm-2 form-control"
+                                id="projectStatus"
+                                defaultValue={this.state.projectStatus}
+                                onChange={this.handleInputChange}>
                             <option>Ninguno</option>
                             <option value="aceptada">Aceptada</option>
                             <option value="rechazada">Rechazada</option>
@@ -40,7 +86,10 @@ class MostrarMasProyecto extends Component {
                         </select>
 
                         <label className="col-sm-2 col-lg-2 text-right">Calificación:</label>
-                        <select className="col-sm-2 form-control" id="qualification">
+                        <select className="col-sm-2 form-control"
+                                id="qualification"
+                                defaultValue={this.state.qualification}
+                                onChange={this.handleInputChange}>
                             <option>Ninguna</option>
                             <option value="aprobada">Aprobada</option>
                             <option value="reprobadad">Reprobada</option>
@@ -70,10 +119,20 @@ class MostrarMasProyecto extends Component {
                     <div className="form-inline  col-sm-12">
                             <button className="btn btn-primary col-sm-2"  >
                                 <a href={this.cleanURL()}>Descargar Proyecto </a> </button>
-
-                            <button className="btn btn-primary col-sm-2"> Calificar</button>
+                            <button onClick={this.accionCalificacion} className="btn btn-primary col-sm-2"> Calificar</button>
                     </div>
-
+                    <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="success" show={this.state.visibleOk} onClose={() => this.setState({
+                            visibleOk: !this.state.visibleOk
+                        })} dismissible>
+                            Calificación registrada!
+                        </Alert>
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
+                            visibleNok: !this.state.visibleNok
+                        })} dismissible>
+                            Calificación no regisrtrada
+                        </Alert>
+                    </div>
 
                 </div>
             </div>

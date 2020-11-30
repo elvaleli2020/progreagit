@@ -51,7 +51,7 @@ class ActData extends Component {
         setTimeout(()=>{
             this.props.handleLogout();
             this.setState();
-        },2500);
+        },6000);
     }
     addClick(){
         this.setState(prevState => ({
@@ -99,7 +99,7 @@ class ActData extends Component {
             return (
                 <div className="Pantilla-body">
                     <h3 className="">
-                        Ya se encuentra registrado en <strong>PROGREAGIT</strong>.
+                        Ya se encuentra registrado en <strong>PROGREAGIT</strong>. <br/>
                         Porfavor espere la confirmación del administrador, para acceder a su perfíl
                     </h3>
                 </div>

@@ -11,7 +11,7 @@ const request = (options) => {
 
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
-    console.log(options);
+    console.log("HTTP: ", options);
 
     return fetch(options.url, options)
     .then(response => 
@@ -19,7 +19,7 @@ const request = (options) => {
             if(!response.ok) {
                 return Promise.reject(json);
             }
-            console.log("Response: "+ json);
+            console.log("Response: ", json);
             return json;
         })
     ).catch(error => {
@@ -123,7 +123,7 @@ export function postAssignarMember(user){
         body: JSON.stringify(user)
     });
 }
-
+// Mostrar al invitado
 export function postShowGuest(search){
     return request({
         url: API_BASE_URL + "/project/showGuest",
@@ -131,12 +131,20 @@ export function postShowGuest(search){
         body: JSON.stringify(search)
     });
 }
-
+// desasingar integrante
 export function postUnAssignarMember(user){
     return request({
         url: API_BASE_URL + "/user/unassingMember",
         method: 'POST',
         body: JSON.stringify(user)
+    });
+}
+
+export function putCalificacion(nota){
+    return request({
+        url: API_BASE_URL + "/project/qualification",
+        method: 'PUT',
+        body: JSON.stringify(nota)
     });
 }
 

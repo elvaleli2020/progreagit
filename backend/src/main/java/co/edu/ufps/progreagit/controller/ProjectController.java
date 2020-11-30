@@ -68,9 +68,9 @@ public class ProjectController {
     @PutMapping("/qualification")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateQualification(@RequestBody Project project){
-        return ResponseEntity.ok(new ApiResponse(
-                projectService.updateQualification(project),
-                "Project update successfull"));
+
+        projectService.updateQualification(project);
+        return ResponseEntity.ok(new ApiResponse(true, "Project update successfull"));
     }
 
     /**

@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,10 +46,10 @@ public class Project {
 
     @Column(updatable = false)
     @CreationTimestamp
-    private Date startDate;
+    private Timestamp startDate;
 
     @Column(insertable = true, updatable = false, nullable = true)
-    private Date endDate;
+    private Timestamp endDate;
 
     @OneToMany(mappedBy="project")
     @JsonIgnore
@@ -140,19 +141,19 @@ public class Project {
         this.director = director;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 

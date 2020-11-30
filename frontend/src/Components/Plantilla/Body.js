@@ -101,6 +101,7 @@ class Body extends Component {
                     <div className="content-wrapper">
 
                         <section className="contend">
+                            <br/>
                             <div className="container-fluid">
 
                                 <BrowserRouter>

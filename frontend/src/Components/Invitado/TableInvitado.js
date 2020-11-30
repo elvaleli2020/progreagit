@@ -8,6 +8,10 @@ class TableInvitado extends React.Component {
     constructor(props) {
         super(props);
         this.cargarDatos();
+        this.state={
+            hasdata:false
+        }
+        console.log(this.props.data);
     }
     cargarDatos(){
         this.columnas=[
@@ -50,7 +54,7 @@ class TableInvitado extends React.Component {
 
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 {
-                    this.props.data.length==0?(
+                    this.state.hasdata==0?(
                         <div>No dispone de datos</div>
                     ):(
                         <DataTable
