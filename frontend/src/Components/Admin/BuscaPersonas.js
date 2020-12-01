@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
-import {postAssingLeader, postSearchUser} from "../../Util/ApiUtil";
+import {postAssingLeader, postShowGuest} from "../../Util/ApiUtil";
 import DataTable from "react-data-table-component";
 import LoadingInternal from "../Plantilla/LoadingInternal";
 import {handleInputChange} from "../../Util/FormUtil";
@@ -43,7 +43,7 @@ class BuscaPersonas extends Component {
         this.setState({
             loading:true
         });
-        postSearchUser(search)
+        postShowGuest(search)
             .then(response => {
                 console.log(response);
                 this.setState({

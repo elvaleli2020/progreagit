@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
@@ -78,7 +80,8 @@ public class ProjectController {
      */
     @PostMapping("/showGuest")
     public ResponseEntity<?> showGuest(@RequestBody(required=false) SearchProject searchProject){ //
-        return ResponseEntity.ok(projectService.showProjectGuest(searchProject));
+        List<Project> projects = projectService.showProjectGuest(searchProject);
+        return ResponseEntity.ok(projects);
     }
     @GetMapping("/prueba")
     public String index(){
