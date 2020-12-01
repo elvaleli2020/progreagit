@@ -171,7 +171,7 @@ public class ProgreaGitUserTests {
 	@WithMockUser(roles={"USER"})
 	@DisplayName(value = "updateUserFail -> The user as soon as he accesses the authenticator if he is missing data")
 	public void updateUserFail() throws Exception {
-		UserRequest userRequest = progreaGitBuilder.userRequestFail();
+		UserRequest userRequest = null;
 		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUser();
 
 		NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
@@ -199,7 +199,7 @@ public class ProgreaGitUserTests {
 	@WithMockUser(roles={"ADMIN"})
 	@DisplayName(value = "assingLeader -> List of users filtered by code, email, name, if they have a leader request or not")
 	public void assingLeaderFail() throws  Exception {
-		UserRequest userRequest = progreaGitBuilder.userRequestAssingLeader();
+		UserRequest userRequest = progreaGitBuilder.userRequestAssingLeaderFail();
 
 		NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
 				NotContentException.class,
