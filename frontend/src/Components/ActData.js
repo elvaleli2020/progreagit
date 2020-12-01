@@ -48,7 +48,7 @@ class ActData extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-
+        this.state.socialMedia=[this.state.social];
         const loginRequest = Object.assign({}, this.state);
 
         putCurrentUser(loginRequest)

@@ -1,5 +1,5 @@
 // export const API_BASE_URL = 'http://progreagit.cpsw.ingsistemasufps.co';
-export const API_BASE_URL = 'http://c2fe19bf917a.ngrok.io';
+export const API_BASE_URL = 'http://localhost:8081';
 export const ACCESS_TOKEN = 'accessToken';
 
 // export const OAUTH2_REDIRECT_URI = 'http://progreagitv.cpsw.ingsistemasufps.co/oauth2/redirect';
