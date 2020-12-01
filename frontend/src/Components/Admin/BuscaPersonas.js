@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import LoadingInternal from "../Plantilla/LoadingInternal";
 import {handleInputChange} from "../../Util/FormUtil";
 import Alert from 'react-s-alert';
+import MostrarMasIntegrante from "../Lider/MostrarMasIntegrante";
 
 class BuscaPersonas extends Component {
     constructor(props) {
@@ -163,6 +164,11 @@ class BuscaPersonas extends Component {
                                                 pagination
                                                 paginationComponentOptions={this.paginacionOpciones}
                                                 fixedHeader
+                                                expandableRows
+                                                expandableRowDisabled={row => row.disabled}
+                                                highlightOnHover
+                                                defaultSortField="name"
+                                                expandableRowsComponent={<MostrarMasIntegrante data={this.props.data} />}
                                             />
                                         )
                                     }

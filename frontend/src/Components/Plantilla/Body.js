@@ -107,7 +107,7 @@ class Body extends Component {
                                 <BrowserRouter>
                                     <Route exact path="/"  component={Invitado}></Route>
                                     <Route path="/oauth2/redirect" component={OAuth2}></Route>
-                                    <Route path="/mediaInv" component={MediaInv}></Route>
+                                    <Route path="/mediaInv" component={MediaInv} authenticated={this.state.rol.user}></Route>
                                     
                                     <PrivateRoute authenticated={true} path="/invitado"
                                            rol={this.state.rol} component={Invitado}></PrivateRoute>
@@ -122,7 +122,6 @@ class Body extends Component {
                                                   component={Lider}></PrivateRoute>
                                     <PrivateRoute path="/verIntegrantes" authenticated={this.state.rol.leader}
                                                   component={VerIntegrante} ></PrivateRoute>
-                                    <PrivateRoute path="/mediaInv" component={MediaInv} authenticated={this.state.rol.user} ></PrivateRoute>
                                     <PrivateRoute path="/mediaAdmin" component={MediaAdmin} authenticated={this.state.rol.admin} ></PrivateRoute>
                                     <PrivateRoute path="/mediaLider" component={MediaLider} authenticated={this.state.rol.leader}></PrivateRoute>
                                     <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} user={this.state.currentUser} handleLogout={this.handleLogout}

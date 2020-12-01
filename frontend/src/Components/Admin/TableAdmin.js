@@ -1,9 +1,6 @@
-import React, {useMemo} from 'react'
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import React from 'react'
 import DataTable from "react-data-table-component";
-import LoadingInternal from "../Plantilla/LoadingInternal";
 import MostrarMasProyecto from "./MostrarMasProyecto";
-import {Button} from "react-bootstrap";
 
 class TableAdmin extends React.Component {
 
