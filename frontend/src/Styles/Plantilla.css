@@ -24,6 +24,22 @@ a {
     background-color: #bf0226;
     border-color: #ff0048;
 }
+.btn-primary:hover{
+    color: #fff;
+    background-color: #86000f;
+    border-color: #ff0048;
+}
+.btn-primary:not(:disabled):not(.disabled):active{
+    color: #fff;
+    background-color: #86000f;
+    border-color: #ff0048;
+}
+.btn-primary:focus {
+    color: #fff;
+    background-color: #86000f;
+    border-color: #ff0048;
+    box-shadow: 0 0 0 0.2rem rgb(255, 255, 255);
+}
 
 .Plantilla-logo {
     height: 10vh;

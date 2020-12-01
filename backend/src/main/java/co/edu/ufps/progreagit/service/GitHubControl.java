@@ -18,10 +18,13 @@ import javax.ws.rs.core.MediaType;
 public class GitHubControl {
 
     private GitHub github;
+    private String name;
 
     public void create(String token){
         try {
             github = new GitHubBuilder().withOAuthToken(token).build();
+            name = github.getMyself().getName();
+//            System.out.println(github.getMyself().getHtmlUrl());
             if(github.isCredentialValid())
                 System.out.println("Paso");
             else throw new NotContentException("Not init");
@@ -32,7 +35,7 @@ public class GitHubControl {
 
     public GHRepository getRepository(String path){
         try {
-            GHRepository g=github.getRepository("elvaleli2016/prestashop");
+            GHRepository g=github.getRepository(path);
             System.out.println(g.getFullName());
             return g;
         }catch (Exception e){
@@ -40,6 +43,15 @@ public class GitHubControl {
             return null;
         }
 
+    }
+
+    public boolean deleteRepository(GHRepository ghRepository){
+        try{
+            ghRepository.delete();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public GHRepository createRepository(String name){

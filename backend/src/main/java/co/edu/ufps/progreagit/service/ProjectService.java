@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
 
 @Service
 public class ProjectService {
@@ -23,6 +20,9 @@ public class ProjectService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private GitHubService gitHubService;
 
 
     public Project getProject(Integer idProject){
@@ -188,11 +188,10 @@ public class ProjectService {
      * @return
      */
     @Transactional
-    public boolean updateQualification(Project project) {
+    public Project updateQualification(Project project) {
         if(project.getIdProject() == null)
             throw new NotContentException("It has no data to modify");
-        Project project1 = projectJPA.findById(project.getIdProject())
-                .orElseThrow(() -> new ResourceNotFoundException("Project", "id", project.getIdProject()));
+        Project project1 = this.getProject(project.getIdProject());
 
         //Project's state ACEPTADO
         if(project.getQualification()!=null && project.getProjectStatus()!=null){
@@ -202,11 +201,16 @@ public class ProjectService {
             System.out.println(project1);
 
             // SE CLONA EL PROYECTO
-            cloneRepository(project1.getIdProject());
-            projectJPA.save(project1);
-            return true;
+            project1.setCloneGitAddress(
+                    cloneRepository(
+                            project1.getIdProject(),
+                            project1.getAcronym(),
+                            project1.getGitAddress()));
+            update(project1);
+
+            return this.getProject(project.getIdProject());
         }
-        return false;
+        throw new NotContentException("Not update");
     }
 
     public Project update(Project project){
@@ -235,7 +239,7 @@ public class ProjectService {
      * @param idProject
      * @return
      */
-    public boolean cloneRepository(int idProject){
-        return false;
+    public String cloneRepository(int idProject, String name, String dir){
+        return gitHubService.createGitClone(name.toLowerCase() + "-" + idProject , dir);
     }
 }

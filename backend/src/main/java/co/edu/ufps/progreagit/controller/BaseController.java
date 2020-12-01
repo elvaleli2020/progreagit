@@ -23,7 +23,7 @@ public class BaseController {
         try {
 //            GITHUB
             GitHubService gitHubService = new GitHubService();
-            gitHubService.createGitClone();
+            gitHubService.createGitClone("prueba5","https://github.com/elvaleli2016/prestashop");
 
 //            String token="ca8bf119b6d4e24479485a6c3ed35bc5f25d2d54";
 //            GitHub github = new GitHubBuilder().withOAuthToken(token).build();

@@ -21,30 +21,30 @@ class MostrarMasProyecto extends Component {
     accionCalificacion(event){
         event.preventDefault();
         const nota = Object.assign({}, this.state);
+
         putCalificacion(nota)
             .then(response => {
-                console.log("Se genero la calificación")
-                dataAutor(response);
+                console.log("Se genero la calificación", response);
+                this.props.data.endDate = response.endDate;
+                dataAutor([response]);
                 this.setState({
-                    data: response,
-                    loading:false,
                     visibleOk: !this.state.visibleOk
                 });
                 setTimeout(() => {
                     this.setState({
                         visibleOk: !this.state.visibleOk
                     })
-                }, 4000)
+                }, 4000);
             }).catch(error => {
-            this.setState({
-                data:[],
-                loading:false,
-                visibleNok: !this.state.visibleNok
-            });
-            setTimeout(() => {
                 this.setState({
+                    data:[],
+                    loading:false,
                     visibleNok: !this.state.visibleNok
-                })
+                });
+                setTimeout(() => {
+                    this.setState({
+                        visibleNok: !this.state.visibleNok
+                    })
             }, 4000)
         });
     }
@@ -62,6 +62,7 @@ class MostrarMasProyecto extends Component {
     
     render(){
         console.log(this.cleanURL());
+        console.log(this.state);
         return (
             <div className="card">
                 <div className="card-body text-left">
@@ -92,34 +93,64 @@ class MostrarMasProyecto extends Component {
                                 onChange={this.handleInputChange}>
                             <option>Ninguna</option>
                             <option value="aprobada">Aprobada</option>
-                            <option value="reprobadad">Reprobada</option>
+                            <option value="reprobada">Reprobada</option>
                             <option value="laureada">Laureada</option>
                             <option value="meritoria">Meritoria</option>
                         </select>
 
                         <label className="col-sm-1 col-lg-1 text-right">Fecha desde:</label>
                         <input className="col-sm-1 form-control" value={this.props.data.startDate} readOnly/>
+                        {
+                            this.props.data.endDate?(
+                                <label className="col-sm-1 col-lg-1 text-right">Fecha hasta:</label>
+                            ):(
+                                <div></div>
+                            )
+                        }
+                        {
+                            this.props.data.endDate?(
+                                <input className="col-sm-1 form-control" value={this.props.data.endDate} readOnly/>
+                            ):(
+                                <div></div>
+                            )
+                        }
 
-                        <label className="col-sm-1 col-lg-1 text-right">Fecha hasta:</label>
-                        <input className="col-sm-1 form-control" value={this.props.data.endDate} readOnly/>
+
 
                     </div>
                     <div className="form-group row">
                             <label className="col-sm-2 col-lg-2 text-right">Mentor(es): </label>
                             <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.director} readOnly/>
                     </div>
-                    <div className="form-group row">
-                            <label className="col-sm-2 col-lg-2 text-right">Repositorio:</label>
-                            <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.gitAddress}  readOnly/>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-lg-2 text-right">Repositorio clon: </label>
-                        <input className="col-sm-10 col-lg-10 form-control"  readOnly />
-                    </div>
-                    <div className="form-inline  col-sm-12">
-                            <button className="btn btn-primary col-sm-2"  >
+                    {
+                        this.props.data.cloneGitAdress!=null?(
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-lg-2 text-right">Repositorio:</label>
+                                <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.gitAddress}  readOnly/>
+                            </div>
+                        ):(
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-lg-2 text-right">Repositorio clon: </label>
+                                <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.cloneGitAddress}  readOnly />
+                            </div>
+                        )
+                    }
+                    <div className="form-inline row text-center">
+                        <div className="col-6 ">
+                            <button className="btn btn-primary"  >
                                 <a href={this.cleanURL()}>Descargar Proyecto </a> </button>
-                            <button onClick={this.accionCalificacion} className="btn btn-primary col-sm-2"> Calificar</button>
+                        </div>
+                        {
+                            !this.props.data.endDate?(
+                                <div className="col-6">
+                                    <button onClick={this.accionCalificacion} className="btn btn-primary"> Calificar</button>
+                                </div>
+                            ):(
+                                <div></div>
+                            )
+                        }
+
+
                     </div>
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
                         <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="success" show={this.state.visibleOk} onClose={() => this.setState({
@@ -130,7 +161,7 @@ class MostrarMasProyecto extends Component {
                         <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
                             visibleNok: !this.state.visibleNok
                         })} dismissible>
-                            Calificación no regisrtrada
+                            Calificación no registrada
                         </Alert>
                     </div>
 
