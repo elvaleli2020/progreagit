@@ -45,8 +45,9 @@ a {
     height: 10vh;
     pointer-events: none;
     float: left;
-
-
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(37 37 37);
 }
 
 .Plantilla-NavBar {

@@ -31,10 +31,13 @@ const request = (options) => {
 export function dataAutor(data){
     data.forEach(e =>{
         let autores = "";
-        e.users.forEach(u =>{
-            autores +=""+u.code+","+u.name+" - ";
-        })
-        e.autores=autores;
+        console.log(e);
+        if(e.users!=null) {
+            e.users.forEach(u => {
+                autores += "" + u.code + "," + u.name + " - ";
+            })
+            e.autores = autores;
+        }else e.autores = null;
     });
 }
 // Ver los datos del usurio registrado
