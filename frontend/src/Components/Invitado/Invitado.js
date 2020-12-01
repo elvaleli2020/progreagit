@@ -75,7 +75,7 @@ class Invitado extends Component {
         return (
             <div className="row">
                 <div>
-                    <a href="./mediaInv" className="nav-link col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+                    <a href="./mediaInv" className="nav-link  col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                         <i className="nav-icon fas fa-th"></i>
                         <p>
                             Guía de uso
@@ -88,23 +88,23 @@ class Invitado extends Component {
                             <div className="card-body">
                                 <form onSubmit={this.cargarDatos}></form>
                                 <div className="form-group row">
-                                    <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 form-inline">
-                                        <label htmlFor="inputInvitado" className="col-12 col-sm-2 col-md-3 col-lg-3 col-xl-3">Buscar por: </label>
+                                    <div className="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 form-inline">
+                                        <label htmlFor="inputInvitado" className="col-12 col-sm-3 col-md-6 col-lg-5 col-xl-4">Buscar por: </label>
                                         <select id="select" defaultValue={this.state.select}
                                                 onChange={this.handleInputChange}
-                                                className=" form-control col-12 col-sm-10 col-md-9 col-lg-9 col-xl-9">
+                                                className=" form-control col-12 col-sm-9 col-md-6 col-lg-7 col-xl-8">
                                             <option value="estudiante">Estudiante</option>
                                             <option value="titulo">Título</option>
                                             <option value="fecha">Año</option>
                                         </select>
                                     </div>
-                                    <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-8">
+                                    <div className="col-12 col-sm-12 col-md-7 col-lg-6 col-xl-6 form-inline">
                                         <input id="valor" type="text" value={this.state.valor}
                                                onChange={this.handleInputChange}
-                                               className="form-control col-12 col-sm-12 col-md-12" placeholder="Digite su búsqueda"/>
+                                               className="form-control col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" placeholder="Digite su búsqueda"/>
                                     </div>
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
-                                        <button type="submit" className="btn btn-primary col-12 col-sm-6 col-md-6 col-lg-2 col-xl-12">Buscar</button>
+                                    <div className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                                        <button type="submit" className="btn btn-primary col-12 col-sm-6 col-md-4 col-lg-12 col-xl-12">Buscar</button>
                                     </div>
                                     <br/>
                                 </div>
