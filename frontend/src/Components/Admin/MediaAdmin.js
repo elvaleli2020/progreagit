@@ -10,7 +10,7 @@ class MediaAdmin extends Component {
                     <h1>Tutorial: ProgreaGit para Administradores</h1>
                 </div>
                 <br/>
-                <div className=" col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                <div className=" mx-auto col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
                     <Iframe source="https://www.youtube.com/embed/dQw4w9WgXcQ" ></Iframe>
                 </div>
                 <br/>

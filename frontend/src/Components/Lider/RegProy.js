@@ -1,8 +1,6 @@
 import React, {Component, useState} from 'react';
 import '../../Styles/Plantilla.css';
 import {dataAutor, putProjectLeader} from "../../Util/ApiUtil";
-import BuscaPersonas from "../Admin/BuscaPersonas";
-import EliminaIntegrante from "./EliminaIntegrante";
 import Modal from 'react-bootstrap/Modal';
 import Button from "react-bootstrap/Button";
 import Integrantes, {cargarIntegrantes} from "./Integrante";

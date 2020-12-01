@@ -1,17 +1,18 @@
 import React from 'react';
+import LoadingInternal from "../Components/Plantilla/LoadingInternal";
 
 const Iframe = ({ source }) => {
 
     if (!source) {
-        return <div>Loading...</div>;
+        return <LoadingInternal></LoadingInternal>;
     }
 
     const src = source;
     return (
         // basic bootstrap classes. you can change with yours.
-        <div  className=" embed-responsive embed-responsive-16by9">
+        <div  className="embed-responsive embed-responsive-16by9">
                 <iframe className="embed-responsive-item "
-                        src={source}
+                        src={src}
                         allowFullScreen></iframe>
         </div>
     );
