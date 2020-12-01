@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
 import '../../Styles/Plantilla.css';
-import Header from "../Plantilla/Header";
-import Footer from "../Plantilla/Footer";
 import Iframe from "../../Global/Iframe";
 
 class MediaInv extends Component {
     render() {
         return (
-            <div>
-
-                <Header></Header>
-                <div className="Plantilla-body">
+            <div className=" form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div className=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <h1>Tutorial: ProgreaGit para Invitados</h1>
-                    <Iframe  source="https://www.youtube.com/embed/dQw4w9WgXcQ" ></Iframe>
                 </div>
-                <Footer></Footer>
+                <br/>
+                <div className=" col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                    <Iframe source="https://www.youtube.com/embed/dQw4w9WgXcQ" ></Iframe>
+                </div>
+                <br/>
+                <div className=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <button className="btn-primary col-12 col-sm-8 col-md-4 col-lg-2 col-xl-2">Ver Manual</button>
+                </div>
             </div>
-
-
         );
     }
 }
-
 export default MediaInv;

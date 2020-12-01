@@ -7,7 +7,7 @@ import {ACCESS_TOKEN} from "../Global";
 class ActData extends Component {
     constructor(props) {
         super(props);
-        this.comprobación=this.props.user.code;
+        this.comprobacion=this.props.user.code;
         this.state = {
             code: this.props.user.code,
             personalEmail: this.props.user.personalEmail,
@@ -95,7 +95,7 @@ class ActData extends Component {
     // }
 
     render() {
-        if(this.state.comprobación!=null) {
+        if(this.comprobacion!=null) {
             this.refescarVista();
             return (
                 <div className="Pantilla-body">

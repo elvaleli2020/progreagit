@@ -9,10 +9,10 @@ const Iframe = ({ source }) => {
     const src = source;
     return (
         // basic bootstrap classes. you can change with yours.
-        <div className="col-md-12">
-            <div className="emdeb-responsive embed-responsive-16by9">
-                <iframe src={src} allowFullScreen></iframe>
-            </div>
+        <div  className=" embed-responsive embed-responsive-16by9">
+                <iframe className="embed-responsive-item "
+                        src={source}
+                        allowFullScreen></iframe>
         </div>
     );
 };
