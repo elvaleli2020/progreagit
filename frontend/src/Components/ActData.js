@@ -8,6 +8,7 @@ class ActData extends Component {
     constructor(props) {
         super(props);
         this.comprobacion=this.props.user.code;
+        this.comprobarCorreo();
         this.state = {
             code: this.props.user.code,
             personalEmail: this.props.user.personalEmail,
@@ -22,6 +23,19 @@ class ActData extends Component {
         this.handleInputCheckBox = this.handleInputCheckBox.bind(this);
     }
 
+    comprobarCorreo(){
+        this.compEmail = false;
+        console.log("Correo: ", this.props.user.email);
+        const email = this.props.user.email;
+        let sep= email.split("@");
+        console.log(sep);
+        if(sep.length==2){
+            if(sep[1]=="ufps.edu.co"){
+                this.compEmail = true;
+            }
+        }
+
+    }
     handleInputCheckBox(event) {
         const target = event.target;
         console.log(target.value);
@@ -95,8 +109,19 @@ class ActData extends Component {
     // }
 
     render() {
-        if(this.comprobacion!=null) {
-            this.refescarVista();
+        if(!this.compEmail){
+            // this.refescarVista();
+            return (
+                <div className="Pantilla-body">
+                    <h3 className="text-center">
+                        EL correo no posee permisos necesarios, no es corporativo de la <br/>
+                        Universidad Francisco de Paula Santander<br/>
+                        <strong>PROGREAGIT</strong>. <br/>
+                    </h3>
+                </div>
+            );
+        }else if(this.comprobacion!=null) {
+            // this.refescarVista();
             return (
                 <div className="Pantilla-body">
                     <h3 className="">
@@ -109,7 +134,7 @@ class ActData extends Component {
             return (
                 <div className="Plantilla-body">
                     <h1>Actualización de datos</h1>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} autoComplete="false">
                         <div className="form-group">
                             <label htmlFor="code">Código U.F.P.S.</label>
                             <input type="text" value={this.state.code} className="form-control" id="code"

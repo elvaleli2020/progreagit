@@ -41,6 +41,14 @@ class LoginButton extends Component {
                                     <span className="navbar-toggler-icon"></span>
                                 </button>
                                 <div className="collapse navbar-collapse order-3" id="navbarCollapse">
+                                    <ul className="navbar-nav">
+
+                                        <li className="nav-item d-none d-sm-inline-block">
+                                            <a href="./mediaInv" className="nav-link">
+                                                <i className="nav-icon fas fa-archive" style={{paddingRight:"5px",paddingLeft:"10px"}}></i>
+                                                Guia de uso</a>
+                                        </li>
+                                    </ul>
                                     <ul className="navbar-nav ml-auto">
                                         <svg xmlns="https://www.w3.org/2000/svg" width="30" height="30"
                                              viewBox="0 0 48 48" aria-hidden="true" className="L5wZDc">

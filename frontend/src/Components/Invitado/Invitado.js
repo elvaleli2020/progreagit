@@ -116,14 +116,6 @@ class Invitado extends Component {
                     }
                 </div>
                 <br/>
-                <div>
-                    <a href="./mediaInv" className="nav-link">
-                        <i className="nav-icon fas fa-archive"></i>
-                        <p>
-                            Guía de uso
-                        </p>
-                    </a>
-                </div>
 
             </div>
 
