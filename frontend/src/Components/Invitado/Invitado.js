@@ -26,7 +26,6 @@ class Invitado extends Component {
      }
 
     comprobarCuenta(){
-        console.log("Invitados: ",this.props);
         if(this.props.rol!=undefined){
             if(this.props.rol.user) {
                 localStorage.removeItem(ACCESS_TOKEN);
@@ -59,7 +58,6 @@ class Invitado extends Component {
         })
         postShowGuest(search)
             .then(response => {
-                this.serviceSearchExt();
                 dataAutor(response);
                 console.log(response);
                 this.setState({

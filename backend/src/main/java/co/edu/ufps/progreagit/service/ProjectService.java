@@ -224,9 +224,9 @@ public class ProjectService {
      */
     public List<Project> showProjectGuest(SearchProject searchProject) {
         if(searchProject!=null){
-            if(searchProject.getName()!=null)
+            if(searchProject.getName()!=null&&searchProject.getName()!="")
                 return projectJPA.findByTitle(searchProject.getName());
-            if(searchProject.getStudent()!=null)
+            if(searchProject.getStudent()!=null&&searchProject.getStudent()!="")
                 return projectJPA.findbyEstudiante(searchProject.getStudent());
         }
         return projectJPA.findByInvidado();

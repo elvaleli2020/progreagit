@@ -8,29 +8,28 @@ class TableInvitado extends React.Component {
     constructor(props) {
         super(props);
         this.cargarDatos();
-        this.state={
-            hasdata:false
+        this.state= {
+            hasdata: 0
         }
+        if(this.props.data!=null)
+            this.state.hasdata=1;
         console.log(this.props.data);
     }
     cargarDatos(){
         this.columnas=[
             {
-                name: 'ID',
-                selector: 'idProject',
-                maxWidth: "20px",
+                name: 'ACRONIMO',
+                selector: 'acronym',
                 sortable:true
             },
             {
                 name: 'TITULO',
                 selector: 'name',
-                maxWidth: "300px",
                 sortable:true
             },
             {
                 name: 'AUTORES',
                 selector: 'autores',
-                maxWidth: "300px",
                 sortable:true
             },
             {
