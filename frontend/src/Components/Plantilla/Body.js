@@ -106,6 +106,7 @@ class Body extends Component {
                                 <BrowserRouter>
                                     <Route exact path="/"  component={Invitado}></Route>
                                     <Route path="/oauth2/redirect" component={OAuth2}></Route>
+                                    <Route path="/mediaInv" component={MediaInv}></Route>
                                     
                                     <PrivateRoute authenticated={true} path="/invitado"
                                            rol={this.state.rol} component={Invitado}></PrivateRoute>

@@ -75,7 +75,7 @@ class Invitado extends Component {
         return (
             <div className="row">
                 <div>
-                    <a href="./mediaLider" className="nav-link col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+                    <a href="./mediaInv" className="nav-link col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                         <i className="nav-icon fas fa-th"></i>
                         <p>
                             Guía de uso

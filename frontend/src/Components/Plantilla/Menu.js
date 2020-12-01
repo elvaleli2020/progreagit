@@ -60,7 +60,7 @@ class Menu extends Component{
                         </li>
                         <li className="nav-item">
                             <a href="./verIntegrantes"  className="nav-link">
-                                <i className="nav-icon fas fa-edit"></i>
+                                <i className="nav-icon fas fa-address-book"></i>
                                 <p>
                                     Ver Integrantes
                                 </p>
@@ -78,7 +78,9 @@ class Menu extends Component{
                 </nav>
             );
         }else{
-            return (<nav></nav>);
+            return (<nav>
+
+            </nav>);
         }
 
     }
