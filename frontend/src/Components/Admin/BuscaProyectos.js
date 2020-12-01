@@ -73,26 +73,28 @@ class BuscaProyectos extends Component {
                     <h4 className="card-title"><strong>Búsqueda Avanzada</strong></h4>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={this.serviceSearch} className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-sm-right" autoComplete="off">
+                    <form onSubmit={this.serviceSearch} className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group row " autoComplete="off">
 
-                        <div className="form-group row">
-                            <label className="col-5 col-sm-5 col-md-2 col-lg-3 col-xl-2 ">Búsqueda por: </label>
+                        <div className="form-group row col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label className="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-6 ">Búsqueda por: </label>
                             <select id="busqueda"
                                     defaultValue={this.state.busqueda}
-                                    onChange={this.handleInputChange} className="col-7 col-sm-7 col-md-4 col-lg-4 col-xl-4 form-control">
+                                    onChange={this.handleInputChange} className="col-7 col-sm-7 col-md-7 col-lg-7 col-xl-6 form-control">
                                 <option value="nombre">Titulo</option>
                                 <option value="autor">Autor</option>
                                 <option value="keywords">Palabras claves</option>
                                 <option value="mentor">Mentor/director</option>
                             </select>
-                            <input type="text" className="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 form-control" id="valueBusqueda"
+                        </div>
+                        <div className="form-group row col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <input type="text" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-control" id="valueBusqueda"
                                    value={this.state.valueBusqueda}
                                    onChange={this.handleInputChange}
                                    placeholder="Busqueda"/>
                         </div>
-                        <div className="form-group row">
-                                <label className="col-5 col-sm-5 col-md-2 col-lg-3 col-xl-3">Seleccione estado: </label>
-                                <select className="form-control col-7 col-sm-7 col-md-4 col-lg-3 col-xl-3" id="estado"
+                        <div className="form-group row col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <label className="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-6">Seleccione estado: </label>
+                                <select className="form-control col-7 col-sm-7 col-md-7 col-lg-7 col-xl-6" id="estado"
                                         defaultValue={this.state.estado}
                                         onChange={this.handleInputChange} >
                                     <option>Ninguno</option>
@@ -100,9 +102,10 @@ class BuscaProyectos extends Component {
                                     <option value="rechazada">Rechazada</option>
                                     <option value="aceptada_con_corecciones">Aceptada con correcciones</option>
                                 </select>
-
-                                <label className="col-5 col-sm-5 col-md-2 col-lg-3 col-xl-3">Seleccione calificación:</label>
-                                <select className="form-control col-7 col-sm-7 col-md-4 col-lg-3 col-xl-3" id="qualification"
+                        </div>
+                        <div className="form-group row  col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <label className="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-6">Seleccione calificación:</label>
+                                <select className="form-control col-7 col-sm-7 col-md-7 col-lg-7 col-xl-6" id="qualification"
                                         defaultValue={this.state.qualification}
                                         onChange={this.handleInputChange}>
                                     <option>Ninguna</option>
@@ -111,20 +114,22 @@ class BuscaProyectos extends Component {
                                     <option value="laureada">Laureada</option>
                                     <option value="meritoria">Meritoria</option>
                                 </select>
-                                <br/>
-                                <label htmlFor="dateInit" className="col-5 col-sm-5 col-md-2 col-lg-3 col-xl-3">Fecha desde:</label>
-                                <input type="date" className="form-control col-7 col-sm-7 col-md-4 col-lg-3 col-xl-3" id="dateInit"
+                        </div>
+                        <div className="form-group row col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <label htmlFor="dateInit" className="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-6">Fecha desde:</label>
+                                <input type="date" className="form-control col-7 col-sm-7 col-md-7 col-lg-7 col-xl-6" id="dateInit"
                                        value={this.state.dateInit}
                                        onChange={this.handleInputChange}/>
-
-                                <label htmlFor="dateInit" className="col-5 col-sm-5 col-md-2 col-lg-3 col-xl-3">Fecha hasta:</label>
-                                <input type="date" className="form-control col-7 col-sm-7 col-md-4 col-lg-3 col-xl-3" id="dateLimit"
+                        </div>
+                        <div className="form-group row col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <label htmlFor="dateInit" className="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-6">Fecha hasta:</label>
+                                <input type="date" className="form-control col-7 col-sm-7 col-md-7 col-lg-7 col-xl-6" id="dateLimit"
                                        value={this.state.dateLimit}
                                        onChange={this.handleInputChange}/>
 
                         </div>
-                        <div className=" form-group row ">
-                            <button type="submit" className=" form-control btn btn-primary col-12 col-sm-4 col-md-3 col-lg-2 col-lg-2 col-xl-2">Buscar</button>
+                        <div className="form-group row justify-content-center col-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" className=" form-control btn btn-primary col-12 col-sm-8 col-md-3 col-lg-2 col-lg-2 col-xl-2">Buscar</button>
                         </div>
                     </form>
                 </div>
