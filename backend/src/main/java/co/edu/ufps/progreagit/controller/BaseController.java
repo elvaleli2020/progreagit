@@ -14,7 +14,7 @@ public class BaseController {
 
     @GetMapping("/")
     public String index(){
-        return "Bienvenido ProgreaGit Backend 29";
+        return "Bienvenido ProgreaGit Backend 1-12";
     }
 
     @GetMapping("/git")

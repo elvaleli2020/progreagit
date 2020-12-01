@@ -78,9 +78,10 @@ class LoginButton extends Component {
                             </ul>
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item dropdown">
-                                    <a className="nav-link btn btn-light text-dark" data-toggle="dropdown"
+                                    <a className="nav-link btn btn-sm btn-light text-dark" data-toggle="dropdown"
                                        onClick={this.props.onLogout}>
-                                        Cerrar sesión
+                                        <span className="nav-icon fas fa-power-off" aria-hidden="true" style={{paddingRight:"10px"}}> </span>
+                                         Cerrar sesión
                                     </a>
                                 </li>
                             </ul>

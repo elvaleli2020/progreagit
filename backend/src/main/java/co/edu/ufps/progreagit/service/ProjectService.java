@@ -187,7 +187,6 @@ public class ProjectService {
      * @param project
      * @return
      */
-    @Transactional
     public Project updateQualification(Project project) {
         if(project.getIdProject() == null)
             throw new NotContentException("It has no data to modify");
@@ -206,6 +205,7 @@ public class ProjectService {
                             project1.getIdProject(),
                             project1.getAcronym(),
                             project1.getGitAddress()));
+
             update(project1);
 
             return this.getProject(project.getIdProject());

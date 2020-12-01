@@ -11,9 +11,10 @@ class TableInvitado extends React.Component {
         this.state= {
             hasdata: 0
         }
-        if(this.props.data!=null)
+
+        if(this.props.data.length!=0)
             this.state.hasdata=1;
-        console.log(this.props.data);
+        console.log(this.props.data, this.props.data.length);
     }
     cargarDatos(){
         this.columnas=[
