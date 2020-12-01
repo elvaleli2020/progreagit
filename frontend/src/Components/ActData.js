@@ -101,7 +101,7 @@ class ActData extends Component {
                 <div className="Pantilla-body">
                     <h3 className="">
                         Ya se encuentra registrado en <strong>PROGREAGIT</strong>. <br/>
-                        Porfavor espere la confirmación del administrador, para acceder a su perfíl
+                        Porfavor espere la confirmación del administrador, para acceder a su perfíl.
                     </h3>
                 </div>
             );

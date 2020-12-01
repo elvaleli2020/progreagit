@@ -22,7 +22,8 @@ class RegProy extends Component {
             date: this.props.data.startDate,
             integrantes:this.props.data.autores,
             visibleOk: false,
-            visibleNok: false
+            visibleNok: false,
+            reqGit: true
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.eliminarIntegrante = this.eliminarIntegrante.bind(this);
@@ -31,6 +32,11 @@ class RegProy extends Component {
 
     eliminarIntegrante(event) {
         console.log("Estoy eliminndo una persona");
+    }
+
+    isGitUrl(str){
+        const regex = /(?:git|ssh|https?|git@[-\w.]+):(\/\/)?(.*?)(\.git)(\/?|\#[-\d\w._]+?)$/;
+        return regex.test(str);
     }
 
     handleSubmit(event) {
@@ -186,14 +192,21 @@ class RegProy extends Component {
                     </div>
 
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
-                        <label className=" col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Integrantes: </label>
+                        <label className=" col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">URL del repositorio: </label>
                         <input type="text" className="form-control col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10 "
                                id="repositorio" value={this.state.gitAddress}
                                placeholder="URL de repositorio" onChange={(e) => {
                             this.setState({gitAddress: e.target.value})
-                        }}/>
+                               }} required={!this.isGitUrl(this.state.gitAddress)}/>
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="success"
+                               show={this.isGitUrl(this.state.gitAddress)} >
+                            Dirección GitHub válida
+                        </Alert>
+                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="danger"
+                               show={!this.isGitUrl(this.state.gitAddress)} >
+                            Dirección GitHub inválida, el formato válido es : https://github.com/USUARIO/REPOSITORIO.git
+                        </Alert>
                     </div>
-                    <br/>
                     <button type="submit" className="btn btn-primary col-sm-2">Guardar</button>
                 </form>
             </div>
