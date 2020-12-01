@@ -5,8 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -45,9 +45,11 @@ public class Project {
 
     @Column(updatable = false)
     @CreationTimestamp
+    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     @Column(insertable = true, updatable = false, nullable = true)
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     @OneToMany(mappedBy="project")

@@ -9,7 +9,7 @@ import co.edu.ufps.progreagit.repository.ProjectJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -20,6 +20,9 @@ public class ProjectService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private GitHubService gitHubService;
 
 
     public Project getProject(Integer idProject){
@@ -184,23 +187,30 @@ public class ProjectService {
      * @param project
      * @return
      */
-    public boolean updateQualification(Project project) {
+    @Transactional
+    public Project updateQualification(Project project) {
         if(project.getIdProject() == null)
             throw new NotContentException("It has no data to modify");
         Project project1 = this.getProject(project.getIdProject());
+
         //Project's state ACEPTADO
         if(project.getQualification()!=null && project.getProjectStatus()!=null){
             project1.setProjectStatus(project.getProjectStatus());
             project1.setQualification(project.getQualification());
-            project1.setEndDate(new Date(System.currentTimeMillis()));
+            project1.setEndDate(project1.getStartDate());
+            System.out.println(project1);
 
             // SE CLONA EL PROYECTO
-            cloneRepository(project1.getIdProject());
-
+            project1.setCloneGitAddress(
+                    cloneRepository(
+                            project1.getIdProject(),
+                            project1.getAcronym(),
+                            project1.getGitAddress()));
             update(project1);
-            return true;
+
+            return this.getProject(project.getIdProject());
         }
-        return false;
+        throw new NotContentException("Not update");
     }
 
     public Project update(Project project){
@@ -213,11 +223,13 @@ public class ProjectService {
      * @return
      */
     public List<Project> showProjectGuest(SearchProject searchProject) {
-        if(searchProject.getName()!=null)
-            return projectJPA.findByTitle(searchProject.getName());
-        if(searchProject.getStudent()!=null)
-            return projectJPA.findbyEstudiante(searchProject.getStudent());
-        return null;
+        if(searchProject!=null){
+            if(searchProject.getName()!=null)
+                return projectJPA.findByTitle(searchProject.getName());
+            if(searchProject.getStudent()!=null)
+                return projectJPA.findbyEstudiante(searchProject.getStudent());
+        }
+        return projectJPA.findByInvidado();
     }
 
     /**
@@ -227,7 +239,7 @@ public class ProjectService {
      * @param idProject
      * @return
      */
-    public boolean cloneRepository(int idProject){
-        return false;
+    public String cloneRepository(int idProject, String name, String dir){
+        return gitHubService.createGitClone(name.toLowerCase() + "-" + idProject , dir);
     }
 }

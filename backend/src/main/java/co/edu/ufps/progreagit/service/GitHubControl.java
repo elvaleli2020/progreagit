@@ -18,10 +18,13 @@ import javax.ws.rs.core.MediaType;
 public class GitHubControl {
 
     private GitHub github;
+    private String name;
 
     public void create(String token){
         try {
-            github = new GitHubBuilder().withOAuthToken("ca8bf119b6d4e24479485a6c3ed35bc5f25d2d54").build();
+            github = new GitHubBuilder().withOAuthToken(token).build();
+            name = github.getMyself().getName();
+//            System.out.println(github.getMyself().getHtmlUrl());
             if(github.isCredentialValid())
                 System.out.println("Paso");
             else throw new NotContentException("Not init");
@@ -30,13 +33,32 @@ public class GitHubControl {
         }
     }
 
-    public GHRepository getRepository(String path) throws IOException {
-        return github.getRepository("elvaleli2016/prestashop");
+    public GHRepository getRepository(String path){
+        try {
+            GHRepository g=github.getRepository(path);
+            System.out.println(g.getFullName());
+            return g;
+        }catch (Exception e){
+            System.out.println("Entro pr error, no realizo nada");
+            return null;
+        }
+
+    }
+
+    public boolean deleteRepository(GHRepository ghRepository){
+        try{
+            ghRepository.delete();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public GHRepository createRepository(String name){
         try {
-            return github.createRepository(name,"estoy realizando una prueba","https://github.com/elvaleli2016/prestashop",true);
+            GHRepository g = github.createRepository(name,"estoy realizando una prueba","https://github.com/elvaleli2016/prestashop",true);
+            System.out.println(g.getFullName());
+            return g;
         }catch (Exception e){
             return null;
         }

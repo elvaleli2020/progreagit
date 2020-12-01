@@ -61,6 +61,7 @@ class Invitado extends Component {
             .then(response => {
                 this.serviceSearchExt();
                 dataAutor(response);
+                console.log(response);
                 this.setState({
                     loading:false,
                     data:response
