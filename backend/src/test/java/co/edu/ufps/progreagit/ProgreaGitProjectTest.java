@@ -70,7 +70,7 @@ public class ProgreaGitProjectTest {
     public void assingMember(){
         UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeader();
         UserRequest userRequest = new UserRequest();
-        userRequest.setId(3L);
+        userRequest.setId(2L);
         Assert.assertEquals(userController.assingMembersUser(userPrincipal,userRequest).getStatusCode(), HttpStatus.OK);
     }
 

@@ -51,6 +51,13 @@ public class ProgreaGitBuilder {
         return userRequest;
     }
 
+    public UserRequest userRequestAssingLeaderFail() {
+        UserRequest userRequest = new UserRequest();
+        userRequest.setId(5L);
+        userRequest.setCode("1143212");
+        return userRequest;
+    }
+
     public UserPrincipal userPrincipalUser() {
         User user = new User();
         user.setIdUser(2L);
