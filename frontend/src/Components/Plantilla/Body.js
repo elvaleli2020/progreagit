@@ -126,7 +126,6 @@ class Body extends Component {
                                     <PrivateRoute path="/mediaLider" component={MediaLider} authenticated={this.state.rol.leader}></PrivateRoute>
                                     <PrivateRoute path="/actualizacion" authenticated={this.state.rol.user} user={this.state.currentUser} handleLogout={this.handleLogout}
                                                   component={ActData}></PrivateRoute>
-
                                 </BrowserRouter>
                             </div>
                         </section>

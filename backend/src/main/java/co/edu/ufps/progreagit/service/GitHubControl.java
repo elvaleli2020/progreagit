@@ -21,7 +21,7 @@ public class GitHubControl {
 
     public void create(String token){
         try {
-            github = new GitHubBuilder().withOAuthToken("ca8bf119b6d4e24479485a6c3ed35bc5f25d2d54").build();
+            github = new GitHubBuilder().withOAuthToken(token).build();
             if(github.isCredentialValid())
                 System.out.println("Paso");
             else throw new NotContentException("Not init");
@@ -30,13 +30,23 @@ public class GitHubControl {
         }
     }
 
-    public GHRepository getRepository(String path) throws IOException {
-        return github.getRepository("elvaleli2016/prestashop");
+    public GHRepository getRepository(String path){
+        try {
+            GHRepository g=github.getRepository("elvaleli2016/prestashop");
+            System.out.println(g.getFullName());
+            return g;
+        }catch (Exception e){
+            System.out.println("Entro pr error, no realizo nada");
+            return null;
+        }
+
     }
 
     public GHRepository createRepository(String name){
         try {
-            return github.createRepository(name,"estoy realizando una prueba","https://github.com/elvaleli2016/prestashop",true);
+            GHRepository g = github.createRepository(name,"estoy realizando una prueba","https://github.com/elvaleli2016/prestashop",true);
+            System.out.println(g.getFullName());
+            return g;
         }catch (Exception e){
             return null;
         }
