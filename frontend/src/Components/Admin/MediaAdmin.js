@@ -11,7 +11,7 @@ class MediaAdmin extends Component {
                 </div>
                 <br/>
                 <div className=" mx-auto col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-                    <Iframe source="https://www.youtube.com/embed/dQw4w9WgXcQ" ></Iframe>
+                    <Iframe source="https://www.youtube.com/embed/6or8RtuTkDA" ></Iframe>
                 </div>
                 <br/>
                 <div className=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
