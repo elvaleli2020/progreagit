@@ -197,7 +197,7 @@ class RegProy extends Component {
                         <textarea className="form-control col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="resumen" rows="5" value={this.state.abstracts}
                                   onChange={(e) => {
                                       this.setState({abstracts: e.target.value})
-                                  }}/>
+                                  }} maxLength="1000"/>
                     </div>
 
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
