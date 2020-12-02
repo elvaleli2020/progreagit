@@ -41,6 +41,7 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.showProject(searchProject));
     }
 
+    ////////////// ITERATION 2//////////////
     /**
      * Method, View project by project leader
      * HU03 RF09, The system must allow the leading user of the project to view the information

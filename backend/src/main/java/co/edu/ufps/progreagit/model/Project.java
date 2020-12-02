@@ -2,6 +2,7 @@ package co.edu.ufps.progreagit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -22,7 +23,7 @@ public class Project {
     @Size(max=250)
     private String name;
 
-    @Size(max=255)
+    @Type(type="text")
     private String abstracts;
 
     @Size(max=100)

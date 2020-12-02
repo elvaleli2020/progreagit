@@ -1,8 +1,11 @@
 package co.edu.ufps.progreagit;
 
+import co.edu.ufps.progreagit.controller.ProjectController;
 import co.edu.ufps.progreagit.controller.UserController;
+import co.edu.ufps.progreagit.exception.BadRequestException;
 import co.edu.ufps.progreagit.exception.NotContentException;
 import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
+import co.edu.ufps.progreagit.model.Project;
 import co.edu.ufps.progreagit.model.User;
 import co.edu.ufps.progreagit.payload.ApiResponse;
 import co.edu.ufps.progreagit.payload.SearchUser;
@@ -22,6 +25,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -47,6 +52,7 @@ public class ProgreaGitUserTests {
 		this.progreaGitBuilder = new ProgreaGitBuilder();
 	}
 
+	//////////// ITERATION 1 /////////////
 
 	@Test
 	@WithMockUser(roles={"USER","ADMIN", "LEADER"})
@@ -88,13 +94,8 @@ public class ProgreaGitUserTests {
 	public void searchUser() throws Exception {
 		// Search by code
 		SearchUser searchUser = progreaGitBuilder.searchUserEmpty();
-		mvc.perform(MockMvcRequestBuilders
-				.post("/user/search")
-				.content(objectMapper.writeValueAsString(searchUser))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk());
+		UserPrincipal userPrincipal = progreaGitBuilder.userPrincipalUser();
+		List<User> users= (List<User>) userController.searchUser(searchUser, userPrincipal).getBody();
 	}
 
 	@Test
@@ -103,13 +104,8 @@ public class ProgreaGitUserTests {
 	public void searchUserByCode() throws Exception {
 		// Search by code
 		SearchUser searchUser = progreaGitBuilder.searchUserCode();
-		mvc.perform(MockMvcRequestBuilders
-				.post("/user/search")
-				.content(objectMapper.writeValueAsString(searchUser))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk());
+		UserPrincipal userPrincipal = progreaGitBuilder.userPrincipalUser();
+		List<User> users= (List<User>) userController.searchUser(searchUser, userPrincipal).getBody();
 	}
 
 	@Test
@@ -118,14 +114,8 @@ public class ProgreaGitUserTests {
 	public void searchUserByEmail() throws Exception {
 		// Search by parts of the email
 		SearchUser searchUser = progreaGitBuilder.searchUserEmail();
-		mvc.perform(MockMvcRequestBuilders
-				.post("/user/search")
-				.content(objectMapper.writeValueAsString(searchUser))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk());
-
+		UserPrincipal userPrincipal = progreaGitBuilder.userPrincipalUser();
+		List<User> users= (List<User>) userController.searchUser(searchUser, userPrincipal).getBody();
 	}
 
 	@Test
@@ -134,13 +124,8 @@ public class ProgreaGitUserTests {
 	public void searchUserByName() throws Exception {
 		// Search by parts of the name
 		SearchUser searchUser = progreaGitBuilder.searchUserName();
-		mvc.perform(MockMvcRequestBuilders
-				.post("/user/search")
-				.content(objectMapper.writeValueAsString(searchUser))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk());
+		UserPrincipal userPrincipal = progreaGitBuilder.userPrincipalUser();
+		List<User> users= (List<User>) userController.searchUser(searchUser, userPrincipal).getBody();
 	}
 
 	@Test
@@ -200,11 +185,61 @@ public class ProgreaGitUserTests {
 	@DisplayName(value = "assingLeader -> List of users filtered by code, email, name, if they have a leader request or not")
 	public void assingLeaderFail() throws  Exception {
 		UserRequest userRequest = progreaGitBuilder.userRequestAssingLeaderFail();
+		userRequest.setId(null);
 
-		NotContentException thrown = org.junit.jupiter.api.Assertions.assertThrows (
-				NotContentException.class,
+		RuntimeException thrown = org.junit.jupiter.api.Assertions.assertThrows (
+				RuntimeException.class,
 				() -> userController.assingLeaderUser(userRequest));
-		Assert.assertEquals("You need additional data!", thrown.getMessage());
+		Assert.assertEquals("You need additional data", thrown.getMessage());
 	}
+
+
+	//////// ITERATION 2 ////////////////
+
+	@Test
+	@WithMockUser(roles = {"LEADER"})
+	public void asisingMembrer() throws Exception {
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeader();
+
+		UserRequest userRequest = progreaGitBuilder.userRequest();
+		userRequest.setId(5L);
+		Boolean cond = (Boolean) userController.assingMembersUser(userPrincipal,userRequest).getBody();
+		assertThat(cond)
+				.matches(m->m=true);
+
+	}
+	@Test
+	@WithMockUser(roles = {"LEADER"})
+	public void asisingMembrerFail() throws Exception {
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeader();
+
+		UserRequest userRequest = progreaGitBuilder.userRequest();
+		userRequest.setId(4L);
+		BadRequestException thrown = org.junit.jupiter.api.Assertions.assertThrows (
+				BadRequestException.class,
+				() -> userController.assingMembersUser(userPrincipal,userRequest));
+		Assert.assertEquals("Member already assigned", thrown.getMessage());
+
+	}
+	@Test
+	@WithMockUser(roles = {"LEADER"})
+	public void unasisingMembrer() throws Exception {
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeader();
+		UserRequest userRequest = progreaGitBuilder.userRequest();
+		Boolean cond = (Boolean) userController.unassingMembersUser(userPrincipal,userRequest).getBody();
+		assertThat(cond)
+				.matches(m->m=true);
+	}
+	@Test
+	@WithMockUser(roles = {"LEADER"})
+	public void unasisingMembrerFail() throws Exception {
+		UserPrincipal userPrincipal= progreaGitBuilder.userPrincipalUserLeader();
+		UserRequest userRequest = progreaGitBuilder.userRequest();
+		userRequest.setId(2L);
+		Boolean cond = (Boolean) userController.unassingMembersUser(userPrincipal,userRequest).getBody();
+		assertThat(cond)
+				.matches(m->m=true);
+	}
+
 
 }

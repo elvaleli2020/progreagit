@@ -2,18 +2,23 @@ package dataBuilder;
 
 import co.edu.ufps.progreagit.exception.ResourceNotFoundException;
 import co.edu.ufps.progreagit.model.ERole;
+import co.edu.ufps.progreagit.model.Project;
 import co.edu.ufps.progreagit.model.Roles;
 import co.edu.ufps.progreagit.model.User;
+import co.edu.ufps.progreagit.payload.SearchProject;
 import co.edu.ufps.progreagit.payload.SearchUser;
 import co.edu.ufps.progreagit.payload.UserRequest;
 import co.edu.ufps.progreagit.repository.UserJPA;
 import co.edu.ufps.progreagit.security.UserPrincipal;
 import co.edu.ufps.progreagit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import javax.naming.directory.SearchResult;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProgreaGitBuilder {
@@ -108,6 +113,7 @@ public class ProgreaGitBuilder {
     public SearchUser searchUserEmail() {
         SearchUser searchUser = new SearchUser();
         searchUser.setEmail("@ufps.edu.co");
+        Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return searchUser;
     }
 
@@ -115,6 +121,38 @@ public class ProgreaGitBuilder {
         SearchUser searchUser = new SearchUser();
         searchUser.setEmail("juli");
         return searchUser;
+    }
+
+    public Project getProject(){
+        Project project = new Project();
+        project.setIdProject(1);
+        project.setAcronym("Prueba");
+        project.setName("Descripción de la prueba");
+        project.setKeywords("keyword1,  keyword2, keybord3");
+        return project;
+    }
+    public Project generateQualification(){
+        Project project = new Project();
+        project.setIdProject(1);
+        project.setProjectStatus("aceptada");
+        project.setQualification("meritoria");
+        return project;
+    }
+
+    public SearchProject searchProjectCode(){
+        SearchProject searchProject = new SearchProject();
+        searchProject.setName("Prueba");
+        return searchProject;
+    }
+    public SearchProject searchProjectAutor(){
+        SearchProject searchProject = new SearchProject();
+        searchProject.setAutor("Prueba");
+        return searchProject;
+    }
+    public SearchProject searchProjectMentor(){
+        SearchProject searchProject = new SearchProject();
+        searchProject.setMentor("Prueba");
+        return searchProject;
     }
 
 
