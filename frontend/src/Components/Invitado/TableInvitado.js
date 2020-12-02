@@ -63,6 +63,7 @@ class TableInvitado extends React.Component {
                             pagination
                             paginationComponentOptions={this.paginacionOpciones}
                             fixedHeader
+                            responsive="true"
                         />
                     )
                 }

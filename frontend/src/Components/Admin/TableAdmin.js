@@ -126,6 +126,7 @@ class TableAdmin extends React.Component {
                         defaultSortField="name"
                         expandableRowsComponent={<MostrarMasProyecto data={this.props.data} />}
                         actions={<button className="btn btn-sm btn-primary" onClick={this.actionMemo}>Export</button>}
+                        responsive="true"
                     />
 
                 </div>

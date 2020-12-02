@@ -169,6 +169,7 @@ class BuscaPersonas extends Component {
                                                 highlightOnHover
                                                 defaultSortField="name"
                                                 expandableRowsComponent={<MostrarMasIntegrante data={this.props.data} />}
+                                                responsive="true"
                                             />
                                         )
                                     }

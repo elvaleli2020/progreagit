@@ -164,6 +164,7 @@ class Integrantes extends Component{
                                             pagination
                                             paginationComponentOptions={this.paginacionOpciones}
                                             fixedHeader
+                                            responsive="true"
                                         />)
                                 }
                             </div>
@@ -189,6 +190,7 @@ class Integrantes extends Component{
                                             pagination
                                             paginationComponentOptions={this.paginacionOpciones}
                                             fixedHeader
+                                            responsive="true"
                                         />)
                                 }
                             </div>
