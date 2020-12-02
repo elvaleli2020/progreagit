@@ -129,7 +129,7 @@ class RegProy extends Component {
                                id="titulo" value={this.state.name} placeholder="Título del proyecto"
                                onChange={(e) => {
                                    this.setState({name: e.target.value})
-                               }} required/>
+                               }} maxLength="249" required/>
                     </div>
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
@@ -138,7 +138,7 @@ class RegProy extends Component {
                                    id="acronimo" value={this.state.acronym}
                                    placeholder="Sigla u Acrónimo" onChange={(e) => {
                                 this.setState({acronym: e.target.value})
-                            }} required/>
+                            }} maxLength="49" required/>
                     </div>
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
                             <label className="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Clasificación: </label>
@@ -155,7 +155,7 @@ class RegProy extends Component {
                                id="monitores" value={this.state.director} placeholder="Director(es) / Codirector(es)"
                                onChange={(e) => {
                                    this.setState({director: e.target.value})
-                               }} required/>
+                               }} maxLength="99" required/>
                     </div>
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <label className="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">Palabras clave: </label>
@@ -163,7 +163,7 @@ class RegProy extends Component {
                                id="palabraClave" value={this.state.keywords} placeholder="Palabras clave"
                                onChange={(e) => {
                                    this.setState({keywords: e.target.value})
-                               }} required/>
+                               }} maxLength="199" required/>
                     </div>
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <label className=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">Resumen del proyecto:</label>
@@ -177,7 +177,7 @@ class RegProy extends Component {
 
                             <label className=" col-12 col-sm-3 col-md-12 col-lg-12 col-xl-12">Integrantes: </label>
                             <textarea type="text"
-                                   value={this.state.integrantes} rows="5"
+                                   value={this.state.integrantes} rows="2"
                                    className="form-control col-12 col-sm-9 col-md-12 col-lg-12 col-xl-12" id="InputGestionInt"
                                    placeholder="Integrantes" readOnly/>
                     </div>
@@ -197,7 +197,7 @@ class RegProy extends Component {
                                id="repositorio" value={this.state.gitAddress}
                                placeholder="URL de repositorio" onChange={(e) => {
                             this.setState({gitAddress: e.target.value})
-                               }} required={!this.isGitUrl(this.state.gitAddress)}/>
+                               }} maxLength="100" required={!this.isGitUrl(this.state.gitAddress)}/>
                         <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="success"
                                show={this.isGitUrl(this.state.gitAddress)} >
                             Dirección GitHub válida
