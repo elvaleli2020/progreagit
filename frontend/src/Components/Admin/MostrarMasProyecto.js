@@ -13,7 +13,14 @@ class MostrarMasProyecto extends Component {
             visibleOk: false,
             visibleNok: false
         }
+        if(this.props.data){
+            if(this.props.data.qualification!=null)
+                this.state.qualification = this.props.data.qualification;
+            if(this.props.data.projectStatus !=null)
+                this.state.projectStatus = this.props.data.projectStatus;
+        }
         console.log("mostrar proyectos: ",this.props);
+        this.cleanURL();
         this.accionCalificacion = this.accionCalificacion.bind(this);
         this.handleInputChange = handleInputChange.bind(this);
     }
@@ -52,16 +59,19 @@ class MostrarMasProyecto extends Component {
         return s.substr(prefix.length);
     }
     cleanURL(){
-        const url="https://github.com/";
-        const page=this.removePrefix(url,this.props.data.gitAddress);
-        const link= page.slice(0,-4);
-        const united = "https://api.github.com/repos/"+link+"/zipball/";
-        return united;
+        if(this.props.data.gitAddress!=null){
+            const url="https://github.com/";
+            // if(this.props.data.cloneGitAddress==null)
+            const page=this.removePrefix(url,this.props.data.gitAddress);
+            const link= page.slice(0,-4);
+            this.urlDownload = "https://api.github.com/repos/"+link+"/zipball/";
+            console.log(this.urlDownload);
+        }else this.urlDownload =null;
+
     }
 
     
     render(){
-        console.log(this.cleanURL());
         console.log(this.state);
         return (
             <div className="card">
@@ -123,7 +133,7 @@ class MostrarMasProyecto extends Component {
                             <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.director} readOnly/>
                     </div>
                     {
-                        this.props.data.cloneGitAdress!=null?(
+                        this.props.data.cloneGitAdress==null?(
                             <div className="form-group row">
                                 <label className="col-sm-2 col-lg-2 text-right">Repositorio:</label>
                                 <input className="col-sm-10 col-lg-10 form-control" value={this.props.data.gitAddress}  readOnly/>
@@ -135,23 +145,36 @@ class MostrarMasProyecto extends Component {
                             </div>
                         )
                     }
-                    <div className="form-inline row text-center">
-                        <div className="col-6 ">
-                            <button className="btn btn-primary"  >
-                                <a href={this.cleanURL()}>Descargar Proyecto </a> </button>
-                        </div>
-                        {
-                            !this.props.data.endDate?(
-                                <div className="col-6">
-                                    <button onClick={this.accionCalificacion} className="btn btn-primary"> Calificar</button>
+
+                    { this.urlDownload?(
+                        <div className="form-inline row text-center">
+                                < div className="col-6 ">
+                                    <button className="btn btn-primary"  >
+                                        <a href={this.urlDownload}>Descargar Proyecto </a> </button>
                                 </div>
-                            ):(
-                                <div></div>
-                            )
-                        }
+                            {
+                                !this.props.data.endDate?(
+                                    <div className="col-6">
+                                        <button onClick={this.accionCalificacion} className="btn btn-primary"> Calificar</button>
+                                    </div>
+                                ):(
+                                    <div></div>
+                                )
+                            }
+                        </div>
+                    ):(
+                        <div className="form-inline row text-center">
+                            <div className="col-12 ">
+                                <strong>NO DISPONE DE REPOSITORIO PARA DESCARGAR</strong>
+                            </div>
+                        </div>
+                    )
+
+                    }
 
 
-                    </div>
+
+
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
                         <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="success" show={this.state.visibleOk} onClose={() => this.setState({
                             visibleOk: !this.state.visibleOk
