@@ -111,16 +111,43 @@ class RegProy extends Component {
 
                 <form onSubmit={this.handleSubmit} className="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12">
-                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="success" show={this.state.visibleOk} onClose={() => this.setState({
-                            visibleOk: !this.state.visibleOk
-                        })} dismissible>
-                            Actualización realizada con Éxito!
-                        </Alert>
-                        <Alert className="col-12 col-sm-12 col-md-12 col-lg-12" effect='slide' offset={65} variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
-                            visibleNok: !this.state.visibleNok
-                        })} dismissible>
-                            Actualización fallida de datos
-                        </Alert>
+                        <Modal
+                            show={this.state.visibleOk}
+                            onHide={() => this.setState({
+                                visibleOk: !this.state.visibleOk
+                            })}
+                            backdrop="static"
+                            keyboard={false}
+                            size="mm"
+                            centered
+                        >
+                            <Modal.Header>
+                                <h5 className="modal-title" >Notificación Éxitosa</h5>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <h6>La actualización de datos del proyecto se ha realizado con éxito</h6>
+                            </Modal.Body>
+
+                        </Modal>
+
+                        <Modal
+                            show={this.state.visibleOk}
+                            onHide={() => this.setState({
+                                visibleOk: !this.state.visibleOk
+                            })}
+                            backdrop="static"
+                            keyboard={false}
+                            size="sm"
+                            centered
+                        >
+                            <Alert effect='slide' offset={65} variant="danger" show={this.state.visibleNok} onClose={() => this.setState({
+                                visibleNok: !this.state.visibleNok
+                            })} >
+                                Actualización fallida de datos
+                            </Alert>
+                        </Modal>
+
+
                     </div>
 
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -170,7 +197,7 @@ class RegProy extends Component {
                         <textarea className="form-control col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="resumen" rows="5" value={this.state.abstracts}
                                   onChange={(e) => {
                                       this.setState({abstracts: e.target.value})
-                                  }}/>
+                                  }} maxLength="1000"/>
                     </div>
 
                     <div className="form-group row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
